@@ -8,7 +8,7 @@ import (
 )
 
 //nolint:revive
-type KmFeedConfig struct {
+type ObserverConfig struct {
 	QueueName        string `default:"" split_words:"true"`
 	TTW              string `default:"10" split_words:"true"`
 	EsiUserAgent     string `default:"zobserver" split_words:"true"`
@@ -30,7 +30,7 @@ type DiscordWebhook struct {
 	Token string `yaml:"token"`
 }
 
-func GetDestinations(c KmFeedConfig) ([]Destination, error) {
+func GetDestinations(c ObserverConfig) ([]Destination, error) {
 	if c.DestinationsFile != "" {
 		confBuf, err := os.ReadFile(c.DestinationsFile)
 		if err != nil {

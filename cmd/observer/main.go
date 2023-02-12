@@ -13,7 +13,7 @@ import (
 
 type config struct {
 	logger.LoggerConfig
-	observer.KmFeedConfig
+	observer.ObserverConfig
 }
 
 func main() {
@@ -29,7 +29,7 @@ func main() {
 		panic(err)
 	}
 
-	_, err = observer.New(c.KmFeedConfig, logger.Sugar())
+	_, err = observer.New(c.ObserverConfig, logger.Sugar())
 	if err != nil {
 		logger.Sugar().Errorw("failed to start km feed", "error", err)
 		os.Exit(1)
