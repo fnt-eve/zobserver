@@ -1,3 +1,4 @@
+---
 kind: pipeline
 type: kubernetes
 name: default
@@ -46,3 +47,8 @@ steps:
       {{else}}
         build {{build.number}} failed.
       {{/success}}
+---
+kind: signature
+hmac: fe23389fdad84c2d1d35d09fc4924da0d1e3c17c1b532b0ce9acd10615ae09c9
+
+...
