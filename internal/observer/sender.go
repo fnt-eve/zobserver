@@ -18,6 +18,7 @@ type EntityAffiliation struct {
 	CharacterID   int32
 	CorporationID int32
 	AllianceID    int32
+	FactionID     int32
 	ShipTypeID    int32
 }
 
@@ -26,6 +27,7 @@ type EntityNames struct {
 	CorporationName string
 	AllianceName    string
 	ShipTypeName    string
+	FactionName     string
 }
 
 type resolvedNames struct {
@@ -96,7 +98,6 @@ func (s *sender) resolveIds(ids []int32) (map[int32]string, error) {
 func (s *sender) resolveKMEntities(victimAffiliation, fbAffiliation *EntityAffiliation, systemID int32) (*resolvedNames, error) {
 	ids := []int32{
 		systemID,
-		victimAffiliation.CorporationID,
 		victimAffiliation.ShipTypeID,
 	}
 
@@ -104,17 +105,30 @@ func (s *sender) resolveKMEntities(victimAffiliation, fbAffiliation *EntityAffil
 		ids = append(ids, victimAffiliation.CharacterID)
 	}
 
+	if victimAffiliation.CorporationID != 0 {
+		ids = append(ids, victimAffiliation.CorporationID)
+	}
+
 	if victimAffiliation.AllianceID != 0 {
 		ids = append(ids, victimAffiliation.AllianceID)
 	}
 
+	if victimAffiliation.FactionID != 0 {
+		ids = append(ids, victimAffiliation.FactionID)
+	}
+
 	if fbAffiliation != nil {
-		ids = append(ids, fbAffiliation.CorporationID)
 		if fbAffiliation.CharacterID != 0 {
 			ids = append(ids, fbAffiliation.CharacterID)
 		}
+		if fbAffiliation.CorporationID != 0 {
+			ids = append(ids, fbAffiliation.CorporationID)
+		}
 		if fbAffiliation.AllianceID != 0 {
 			ids = append(ids, fbAffiliation.AllianceID)
+		}
+		if fbAffiliation.FactionID != 0 {
+			ids = append(ids, fbAffiliation.FactionID)
 		}
 		ids = append(ids, fbAffiliation.ShipTypeID)
 	}
@@ -158,6 +172,10 @@ func getKMEntityInfo(aff EntityAffiliation, resolvedNames map[int32]string) Enti
 		names.ShipTypeName = name
 	}
 
+	if name, ok := resolvedNames[aff.FactionID]; ok {
+		names.FactionName = name
+	}
+
 	return names
 }
 
@@ -167,6 +185,7 @@ func (s *sender) transform(r *ZkilResponse, isLoss bool) (*discordgo.MessageEmbe
 		CorporationID: r.Package.Killmail.Victim.CorporationId,
 		AllianceID:    r.Package.Killmail.Victim.AllianceId,
 		ShipTypeID:    r.Package.Killmail.Victim.ShipTypeId,
+		FactionID:     r.Package.Killmail.Victim.FactionId,
 	}
 	fb := findFinalBlow(r.Package.Killmail.Attackers)
 	var fbAff *EntityAffiliation
@@ -176,6 +195,7 @@ func (s *sender) transform(r *ZkilResponse, isLoss bool) (*discordgo.MessageEmbe
 			CorporationID: fb.CorporationId,
 			AllianceID:    fb.AllianceId,
 			ShipTypeID:    fb.ShipTypeId,
+			FactionID:     fb.FactionId,
 		}
 	}
 
@@ -196,7 +216,7 @@ func (s *sender) transform(r *ZkilResponse, isLoss bool) (*discordgo.MessageEmbe
 
 	return &discordgo.MessageEmbed{
 		URL:       zKillURL(r.Package.KillID),
-		Title:     genTitle(names.victimInfo.CharacterName, names.fbInfo.ShipTypeName, names.systemName),
+		Title:     genTitle(names.victimInfo.CharacterName, names.victimInfo.ShipTypeName, names.systemName),
 		Timestamp: r.Package.Killmail.KillmailTime.Format(time.RFC3339),
 		Fields:    genFields(names.victimInfo, r.Package.Killmail.Victim.ShipTypeId, names.fbInfo.ShipTypeName, names.systemName, r.Package.ZKillmailMetadata.TotalValue),
 		Thumbnail: genThumbnail(r.Package.Killmail.Victim.ShipTypeId),
@@ -283,7 +303,14 @@ func genFooter(entityInfo EntityNames, shipTypeID int32, involvedCount int) *dis
 		entityName = entityInfo.AllianceName
 	}
 
-	footText := fmt.Sprintf("Final blow by %s (%s) in %s (%v involved)", entityInfo.CharacterName, entityName, entityInfo.ShipTypeName, involvedCount)
+	var footText string
+	if entityInfo.CharacterName == "" && entityName != "" {
+		footText = fmt.Sprintf("Final blow by %s in %s (%v involved)", entityName, entityInfo.ShipTypeName, involvedCount)
+	} else if entityInfo.CharacterName == "" && entityName == "" {
+		footText = fmt.Sprintf("Final blow by %s in %s (%v involved)", entityInfo.FactionName, entityInfo.ShipTypeName, involvedCount)
+	} else {
+		footText = fmt.Sprintf("Final blow by %s (%s) in %s (%v involved)", entityInfo.CharacterName, entityName, entityInfo.ShipTypeName, involvedCount)
+	}
 	return &discordgo.MessageEmbedFooter{
 		Text:    footText,
 		IconURL: itemTypeImageURL(shipTypeID, true, 32),
