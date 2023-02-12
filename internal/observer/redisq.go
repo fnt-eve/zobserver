@@ -4,6 +4,7 @@ import (
 	"crypto/rand"
 	"encoding/base64"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"net/http"
 	"time"
@@ -12,6 +13,18 @@ import (
 )
 
 const RedisQURL = "https://redisq.zkillboard.com/listen.php"
+
+var errTooManyRequests = errors.New("too many requests")
+
+type RequestError struct {
+	StatusCode int
+
+	Err error
+}
+
+func (r *RequestError) Error() string {
+	return r.Err.Error()
+}
 
 type redisQ struct {
 	out     chan *ZkilResponse
@@ -34,6 +47,12 @@ func (k *redisQ) init(log *zap.SugaredLogger) {
 		for {
 			log.Debugw("polling redisq API", "queueID", k.queueID, "ttw", k.ttw)
 			resp, err := queryRedisq(k.queueID, k.ttw)
+			// Delay if 429 error
+			if err == errTooManyRequests {
+				time.Sleep(1 * time.Second)
+				continue
+			}
+
 			if err != nil {
 				log.Errorw("error while fetching from RedisQ API", "error", err)
 				time.Sleep(1 * time.Second)
@@ -68,6 +87,10 @@ func queryRedisq(queueID string, ttw string) (*ZkilResponse, error) {
 		return nil, err
 	}
 	defer res.Body.Close()
+
+	if res.StatusCode == http.StatusTooManyRequests {
+		return nil, errTooManyRequests
+	}
 
 	if res.StatusCode != 200 {
 		return nil, fmt.Errorf("got %v from RedisQ", res.StatusCode)
