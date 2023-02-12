@@ -218,7 +218,7 @@ func (s *sender) transform(r *ZkilResponse, isLoss bool) (*discordgo.MessageEmbe
 		URL:       zKillURL(r.Package.KillID),
 		Title:     genTitle(names.victimInfo.CharacterName, names.victimInfo.ShipTypeName, names.systemName),
 		Timestamp: r.Package.Killmail.KillmailTime.Format(time.RFC3339),
-		Fields:    genFields(names.victimInfo, r.Package.Killmail.Victim.ShipTypeId, names.fbInfo.ShipTypeName, names.systemName, r.Package.ZKillmailMetadata.TotalValue),
+		Fields:    genFields(names.victimInfo, r.Package.Killmail.Victim.ShipTypeId, names.victimInfo.ShipTypeName, names.systemName, r.Package.ZKillmailMetadata.TotalValue),
 		Thumbnail: genThumbnail(r.Package.Killmail.Victim.ShipTypeId),
 		Color:     color,
 		Footer:    footer,
