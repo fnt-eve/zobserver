@@ -43,12 +43,12 @@ steps:
       from_secret: discord_webhook_token
     message: >
       {{#success build.status}}
-        build #{{build.number}} {{commit.branch}}_{{truncate commit.sha 7}} succeeded. Build took {{since build.started}}.
+        {{repo.namespace}}/{{repo.name}}: build #{{build.number}} {{commit.branch}}_{{truncate commit.sha 7}} succeeded. Build took {{since build.started}}.
       {{else}}
-        build {{build.number}} failed.
+        {{repo.namespace}}/{{repo.name}}: build {{build.number}} failed.
       {{/success}}
 ---
 kind: signature
-hmac: fe23389fdad84c2d1d35d09fc4924da0d1e3c17c1b532b0ce9acd10615ae09c9
+hmac: 6d6e84c9fd4419251211ae1754e6bb8db562a2577d5cf90390b496fca351c363
 
 ...
