@@ -1,4 +1,4 @@
-module github.com/greg2010/zobserver
+module github.com/fnt-eve/zobserver
 
 go 1.18
 

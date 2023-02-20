@@ -6,8 +6,8 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/greg2010/zobserver/internal/logger"
-	"github.com/greg2010/zobserver/internal/observer"
+	"github.com/fnt-eve/zobserver/internal/logger"
+	"github.com/fnt-eve/zobserver/internal/observer"
 	"github.com/kelseyhightower/envconfig"
 )
 

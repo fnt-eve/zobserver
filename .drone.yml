@@ -13,7 +13,7 @@ steps:
   - wget -O- -nv https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.50.1
   - go test ./...
   - ./bin/golangci-lint run ./...
-  - go build -o observer github.com/greg2010/zobserver/cmd/observer
+  - go build -o observer github.com/fnt-eve/zobserver/cmd/observer
 
 - name: build-docker
   image: gcr.io/kaniko-project/executor:debug
@@ -29,9 +29,9 @@ steps:
     container=kube /kaniko/executor \
       --context . \
       --dockerfile ./Dockerfile \
-      --destination harbor.greg2010.me/greg2010/zobserver:$SANITIZED_DRONE_COMMIT_BRANCH\_$COMMIT_SHA \
-      --destination harbor.greg2010.me/greg2010/zobserver:$SANITIZED_DRONE_COMMIT_BRANCH\_latest \
-      --destination harbor.greg2010.me/greg2010/zobserver:latest
+      --destination harbor.greg2010.me/fnt-eve/zobserver:$SANITIZED_DRONE_COMMIT_BRANCH\_$COMMIT_SHA \
+      --destination harbor.greg2010.me/fnt-eve/zobserver:$SANITIZED_DRONE_COMMIT_BRANCH\_latest \
+      --destination harbor.greg2010.me/fnt-eve/zobserver:latest
 - name: discord notification
   image: appleboy/drone-discord
   settings:
