@@ -72,7 +72,7 @@ func (s *sender) init(log *zap.SugaredLogger) {
 	}()
 }
 
-func (s *sender) resolveIds(ids []int32) (map[int32]string, error) {
+func (s *sender) resolveIDs(ids []int32) (map[int32]string, error) {
 	// Make sure all ids are unique
 	u := make([]int32, 0, len(ids))
 	m := make(map[int32]bool)
@@ -133,7 +133,7 @@ func (s *sender) resolveKMEntities(victimAffiliation, fbAffiliation *EntityAffil
 		ids = append(ids, fbAffiliation.ShipTypeID)
 	}
 
-	resolved, err := s.resolveIds(ids)
+	resolved, err := s.resolveIDs(ids)
 	if err != nil {
 		return nil, err
 	}
@@ -218,7 +218,7 @@ func (s *sender) transform(r *ZkilResponse, isLoss bool) (*discordgo.MessageEmbe
 		URL:       zKillURL(r.Package.KillID),
 		Title:     genTitle(names.victimInfo.CharacterName, names.victimInfo.ShipTypeName, names.systemName),
 		Timestamp: r.Package.Killmail.KillmailTime.Format(time.RFC3339),
-		Fields:    genFields(names.victimInfo, r.Package.Killmail.Victim.ShipTypeId, names.victimInfo.ShipTypeName, names.systemName, r.Package.ZKillmailMetadata.TotalValue),
+		Fields:    genFields(names.victimInfo, names.victimInfo.ShipTypeName, names.systemName, r.Package.ZKillmailMetadata.TotalValue),
 		Thumbnail: genThumbnail(r.Package.Killmail.Victim.ShipTypeId),
 		Color:     color,
 		Footer:    footer,
@@ -249,7 +249,7 @@ func genThumbnail(shipTypeID int32) *discordgo.MessageEmbedThumbnail {
 	}
 }
 
-func genFields(victimStrings EntityNames, shipTypeID int32, shipTypeName, systemName string, totalValue float64) []*discordgo.MessageEmbedField {
+func genFields(victimStrings EntityNames, shipTypeName, systemName string, totalValue float64) []*discordgo.MessageEmbedField {
 	fields := []*discordgo.MessageEmbedField{}
 	if victimStrings.CharacterName != "" {
 		fields = append(fields,

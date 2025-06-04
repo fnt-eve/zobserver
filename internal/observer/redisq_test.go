@@ -42,10 +42,10 @@ func TestQueryRedisQ(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			// create a mock server that returns the desired status code and body
-			mockServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			mockServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 				w.WriteHeader(tc.statusCode)
 				if tc.statusCode == http.StatusOK {
-					w.Write([]byte(`{"Package": {"KillID": 123}}`)) // replace with your actual response JSON
+					_, _ = w.Write([]byte(`{"Package": {"KillID": 123}}`)) // replace with your actual response JSON
 				}
 			}))
 			defer mockServer.Close()
@@ -60,7 +60,6 @@ func TestQueryRedisQ(t *testing.T) {
 
 			if tc.err == nil {
 				expectNoError(t, err, "Failed to fetch from RedisQ API")
-
 			}
 
 			if err == nil { // only need to compare response if no error occurs
