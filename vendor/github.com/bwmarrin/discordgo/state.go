@@ -42,6 +42,7 @@ type State struct {
 	TrackChannels      bool
 	TrackThreads       bool
 	TrackEmojis        bool
+	TrackStickers      bool
 	TrackMembers       bool
 	TrackThreadMembers bool
 	TrackRoles         bool
@@ -63,6 +64,7 @@ func NewState() *State {
 		TrackChannels:      true,
 		TrackThreads:       true,
 		TrackEmojis:        true,
+		TrackStickers:      true,
 		TrackMembers:       true,
 		TrackThreadMembers: true,
 		TrackRoles:         true,
@@ -175,8 +177,8 @@ func (s *State) GuildRemove(guild *Guild) error {
 
 // Guild gets a guild by ID.
 // Useful for querying if @me is in a guild:
-//     _, err := discordgo.Session.State.Guild(guildID)
-//     isInGuild := err == nil
+//    _, err := discordgo.Session.State.Guild(guildID)
+//	  isInGuild := err == nil
 func (s *State) Guild(guildID string) (*Guild, error) {
 	if s == nil {
 		return nil, ErrNilState
@@ -206,6 +208,15 @@ func (s *State) presenceAdd(guildID string, presence *Presence) error {
 			guild.Presences[i].Activities = presence.Activities
 			if presence.Status != "" {
 				guild.Presences[i].Status = presence.Status
+			}
+			if presence.ClientStatus.Desktop != "" {
+				guild.Presences[i].ClientStatus.Desktop = presence.ClientStatus.Desktop
+			}
+			if presence.ClientStatus.Mobile != "" {
+				guild.Presences[i].ClientStatus.Mobile = presence.ClientStatus.Mobile
+			}
+			if presence.ClientStatus.Web != "" {
+				guild.Presences[i].ClientStatus.Web = presence.ClientStatus.Web
 			}
 
 			//Update the optionally sent user information
@@ -909,9 +920,11 @@ func (s *State) onReady(se *Session, r *Ready) (err error) {
 	// if state is disabled, store the bare essentials.
 	if !se.StateEnabled {
 		ready := Ready{
-			Version:   r.Version,
-			SessionID: r.SessionID,
-			User:      r.User,
+			Version:     r.Version,
+			SessionID:   r.SessionID,
+			User:        r.User,
+			Shard:       r.Shard,
+			Application: r.Application,
 		}
 
 		s.Ready = ready
@@ -981,6 +994,13 @@ func (s *State) OnInterface(se *Session, i interface{}) (err error) {
 		}
 	case *GuildMemberUpdate:
 		if s.TrackMembers {
+			var old *Member
+			old, err = s.Member(t.GuildID, t.User.ID)
+			if err == nil {
+				oldCopy := *old
+				t.BeforeUpdate = &oldCopy
+			}
+
 			err = s.MemberAdd(t.Member)
 		}
 	case *GuildMemberRemove:
@@ -1023,7 +1043,25 @@ func (s *State) OnInterface(se *Session, i interface{}) (err error) {
 		}
 	case *GuildEmojisUpdate:
 		if s.TrackEmojis {
-			err = s.EmojisAdd(t.GuildID, t.Emojis)
+			var guild *Guild
+			guild, err = s.Guild(t.GuildID)
+			if err != nil {
+				return err
+			}
+			s.Lock()
+			defer s.Unlock()
+			guild.Emojis = t.Emojis
+		}
+	case *GuildStickersUpdate:
+		if s.TrackStickers {
+			var guild *Guild
+			guild, err = s.Guild(t.GuildID)
+			if err != nil {
+				return err
+			}
+			s.Lock()
+			defer s.Unlock()
+			guild.Stickers = t.Stickers
 		}
 	case *ChannelCreate:
 		if s.TrackChannels {
@@ -1031,6 +1069,11 @@ func (s *State) OnInterface(se *Session, i interface{}) (err error) {
 		}
 	case *ChannelUpdate:
 		if s.TrackChannels {
+			old, err := s.Channel(t.ID)
+			if err == nil {
+				oldCopy := *old
+				t.BeforeUpdate = &oldCopy
+			}
 			err = s.ChannelAdd(t.Channel)
 		}
 	case *ChannelDelete:

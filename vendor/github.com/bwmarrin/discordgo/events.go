@@ -36,13 +36,13 @@ type Event struct {
 
 // A Ready stores all data for the websocket READY event.
 type Ready struct {
-	Version         int        `json:"v"`
-	SessionID       string     `json:"session_id"`
-	User            *User      `json:"user"`
-	Guilds          []*Guild   `json:"guilds"`
-	PrivateChannels []*Channel `json:"private_channels"`
-
-	// TODO: Application and Shard
+	Version         int          `json:"v"`
+	SessionID       string       `json:"session_id"`
+	User            *User        `json:"user"`
+	Shard           *[2]int      `json:"shard"`
+	Application     *Application `json:"application"`
+	Guilds          []*Guild     `json:"guilds"`
+	PrivateChannels []*Channel   `json:"private_channels"`
 }
 
 // ChannelCreate is the data for a ChannelCreate event.
@@ -53,6 +53,7 @@ type ChannelCreate struct {
 // ChannelUpdate is the data for a ChannelUpdate event.
 type ChannelUpdate struct {
 	*Channel
+	BeforeUpdate *Channel `json:"-"`
 }
 
 // ChannelDelete is the data for a ChannelDelete event.
@@ -150,6 +151,7 @@ type GuildMemberAdd struct {
 // GuildMemberUpdate is the data for a GuildMemberUpdate event.
 type GuildMemberUpdate struct {
 	*Member
+	BeforeUpdate *Member `json:"-"`
 }
 
 // GuildMemberRemove is the data for a GuildMemberRemove event.
@@ -177,6 +179,12 @@ type GuildRoleDelete struct {
 type GuildEmojisUpdate struct {
 	GuildID string   `json:"guild_id"`
 	Emojis  []*Emoji `json:"emojis"`
+}
+
+// A GuildStickersUpdate is the data for a GuildStickersUpdate event.
+type GuildStickersUpdate struct {
+	GuildID  string     `json:"guild_id"`
+	Stickers []*Sticker `json:"stickers"`
 }
 
 // A GuildMembersChunk is the data for a GuildMembersChunk event.
@@ -237,6 +245,25 @@ type GuildScheduledEventUserRemove struct {
 	GuildScheduledEventID string `json:"guild_scheduled_event_id"`
 	UserID                string `json:"user_id"`
 	GuildID               string `json:"guild_id"`
+}
+
+// IntegrationCreate is the data for a IntegrationCreate event.
+type IntegrationCreate struct {
+	*Integration
+	GuildID string `json:"guild_id"`
+}
+
+// IntegrationUpdate is the data for a IntegrationUpdate event.
+type IntegrationUpdate struct {
+	*Integration
+	GuildID string `json:"guild_id"`
+}
+
+// IntegrationDelete is the data for a IntegrationDelete event.
+type IntegrationDelete struct {
+	ID            string `json:"id"`
+	GuildID       string `json:"guild_id"`
+	ApplicationID string `json:"application_id,omitempty"`
 }
 
 // MessageCreate is the data for a MessageCreate event.
@@ -399,4 +426,62 @@ type AutoModerationActionExecution struct {
 	Content              string                        `json:"content"`
 	MatchedKeyword       string                        `json:"matched_keyword"`
 	MatchedContent       string                        `json:"matched_content"`
+}
+
+// GuildAuditLogEntryCreate is the data for a GuildAuditLogEntryCreate event.
+type GuildAuditLogEntryCreate struct {
+	*AuditLogEntry
+	GuildID string `json:"guild_id"`
+}
+
+// MessagePollVoteAdd is the data for a MessagePollVoteAdd event.
+type MessagePollVoteAdd struct {
+	UserID    string `json:"user_id"`
+	ChannelID string `json:"channel_id"`
+	MessageID string `json:"message_id"`
+	GuildID   string `json:"guild_id,omitempty"`
+	AnswerID  int    `json:"answer_id"`
+}
+
+// MessagePollVoteRemove is the data for a MessagePollVoteRemove event.
+type MessagePollVoteRemove struct {
+	UserID    string `json:"user_id"`
+	ChannelID string `json:"channel_id"`
+	MessageID string `json:"message_id"`
+	GuildID   string `json:"guild_id,omitempty"`
+	AnswerID  int    `json:"answer_id"`
+}
+
+// EntitlementCreate is the data for an EntitlementCreate event.
+type EntitlementCreate struct {
+	*Entitlement
+}
+
+// EntitlementUpdate is the data for an EntitlementUpdate event.
+type EntitlementUpdate struct {
+	*Entitlement
+}
+
+// EntitlementDelete is the data for an EntitlementDelete event.
+// NOTE: Entitlements are not deleted when they expire.
+type EntitlementDelete struct {
+	*Entitlement
+}
+
+// SubscriptionCreate is the data for an SubscriptionCreate event.
+// https://discord.com/developers/docs/monetization/implementing-app-subscriptions#using-subscription-events-for-the-subscription-lifecycle
+type SubscriptionCreate struct {
+	*Subscription
+}
+
+// SubscriptionUpdate is the data for an SubscriptionUpdate event.
+// https://discord.com/developers/docs/monetization/implementing-app-subscriptions#using-subscription-events-for-the-subscription-lifecycle
+type SubscriptionUpdate struct {
+	*Subscription
+}
+
+// SubscriptionDelete is the data for an SubscriptionDelete event.
+// https://discord.com/developers/docs/monetization/implementing-app-subscriptions#using-subscription-events-for-the-subscription-lifecycle
+type SubscriptionDelete struct {
+	*Subscription
 }
