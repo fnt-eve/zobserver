@@ -12,7 +12,7 @@ import (
 	"go.uber.org/zap"
 )
 
-const RedisQURL = "https://redisq.zkillboard.com/listen.php"
+var RedisQURL = "https://zkillredisq.stream/listen.php"
 
 var errTooManyRequests = errors.New("too many requests")
 
@@ -105,9 +105,9 @@ func queryRedisq(queueID string, ttw string) (*ZkilResponse, error) {
 	return zkr, nil
 }
 
-func GenRand(len int) (*string, error) {
+func GenRand(length int) (*string, error) {
 	// Generate a random string
-	b := make([]byte, len)
+	b := make([]byte, length)
 	_, err := rand.Read(b)
 	if err != nil {
 		return nil, err
