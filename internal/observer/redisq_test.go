@@ -124,15 +124,3 @@ func TestGenRand(t *testing.T) {
 		})
 	}
 }
-
-func expectNoError(t *testing.T, err error, msg string) {
-	if err != nil {
-		t.Errorf("%s: Expected no error but got: %v", msg, err)
-	}
-}
-
-func expectEqualResponses(t *testing.T, resp ZkilResponse, expected ZkilResponse, msg string) {
-	if resp != expected {
-		t.Errorf("%s: Expected response %v, got %v", msg, resp, expected)
-	}
-}
