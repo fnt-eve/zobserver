@@ -9,6 +9,8 @@ import (
 	"net/http"
 	"time"
 
+	goesi "github.com/antihax/goesi/esi"
+
 	"go.uber.org/zap"
 )
 
@@ -102,7 +104,39 @@ func queryRedisq(queueID string, ttw string) (*ZkilResponse, error) {
 		return nil, err
 	}
 
+	if zkr.Package.ZKillmailMetadata != nil && zkr.Package.ZKillmailMetadata.Href != "" {
+		km, err := fetchKillmail(zkr.Package.ZKillmailMetadata.Href)
+		if err != nil {
+			return nil, fmt.Errorf("failed to fetch killmail from href: %w", err)
+		}
+		zkr.Package.Killmail = km
+	}
+
 	return zkr, nil
+}
+
+func fetchKillmail(url string) (*goesi.GetKillmailsKillmailIdKillmailHashOk, error) {
+	req, err := http.NewRequest("GET", url, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	res, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer res.Body.Close()
+
+	if res.StatusCode != 200 {
+		return nil, fmt.Errorf("got %v from killmail href", res.StatusCode)
+	}
+
+	km := &goesi.GetKillmailsKillmailIdKillmailHashOk{}
+	err = json.NewDecoder(res.Body).Decode(km)
+	if err != nil {
+		return nil, err
+	}
+	return km, nil
 }
 
 func GenRand(length int) (*string, error) {

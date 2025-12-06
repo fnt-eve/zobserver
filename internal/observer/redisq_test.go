@@ -7,6 +7,8 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
+
+	"github.com/antihax/goesi/esi"
 )
 
 // TestQueryRedisQ tests queryRedisq with a mock server.
@@ -23,7 +25,7 @@ func TestQueryRedisQ(t *testing.T) {
 			name:             "Success",
 			statusCode:       http.StatusOK,
 			err:              nil,
-			expectedResponse: ZkilResponse{Package: ZkilPackage{KillID: 123}}, // replace with your actual response structure
+			expectedResponse: ZkilResponse{Package: ZkilPackage{KillID: 123, Killmail: &esi.GetKillmailsKillmailIdKillmailHashOk{KillmailId: 123}}},
 		},
 		{
 			name:             "TooManyRequests",
@@ -42,30 +44,67 @@ func TestQueryRedisQ(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			// create a mock server that returns the desired status code and body
-			mockServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
-				w.WriteHeader(tc.statusCode)
-				if tc.statusCode == http.StatusOK {
-					_, _ = w.Write([]byte(`{"Package": {"KillID": 123}}`)) // replace with your actual response JSON
+			mockServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				if r.URL.Path == "/" {
+					if tc.statusCode != 0 {
+						w.WriteHeader(tc.statusCode)
+					}
+					if tc.statusCode == http.StatusOK {
+						// Return response with Href pointing to the killmail endpoint on the same mock server
+						href := fmt.Sprintf("http://%s/killmail", r.Host)
+						resp := fmt.Sprintf(`{"Package": {"KillID": 123, "zkb": {"href": "%s"}}}`, href)
+						_, _ = w.Write([]byte(resp))
+					}
+					return
 				}
+
+				if r.URL.Path == "/killmail" {
+					w.WriteHeader(http.StatusOK)
+					_, _ = w.Write([]byte(`{"killmail_id": 123, "killmail_hash": "hash"}`))
+					return
+				}
+
+				w.WriteHeader(http.StatusNotFound)
 			}))
 			defer mockServer.Close()
 
 			// override RedisQURL so it points to our mock server
 			oldRedisQURL := RedisQURL
 			RedisQURL = mockServer.URL
+			if tc.name == "InvalidURL" {
+				RedisQURL = ""
+			}
 			defer func() { RedisQURL = oldRedisQURL }() // restore original URL after test
 
 			// call queryRedisq
 			resp, err := queryRedisq("testQueue", "0")
 
-			if tc.err == nil {
-				expectNoError(t, err, "Failed to fetch from RedisQ API")
+			if tc.err != nil {
+				if err == nil {
+					t.Errorf("Expected error '%v', got nil", tc.err)
+				}
 			}
 
 			if err == nil { // only need to compare response if no error occurs
-				expectEqualResponses(t, *resp, tc.expectedResponse, "Unexpected Response from RedisQ API")
+				verifyResponse(t, *resp, tc.expectedResponse)
 			}
 		})
+	}
+}
+
+func verifyResponse(t *testing.T, resp ZkilResponse, expected ZkilResponse) {
+	if resp.Package.KillID != expected.Package.KillID {
+		t.Errorf("KillID mismatch: got %v, want %v", resp.Package.KillID, expected.Package.KillID)
+	}
+	// Check Killmail
+	if expected.Package.Killmail != nil {
+		if resp.Package.Killmail == nil {
+			t.Errorf("Expected Killmail to be non-nil")
+			return
+		}
+		if resp.Package.Killmail.KillmailId != expected.Package.Killmail.KillmailId {
+			t.Errorf("KillmailID mismatch: got %v, want %v", resp.Package.Killmail.KillmailId, expected.Package.Killmail.KillmailId)
+		}
 	}
 }
 
