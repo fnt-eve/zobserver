@@ -318,7 +318,7 @@ func genFooter(entityInfo EntityNames, shipTypeID int32, involvedCount int) *dis
 }
 
 func zKillURL(killID int64) string {
-	return fmt.Sprintf("https://zkillboard.com/kill/%v", killID)
+	return fmt.Sprintf("https://zkillboard.com/kill/%v/", killID)
 }
 
 func itemTypeImageURL(ID int32, isIcon bool, size int) string {
