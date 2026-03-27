@@ -6,7 +6,7 @@ COPY . .
 ENV CGO_ENABLED=0
 RUN go build -o  /go/bin/observer github.com/fnt-eve/zobserver/cmd/observer
 
-FROM alpine:3.22
+FROM alpine:3.23
 
 LABEL org.opencontainers.image.source=https://github.com/fnt-eve/zobserver
 
