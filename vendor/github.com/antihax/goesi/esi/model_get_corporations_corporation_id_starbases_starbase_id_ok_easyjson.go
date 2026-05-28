@@ -36,7 +36,11 @@ func easyjsonAa81674fDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCo
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCorporationsCorporationIdStarbasesStarbaseIdOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,30 +101,61 @@ func easyjsonAa81674fDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "allow_alliance_members":
-			out.AllowAllianceMembers = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.AllowAllianceMembers = bool(in.Bool())
+			}
 		case "allow_corporation_members":
-			out.AllowCorporationMembers = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.AllowCorporationMembers = bool(in.Bool())
+			}
 		case "anchor":
-			out.Anchor = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Anchor = string(in.String())
+			}
 		case "attack_if_at_war":
-			out.AttackIfAtWar = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.AttackIfAtWar = bool(in.Bool())
+			}
 		case "attack_if_other_security_status_dropping":
-			out.AttackIfOtherSecurityStatusDropping = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.AttackIfOtherSecurityStatusDropping = bool(in.Bool())
+			}
 		case "attack_security_status_threshold":
-			out.AttackSecurityStatusThreshold = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.AttackSecurityStatusThreshold = float32(in.Float32())
+			}
 		case "attack_standing_threshold":
-			out.AttackStandingThreshold = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.AttackStandingThreshold = float32(in.Float32())
+			}
 		case "fuel_bay_take":
-			out.FuelBayTake = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.FuelBayTake = string(in.String())
+			}
 		case "fuel_bay_view":
-			out.FuelBayView = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.FuelBayView = string(in.String())
+			}
 		case "fuels":
 			if in.IsNull() {
 				in.Skip()
@@ -145,13 +180,29 @@ func easyjsonAa81674fDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				in.Delim(']')
 			}
 		case "offline":
-			out.Offline = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Offline = string(in.String())
+			}
 		case "online":
-			out.Online = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Online = string(in.String())
+			}
 		case "unanchor":
-			out.Unanchor = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Unanchor = string(in.String())
+			}
 		case "use_alliance_standings":
-			out.UseAllianceStandings = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.UseAllianceStandings = bool(in.Bool())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -350,16 +401,19 @@ func easyjsonAa81674fDecodeGithubComAntihaxGoesiEsi2(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "quantity":
-			out.Quantity = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Quantity = int32(in.Int32())
+			}
 		case "type_id":
-			out.TypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.TypeId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

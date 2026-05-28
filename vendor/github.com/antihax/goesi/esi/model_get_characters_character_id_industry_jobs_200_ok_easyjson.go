@@ -36,7 +36,11 @@ func easyjsonA76eed41DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCh
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCharactersCharacterIdIndustryJobs200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,64 +101,147 @@ func easyjsonA76eed41DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "activity_id":
-			out.ActivityId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ActivityId = int32(in.Int32())
+			}
 		case "blueprint_id":
-			out.BlueprintId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.BlueprintId = int64(in.Int64())
+			}
 		case "blueprint_location_id":
-			out.BlueprintLocationId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.BlueprintLocationId = int64(in.Int64())
+			}
 		case "blueprint_type_id":
-			out.BlueprintTypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.BlueprintTypeId = int32(in.Int32())
+			}
 		case "completed_character_id":
-			out.CompletedCharacterId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CompletedCharacterId = int32(in.Int32())
+			}
 		case "completed_date":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.CompletedDate).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.CompletedDate).UnmarshalJSON(data))
+				}
 			}
 		case "cost":
-			out.Cost = float64(in.Float64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Cost = float64(in.Float64())
+			}
 		case "duration":
-			out.Duration = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Duration = int32(in.Int32())
+			}
 		case "end_date":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.EndDate).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.EndDate).UnmarshalJSON(data))
+				}
 			}
 		case "facility_id":
-			out.FacilityId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.FacilityId = int64(in.Int64())
+			}
 		case "installer_id":
-			out.InstallerId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.InstallerId = int32(in.Int32())
+			}
 		case "job_id":
-			out.JobId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.JobId = int32(in.Int32())
+			}
 		case "licensed_runs":
-			out.LicensedRuns = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.LicensedRuns = int32(in.Int32())
+			}
 		case "output_location_id":
-			out.OutputLocationId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.OutputLocationId = int64(in.Int64())
+			}
 		case "pause_date":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.PauseDate).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.PauseDate).UnmarshalJSON(data))
+				}
 			}
 		case "probability":
-			out.Probability = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Probability = float32(in.Float32())
+			}
 		case "product_type_id":
-			out.ProductTypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ProductTypeId = int32(in.Int32())
+			}
 		case "runs":
-			out.Runs = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Runs = int32(in.Int32())
+			}
 		case "start_date":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.StartDate).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.StartDate).UnmarshalJSON(data))
+				}
 			}
 		case "station_id":
-			out.StationId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.StationId = int64(in.Int64())
+			}
 		case "status":
-			out.Status = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Status = string(in.String())
+			}
 		case "successful_runs":
-			out.SuccessfulRuns = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SuccessfulRuns = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

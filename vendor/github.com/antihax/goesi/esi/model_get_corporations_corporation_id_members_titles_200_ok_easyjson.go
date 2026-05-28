@@ -36,7 +36,11 @@ func easyjson640f619dDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCo
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCorporationsCorporationIdMembersTitles200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,14 +101,13 @@ func easyjson640f619dDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "character_id":
-			out.CharacterId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CharacterId = int32(in.Int32())
+			}
 		case "titles":
 			if in.IsNull() {
 				in.Skip()
@@ -122,7 +125,11 @@ func easyjson640f619dDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				}
 				for !in.IsDelim(']') {
 					var v4 int32
-					v4 = int32(in.Int32())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v4 = int32(in.Int32())
+					}
 					out.Titles = append(out.Titles, v4)
 					in.WantComma()
 				}

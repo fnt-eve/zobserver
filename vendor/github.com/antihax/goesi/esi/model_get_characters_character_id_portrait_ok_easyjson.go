@@ -36,7 +36,11 @@ func easyjson157419baDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCh
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCharactersCharacterIdPortraitOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,20 +101,31 @@ func easyjson157419baDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "px128x128":
-			out.Px128x128 = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Px128x128 = string(in.String())
+			}
 		case "px256x256":
-			out.Px256x256 = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Px256x256 = string(in.String())
+			}
 		case "px512x512":
-			out.Px512x512 = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Px512x512 = string(in.String())
+			}
 		case "px64x64":
-			out.Px64x64 = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Px64x64 = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}

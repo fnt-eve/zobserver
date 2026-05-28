@@ -36,7 +36,11 @@ func easyjsonB63f3efcDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCh
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCharactersCharacterIdNotificationsContacts200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,24 +101,39 @@ func easyjsonB63f3efcDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "message":
-			out.Message = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Message = string(in.String())
+			}
 		case "notification_id":
-			out.NotificationId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.NotificationId = int64(in.Int64())
+			}
 		case "send_date":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.SendDate).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.SendDate).UnmarshalJSON(data))
+				}
 			}
 		case "sender_character_id":
-			out.SenderCharacterId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SenderCharacterId = int32(in.Int32())
+			}
 		case "standing_level":
-			out.StandingLevel = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.StandingLevel = float32(in.Float32())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -143,7 +162,7 @@ func easyjsonB63f3efcEncodeGithubComAntihaxGoesiEsi1(out *jwriter.Writer, in Get
 		} else {
 			out.RawString(prefix)
 		}
-		out.Int32(int32(in.NotificationId))
+		out.Int64(int64(in.NotificationId))
 	}
 	if true {
 		const prefix string = ",\"send_date\":"

@@ -36,7 +36,11 @@ func easyjson908d5a0dDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCo
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCorporationsCorporationIdDivisionsOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,11 +101,6 @@ func easyjson908d5a0dDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "hangar":
 			if in.IsNull() {
@@ -120,7 +119,11 @@ func easyjson908d5a0dDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				}
 				for !in.IsDelim(']') {
 					var v4 GetCorporationsCorporationIdDivisionsHangarHangar
-					(v4).UnmarshalEasyJSON(in)
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						(v4).UnmarshalEasyJSON(in)
+					}
 					out.Hangar = append(out.Hangar, v4)
 					in.WantComma()
 				}
@@ -143,7 +146,11 @@ func easyjson908d5a0dDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				}
 				for !in.IsDelim(']') {
 					var v5 GetCorporationsCorporationIdDivisionsWalletWallet
-					(v5).UnmarshalEasyJSON(in)
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						(v5).UnmarshalEasyJSON(in)
+					}
 					out.Wallet = append(out.Wallet, v5)
 					in.WantComma()
 				}

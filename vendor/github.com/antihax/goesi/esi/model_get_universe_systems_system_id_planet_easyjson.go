@@ -36,7 +36,11 @@ func easyjsonFed59962DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetUn
 		}
 		for !in.IsDelim(']') {
 			var v1 GetUniverseSystemsSystemIdPlanet
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,11 +101,6 @@ func easyjsonFed59962DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetU
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "asteroid_belts":
 			if in.IsNull() {
@@ -120,7 +119,11 @@ func easyjsonFed59962DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetU
 				}
 				for !in.IsDelim(']') {
 					var v4 int32
-					v4 = int32(in.Int32())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v4 = int32(in.Int32())
+					}
 					out.AsteroidBelts = append(out.AsteroidBelts, v4)
 					in.WantComma()
 				}
@@ -143,14 +146,22 @@ func easyjsonFed59962DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetU
 				}
 				for !in.IsDelim(']') {
 					var v5 int32
-					v5 = int32(in.Int32())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v5 = int32(in.Int32())
+					}
 					out.Moons = append(out.Moons, v5)
 					in.WantComma()
 				}
 				in.Delim(']')
 			}
 		case "planet_id":
-			out.PlanetId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.PlanetId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

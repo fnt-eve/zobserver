@@ -36,7 +36,11 @@ func easyjson37f7d2d4DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCh
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCharactersCharacterIdClonesHomeLocation
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,16 +101,19 @@ func easyjson37f7d2d4DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "location_id":
-			out.LocationId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.LocationId = int64(in.Int64())
+			}
 		case "location_type":
-			out.LocationType = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.LocationType = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}

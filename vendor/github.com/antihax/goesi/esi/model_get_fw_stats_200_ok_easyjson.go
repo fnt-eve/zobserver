@@ -36,7 +36,11 @@ func easyjsonC070293eDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetFw
 		}
 		for !in.IsDelim(']') {
 			var v1 GetFwStats200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,22 +101,37 @@ func easyjsonC070293eDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetF
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "faction_id":
-			out.FactionId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.FactionId = int32(in.Int32())
+			}
 		case "kills":
-			(out.Kills).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(out.Kills).UnmarshalEasyJSON(in)
+			}
 		case "pilots":
-			out.Pilots = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Pilots = int32(in.Int32())
+			}
 		case "systems_controlled":
-			out.SystemsControlled = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SystemsControlled = int32(in.Int32())
+			}
 		case "victory_points":
-			(out.VictoryPoints).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(out.VictoryPoints).UnmarshalEasyJSON(in)
+			}
 		default:
 			in.SkipRecursive()
 		}

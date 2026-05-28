@@ -36,7 +36,11 @@ func easyjson28a4c0c5DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *PostC
 		}
 		for !in.IsDelim(']') {
 			var v1 PostCharactersCharacterIdMailMail
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,16 +101,19 @@ func easyjson28a4c0c5DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *Post
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "approved_cost":
-			out.ApprovedCost = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ApprovedCost = int64(in.Int64())
+			}
 		case "body":
-			out.Body = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Body = string(in.String())
+			}
 		case "recipients":
 			if in.IsNull() {
 				in.Skip()
@@ -131,7 +138,11 @@ func easyjson28a4c0c5DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *Post
 				in.Delim(']')
 			}
 		case "subject":
-			out.Subject = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Subject = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -230,16 +241,19 @@ func easyjson28a4c0c5DecodeGithubComAntihaxGoesiEsi2(in *jlexer.Lexer, out *Post
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "recipient_id":
-			out.RecipientId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.RecipientId = int32(in.Int32())
+			}
 		case "recipient_type":
-			out.RecipientType = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.RecipientType = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}

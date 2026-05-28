@@ -36,7 +36,11 @@ func easyjsonFa740090DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetFw
 		}
 		for !in.IsDelim(']') {
 			var v1 GetFwLeaderboardsCharactersKills
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,11 +101,6 @@ func easyjsonFa740090DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetF
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "active_total":
 			if in.IsNull() {
@@ -278,16 +277,19 @@ func easyjsonFa740090DecodeGithubComAntihaxGoesiEsi4(in *jlexer.Lexer, out *GetF
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "amount":
-			out.Amount = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Amount = int32(in.Int32())
+			}
 		case "character_id":
-			out.CharacterId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CharacterId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -333,16 +335,19 @@ func easyjsonFa740090DecodeGithubComAntihaxGoesiEsi3(in *jlexer.Lexer, out *GetF
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "amount":
-			out.Amount = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Amount = int32(in.Int32())
+			}
 		case "character_id":
-			out.CharacterId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CharacterId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -388,16 +393,19 @@ func easyjsonFa740090DecodeGithubComAntihaxGoesiEsi2(in *jlexer.Lexer, out *GetF
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "amount":
-			out.Amount = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Amount = int32(in.Int32())
+			}
 		case "character_id":
-			out.CharacterId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CharacterId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

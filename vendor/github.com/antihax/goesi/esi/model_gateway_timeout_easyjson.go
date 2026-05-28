@@ -36,7 +36,11 @@ func easyjson326404aDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *Gatewa
 		}
 		for !in.IsDelim(']') {
 			var v1 GatewayTimeout
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,16 +101,19 @@ func easyjson326404aDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *Gatew
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "error":
-			out.Error_ = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Error_ = string(in.String())
+			}
 		case "timeout":
-			out.Timeout = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Timeout = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

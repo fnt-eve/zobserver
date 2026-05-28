@@ -36,7 +36,11 @@ func easyjsonFb912c78DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCo
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCorporationsCorporationIdWalletsDivisionTransactions200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,32 +101,63 @@ func easyjsonFb912c78DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "client_id":
-			out.ClientId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ClientId = int32(in.Int32())
+			}
 		case "date":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.Date).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.Date).UnmarshalJSON(data))
+				}
 			}
 		case "is_buy":
-			out.IsBuy = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.IsBuy = bool(in.Bool())
+			}
 		case "journal_ref_id":
-			out.JournalRefId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.JournalRefId = int64(in.Int64())
+			}
 		case "location_id":
-			out.LocationId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.LocationId = int64(in.Int64())
+			}
 		case "quantity":
-			out.Quantity = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Quantity = int32(in.Int32())
+			}
 		case "transaction_id":
-			out.TransactionId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.TransactionId = int64(in.Int64())
+			}
 		case "type_id":
-			out.TypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.TypeId = int32(in.Int32())
+			}
 		case "unit_price":
-			out.UnitPrice = float64(in.Float64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.UnitPrice = float64(in.Float64())
+			}
 		default:
 			in.SkipRecursive()
 		}

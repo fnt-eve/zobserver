@@ -36,7 +36,11 @@ func easyjsonFf081cddDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *PostF
 		}
 		for !in.IsDelim(']') {
 			var v1 PostFleetsFleetIdMembersInvitation
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,20 +101,31 @@ func easyjsonFf081cddDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *Post
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "character_id":
-			out.CharacterId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CharacterId = int32(in.Int32())
+			}
 		case "role":
-			out.Role = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Role = string(in.String())
+			}
 		case "squad_id":
-			out.SquadId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SquadId = int64(in.Int64())
+			}
 		case "wing_id":
-			out.WingId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.WingId = int64(in.Int64())
+			}
 		default:
 			in.SkipRecursive()
 		}

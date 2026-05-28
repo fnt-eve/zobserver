@@ -36,7 +36,11 @@ func easyjson71b62f52DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetUn
 		}
 		for !in.IsDelim(']') {
 			var v1 GetUniverseStationsStationIdOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,28 +101,51 @@ func easyjson71b62f52DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetU
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "max_dockable_ship_volume":
-			out.MaxDockableShipVolume = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.MaxDockableShipVolume = float32(in.Float32())
+			}
 		case "name":
-			out.Name = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
 		case "office_rental_cost":
-			out.OfficeRentalCost = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.OfficeRentalCost = float32(in.Float32())
+			}
 		case "owner":
-			out.Owner = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Owner = int32(in.Int32())
+			}
 		case "position":
 			easyjson71b62f52DecodeGithubComAntihaxGoesiEsi2(in, &out.Position)
 		case "race_id":
-			out.RaceId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.RaceId = int32(in.Int32())
+			}
 		case "reprocessing_efficiency":
-			out.ReprocessingEfficiency = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ReprocessingEfficiency = float32(in.Float32())
+			}
 		case "reprocessing_stations_take":
-			out.ReprocessingStationsTake = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ReprocessingStationsTake = float32(in.Float32())
+			}
 		case "services":
 			if in.IsNull() {
 				in.Skip()
@@ -136,18 +163,34 @@ func easyjson71b62f52DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetU
 				}
 				for !in.IsDelim(']') {
 					var v4 string
-					v4 = string(in.String())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v4 = string(in.String())
+					}
 					out.Services = append(out.Services, v4)
 					in.WantComma()
 				}
 				in.Delim(']')
 			}
 		case "station_id":
-			out.StationId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.StationId = int32(in.Int32())
+			}
 		case "system_id":
-			out.SystemId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SystemId = int32(in.Int32())
+			}
 		case "type_id":
-			out.TypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.TypeId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -326,18 +369,25 @@ func easyjson71b62f52DecodeGithubComAntihaxGoesiEsi2(in *jlexer.Lexer, out *GetU
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "x":
-			out.X = float64(in.Float64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.X = float64(in.Float64())
+			}
 		case "y":
-			out.Y = float64(in.Float64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Y = float64(in.Float64())
+			}
 		case "z":
-			out.Z = float64(in.Float64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Z = float64(in.Float64())
+			}
 		default:
 			in.SkipRecursive()
 		}

@@ -36,7 +36,11 @@ func easyjson3ab323d2DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetAl
 		}
 		for !in.IsDelim(']') {
 			var v1 GetAlliancesAllianceIdOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,28 +101,51 @@ func easyjson3ab323d2DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetA
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "creator_corporation_id":
-			out.CreatorCorporationId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CreatorCorporationId = int32(in.Int32())
+			}
 		case "creator_id":
-			out.CreatorId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CreatorId = int32(in.Int32())
+			}
 		case "date_founded":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.DateFounded).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.DateFounded).UnmarshalJSON(data))
+				}
 			}
 		case "executor_corporation_id":
-			out.ExecutorCorporationId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ExecutorCorporationId = int32(in.Int32())
+			}
 		case "faction_id":
-			out.FactionId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.FactionId = int32(in.Int32())
+			}
 		case "name":
-			out.Name = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
 		case "ticker":
-			out.Ticker = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Ticker = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}

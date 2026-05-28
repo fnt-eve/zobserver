@@ -36,7 +36,11 @@ func easyjsonAd79ccc0DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetDo
 		}
 		for !in.IsDelim(']') {
 			var v1 GetDogmaEffectsEffectIdModifier
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,24 +101,43 @@ func easyjsonAd79ccc0DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetD
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "domain":
-			out.Domain = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Domain = string(in.String())
+			}
 		case "effect_id":
-			out.EffectId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.EffectId = int32(in.Int32())
+			}
 		case "func":
-			out.Func_ = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Func_ = string(in.String())
+			}
 		case "modified_attribute_id":
-			out.ModifiedAttributeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ModifiedAttributeId = int32(in.Int32())
+			}
 		case "modifying_attribute_id":
-			out.ModifyingAttributeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ModifyingAttributeId = int32(in.Int32())
+			}
 		case "operator":
-			out.Operator = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Operator = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

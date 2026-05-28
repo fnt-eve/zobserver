@@ -36,7 +36,11 @@ func easyjsonF4e2485aDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetUn
 		}
 		for !in.IsDelim(']') {
 			var v1 GetUniverseSystemsSystemIdOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,16 +101,19 @@ func easyjsonF4e2485aDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetU
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "constellation_id":
-			out.ConstellationId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ConstellationId = int32(in.Int32())
+			}
 		case "name":
-			out.Name = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
 		case "planets":
 			if in.IsNull() {
 				in.Skip()
@@ -131,13 +138,29 @@ func easyjsonF4e2485aDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetU
 				in.Delim(']')
 			}
 		case "position":
-			(out.Position).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(out.Position).UnmarshalEasyJSON(in)
+			}
 		case "security_class":
-			out.SecurityClass = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SecurityClass = string(in.String())
+			}
 		case "security_status":
-			out.SecurityStatus = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SecurityStatus = float32(in.Float32())
+			}
 		case "star_id":
-			out.StarId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.StarId = int32(in.Int32())
+			}
 		case "stargates":
 			if in.IsNull() {
 				in.Skip()
@@ -155,7 +178,11 @@ func easyjsonF4e2485aDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetU
 				}
 				for !in.IsDelim(']') {
 					var v5 int32
-					v5 = int32(in.Int32())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v5 = int32(in.Int32())
+					}
 					out.Stargates = append(out.Stargates, v5)
 					in.WantComma()
 				}
@@ -178,14 +205,22 @@ func easyjsonF4e2485aDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetU
 				}
 				for !in.IsDelim(']') {
 					var v6 int32
-					v6 = int32(in.Int32())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v6 = int32(in.Int32())
+					}
 					out.Stations = append(out.Stations, v6)
 					in.WantComma()
 				}
 				in.Delim(']')
 			}
 		case "system_id":
-			out.SystemId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SystemId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -362,11 +397,6 @@ func easyjsonF4e2485aDecodeGithubComAntihaxGoesiEsi2(in *jlexer.Lexer, out *GetU
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "asteroid_belts":
 			if in.IsNull() {
@@ -385,7 +415,11 @@ func easyjsonF4e2485aDecodeGithubComAntihaxGoesiEsi2(in *jlexer.Lexer, out *GetU
 				}
 				for !in.IsDelim(']') {
 					var v13 int32
-					v13 = int32(in.Int32())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v13 = int32(in.Int32())
+					}
 					out.AsteroidBelts = append(out.AsteroidBelts, v13)
 					in.WantComma()
 				}
@@ -408,14 +442,22 @@ func easyjsonF4e2485aDecodeGithubComAntihaxGoesiEsi2(in *jlexer.Lexer, out *GetU
 				}
 				for !in.IsDelim(']') {
 					var v14 int32
-					v14 = int32(in.Int32())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v14 = int32(in.Int32())
+					}
 					out.Moons = append(out.Moons, v14)
 					in.WantComma()
 				}
 				in.Delim(']')
 			}
 		case "planet_id":
-			out.PlanetId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.PlanetId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

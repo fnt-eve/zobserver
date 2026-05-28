@@ -36,7 +36,11 @@ func easyjson1bb669caDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCh
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCharactersCharacterIdPlanetsPlanetIdPin
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,11 +101,6 @@ func easyjson1bb669caDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "contents":
 			if in.IsNull() {
@@ -127,31 +126,67 @@ func easyjson1bb669caDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				in.Delim(']')
 			}
 		case "expiry_time":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.ExpiryTime).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.ExpiryTime).UnmarshalJSON(data))
+				}
 			}
 		case "extractor_details":
-			(out.ExtractorDetails).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(out.ExtractorDetails).UnmarshalEasyJSON(in)
+			}
 		case "factory_details":
 			easyjson1bb669caDecodeGithubComAntihaxGoesiEsi3(in, &out.FactoryDetails)
 		case "install_time":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.InstallTime).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.InstallTime).UnmarshalJSON(data))
+				}
 			}
 		case "last_cycle_start":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.LastCycleStart).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.LastCycleStart).UnmarshalJSON(data))
+				}
 			}
 		case "latitude":
-			out.Latitude = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Latitude = float32(in.Float32())
+			}
 		case "longitude":
-			out.Longitude = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Longitude = float32(in.Float32())
+			}
 		case "pin_id":
-			out.PinId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.PinId = int64(in.Int64())
+			}
 		case "schematic_id":
-			out.SchematicId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SchematicId = int32(in.Int32())
+			}
 		case "type_id":
-			out.TypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.TypeId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -320,14 +355,13 @@ func easyjson1bb669caDecodeGithubComAntihaxGoesiEsi3(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "schematic_id":
-			out.SchematicId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SchematicId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -363,16 +397,19 @@ func easyjson1bb669caDecodeGithubComAntihaxGoesiEsi2(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "amount":
-			out.Amount = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Amount = int64(in.Int64())
+			}
 		case "type_id":
-			out.TypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.TypeId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

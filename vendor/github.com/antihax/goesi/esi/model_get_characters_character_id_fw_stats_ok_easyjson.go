@@ -36,7 +36,11 @@ func easyjsonB9cd43f2DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCh
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCharactersCharacterIdFwStatsOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,26 +101,45 @@ func easyjsonB9cd43f2DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "current_rank":
-			out.CurrentRank = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CurrentRank = int32(in.Int32())
+			}
 		case "enlisted_on":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.EnlistedOn).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.EnlistedOn).UnmarshalJSON(data))
+				}
 			}
 		case "faction_id":
-			out.FactionId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.FactionId = int32(in.Int32())
+			}
 		case "highest_rank":
-			out.HighestRank = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.HighestRank = int32(in.Int32())
+			}
 		case "kills":
-			(out.Kills).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(out.Kills).UnmarshalEasyJSON(in)
+			}
 		case "victory_points":
-			(out.VictoryPoints).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(out.VictoryPoints).UnmarshalEasyJSON(in)
+			}
 		default:
 			in.SkipRecursive()
 		}

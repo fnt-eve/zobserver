@@ -36,7 +36,11 @@ func easyjsonDac4178DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetUni
 		}
 		for !in.IsDelim(']') {
 			var v1 GetUniverseFactions200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,32 +101,67 @@ func easyjsonDac4178DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetUn
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "corporation_id":
-			out.CorporationId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CorporationId = int32(in.Int32())
+			}
 		case "description":
-			out.Description = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Description = string(in.String())
+			}
 		case "faction_id":
-			out.FactionId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.FactionId = int32(in.Int32())
+			}
 		case "is_unique":
-			out.IsUnique = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.IsUnique = bool(in.Bool())
+			}
 		case "militia_corporation_id":
-			out.MilitiaCorporationId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.MilitiaCorporationId = int32(in.Int32())
+			}
 		case "name":
-			out.Name = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
 		case "size_factor":
-			out.SizeFactor = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SizeFactor = float32(in.Float32())
+			}
 		case "solar_system_id":
-			out.SolarSystemId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SolarSystemId = int32(in.Int32())
+			}
 		case "station_count":
-			out.StationCount = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.StationCount = int32(in.Int32())
+			}
 		case "station_system_count":
-			out.StationSystemCount = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.StationSystemCount = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

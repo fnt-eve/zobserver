@@ -36,7 +36,11 @@ func easyjson417de55fDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *PostC
 		}
 		for !in.IsDelim(']') {
 			var v1 PostCharactersCharacterIdFittingsCreated
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,14 +101,13 @@ func easyjson417de55fDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *Post
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "fitting_id":
-			out.FittingId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.FittingId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

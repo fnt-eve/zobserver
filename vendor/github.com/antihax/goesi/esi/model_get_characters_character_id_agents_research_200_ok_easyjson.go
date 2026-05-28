@@ -36,7 +36,11 @@ func easyjsonB249e244DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCh
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCharactersCharacterIdAgentsResearch200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,23 +101,38 @@ func easyjsonB249e244DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "agent_id":
-			out.AgentId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.AgentId = int32(in.Int32())
+			}
 		case "points_per_day":
-			out.PointsPerDay = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.PointsPerDay = float32(in.Float32())
+			}
 		case "remainder_points":
-			out.RemainderPoints = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.RemainderPoints = float32(in.Float32())
+			}
 		case "skill_type_id":
-			out.SkillTypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SkillTypeId = int32(in.Int32())
+			}
 		case "started_at":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.StartedAt).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.StartedAt).UnmarshalJSON(data))
+				}
 			}
 		default:
 			in.SkipRecursive()

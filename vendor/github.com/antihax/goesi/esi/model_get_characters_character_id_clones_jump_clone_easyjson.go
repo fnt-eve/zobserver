@@ -36,7 +36,11 @@ func easyjson35bb60e3DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCh
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCharactersCharacterIdClonesJumpClone
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,11 +101,6 @@ func easyjson35bb60e3DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "implants":
 			if in.IsNull() {
@@ -120,20 +119,40 @@ func easyjson35bb60e3DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				}
 				for !in.IsDelim(']') {
 					var v4 int32
-					v4 = int32(in.Int32())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v4 = int32(in.Int32())
+					}
 					out.Implants = append(out.Implants, v4)
 					in.WantComma()
 				}
 				in.Delim(']')
 			}
 		case "jump_clone_id":
-			out.JumpCloneId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.JumpCloneId = int32(in.Int32())
+			}
 		case "location_id":
-			out.LocationId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.LocationId = int64(in.Int64())
+			}
 		case "location_type":
-			out.LocationType = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.LocationType = string(in.String())
+			}
 		case "name":
-			out.Name = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}

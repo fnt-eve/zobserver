@@ -36,7 +36,11 @@ func easyjson2624bd49DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetFw
 		}
 		for !in.IsDelim(']') {
 			var v1 GetFwLeaderboardsCorporationsKills
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,11 +101,6 @@ func easyjson2624bd49DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetF
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "active_total":
 			if in.IsNull() {
@@ -120,7 +119,11 @@ func easyjson2624bd49DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetF
 				}
 				for !in.IsDelim(']') {
 					var v4 GetFwLeaderboardsCorporationsActiveTotalActiveTotal
-					(v4).UnmarshalEasyJSON(in)
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						(v4).UnmarshalEasyJSON(in)
+					}
 					out.ActiveTotal = append(out.ActiveTotal, v4)
 					in.WantComma()
 				}
@@ -143,7 +146,11 @@ func easyjson2624bd49DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetF
 				}
 				for !in.IsDelim(']') {
 					var v5 GetFwLeaderboardsCorporationsLastWeekLastWeek
-					(v5).UnmarshalEasyJSON(in)
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						(v5).UnmarshalEasyJSON(in)
+					}
 					out.LastWeek = append(out.LastWeek, v5)
 					in.WantComma()
 				}
@@ -166,7 +173,11 @@ func easyjson2624bd49DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetF
 				}
 				for !in.IsDelim(']') {
 					var v6 GetFwLeaderboardsCorporationsYesterdayYesterday
-					(v6).UnmarshalEasyJSON(in)
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						(v6).UnmarshalEasyJSON(in)
+					}
 					out.Yesterday = append(out.Yesterday, v6)
 					in.WantComma()
 				}

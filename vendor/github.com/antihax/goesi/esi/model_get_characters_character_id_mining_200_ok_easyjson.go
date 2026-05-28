@@ -36,7 +36,11 @@ func easyjson8f350f00DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCh
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCharactersCharacterIdMining200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,20 +101,31 @@ func easyjson8f350f00DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "date":
-			out.Date = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Date = string(in.String())
+			}
 		case "quantity":
-			out.Quantity = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Quantity = int64(in.Int64())
+			}
 		case "solar_system_id":
-			out.SolarSystemId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SolarSystemId = int32(in.Int32())
+			}
 		case "type_id":
-			out.TypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.TypeId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

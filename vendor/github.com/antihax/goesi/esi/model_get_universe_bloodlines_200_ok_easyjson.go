@@ -36,7 +36,11 @@ func easyjson9e281deaDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetUn
 		}
 		for !in.IsDelim(']') {
 			var v1 GetUniverseBloodlines200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,34 +101,73 @@ func easyjson9e281deaDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetU
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "bloodline_id":
-			out.BloodlineId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.BloodlineId = int32(in.Int32())
+			}
 		case "charisma":
-			out.Charisma = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Charisma = int32(in.Int32())
+			}
 		case "corporation_id":
-			out.CorporationId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CorporationId = int32(in.Int32())
+			}
 		case "description":
-			out.Description = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Description = string(in.String())
+			}
 		case "intelligence":
-			out.Intelligence = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Intelligence = int32(in.Int32())
+			}
 		case "memory":
-			out.Memory = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Memory = int32(in.Int32())
+			}
 		case "name":
-			out.Name = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
 		case "perception":
-			out.Perception = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Perception = int32(in.Int32())
+			}
 		case "race_id":
-			out.RaceId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.RaceId = int32(in.Int32())
+			}
 		case "ship_type_id":
-			out.ShipTypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ShipTypeId = int32(in.Int32())
+			}
 		case "willpower":
-			out.Willpower = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Willpower = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

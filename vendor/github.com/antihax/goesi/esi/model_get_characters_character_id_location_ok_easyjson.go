@@ -36,7 +36,11 @@ func easyjson6da70a8eDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCh
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCharactersCharacterIdLocationOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,18 +101,25 @@ func easyjson6da70a8eDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "solar_system_id":
-			out.SolarSystemId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SolarSystemId = int32(in.Int32())
+			}
 		case "station_id":
-			out.StationId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.StationId = int32(in.Int32())
+			}
 		case "structure_id":
-			out.StructureId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.StructureId = int64(in.Int64())
+			}
 		default:
 			in.SkipRecursive()
 		}

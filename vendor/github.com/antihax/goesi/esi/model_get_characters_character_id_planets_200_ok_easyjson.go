@@ -36,7 +36,11 @@ func easyjson9df0ab01DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCh
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCharactersCharacterIdPlanets200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,28 +101,51 @@ func easyjson9df0ab01DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "last_update":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.LastUpdate).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.LastUpdate).UnmarshalJSON(data))
+				}
 			}
 		case "num_pins":
-			out.NumPins = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.NumPins = int32(in.Int32())
+			}
 		case "owner_id":
-			out.OwnerId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.OwnerId = int32(in.Int32())
+			}
 		case "planet_id":
-			out.PlanetId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.PlanetId = int32(in.Int32())
+			}
 		case "planet_type":
-			out.PlanetType = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.PlanetType = string(in.String())
+			}
 		case "solar_system_id":
-			out.SolarSystemId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SolarSystemId = int32(in.Int32())
+			}
 		case "upgrade_level":
-			out.UpgradeLevel = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.UpgradeLevel = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

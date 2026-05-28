@@ -36,7 +36,11 @@ func easyjson173baafaDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCo
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCorporationsCorporationIdBlueprints200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,28 +101,55 @@ func easyjson173baafaDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "item_id":
-			out.ItemId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ItemId = int64(in.Int64())
+			}
 		case "location_flag":
-			out.LocationFlag = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.LocationFlag = string(in.String())
+			}
 		case "location_id":
-			out.LocationId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.LocationId = int64(in.Int64())
+			}
 		case "material_efficiency":
-			out.MaterialEfficiency = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.MaterialEfficiency = int32(in.Int32())
+			}
 		case "quantity":
-			out.Quantity = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Quantity = int32(in.Int32())
+			}
 		case "runs":
-			out.Runs = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Runs = int32(in.Int32())
+			}
 		case "time_efficiency":
-			out.TimeEfficiency = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.TimeEfficiency = int32(in.Int32())
+			}
 		case "type_id":
-			out.TypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.TypeId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

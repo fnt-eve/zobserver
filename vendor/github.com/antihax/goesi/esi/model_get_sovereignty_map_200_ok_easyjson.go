@@ -36,7 +36,11 @@ func easyjson9d3eb98fDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetSo
 		}
 		for !in.IsDelim(']') {
 			var v1 GetSovereigntyMap200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,20 +101,31 @@ func easyjson9d3eb98fDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetS
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "alliance_id":
-			out.AllianceId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.AllianceId = int32(in.Int32())
+			}
 		case "corporation_id":
-			out.CorporationId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CorporationId = int32(in.Int32())
+			}
 		case "faction_id":
-			out.FactionId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.FactionId = int32(in.Int32())
+			}
 		case "system_id":
-			out.SystemId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SystemId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

@@ -36,7 +36,11 @@ func easyjson2de64a6cDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCh
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCharactersCharacterIdPlanetsPlanetIdRoute
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,22 +101,37 @@ func easyjson2de64a6cDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "content_type_id":
-			out.ContentTypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ContentTypeId = int32(in.Int32())
+			}
 		case "destination_pin_id":
-			out.DestinationPinId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.DestinationPinId = int64(in.Int64())
+			}
 		case "quantity":
-			out.Quantity = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Quantity = float32(in.Float32())
+			}
 		case "route_id":
-			out.RouteId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.RouteId = int64(in.Int64())
+			}
 		case "source_pin_id":
-			out.SourcePinId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SourcePinId = int64(in.Int64())
+			}
 		case "waypoints":
 			if in.IsNull() {
 				in.Skip()
@@ -130,7 +149,11 @@ func easyjson2de64a6cDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				}
 				for !in.IsDelim(']') {
 					var v4 int64
-					v4 = int64(in.Int64())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v4 = int64(in.Int64())
+					}
 					out.Waypoints = append(out.Waypoints, v4)
 					in.WantComma()
 				}

@@ -36,7 +36,11 @@ func easyjson15bd1d73DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetLo
 		}
 		for !in.IsDelim(']') {
 			var v1 GetLoyaltyStoresCorporationIdOffers200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,22 +101,37 @@ func easyjson15bd1d73DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetL
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "ak_cost":
-			out.AkCost = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.AkCost = int32(in.Int32())
+			}
 		case "isk_cost":
-			out.IskCost = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.IskCost = int64(in.Int64())
+			}
 		case "lp_cost":
-			out.LpCost = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.LpCost = int32(in.Int32())
+			}
 		case "offer_id":
-			out.OfferId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.OfferId = int32(in.Int32())
+			}
 		case "quantity":
-			out.Quantity = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Quantity = int32(in.Int32())
+			}
 		case "required_items":
 			if in.IsNull() {
 				in.Skip()
@@ -137,7 +156,11 @@ func easyjson15bd1d73DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetL
 				in.Delim(']')
 			}
 		case "type_id":
-			out.TypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.TypeId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -266,16 +289,19 @@ func easyjson15bd1d73DecodeGithubComAntihaxGoesiEsi2(in *jlexer.Lexer, out *GetL
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "quantity":
-			out.Quantity = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Quantity = int32(in.Int32())
+			}
 		case "type_id":
-			out.TypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.TypeId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

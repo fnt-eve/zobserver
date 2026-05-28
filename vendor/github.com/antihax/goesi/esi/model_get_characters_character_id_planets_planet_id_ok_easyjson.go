@@ -36,7 +36,11 @@ func easyjson29210505DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCh
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCharactersCharacterIdPlanetsPlanetIdOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,11 +101,6 @@ func easyjson29210505DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "links":
 			if in.IsNull() {
@@ -278,22 +277,37 @@ func easyjson29210505DecodeGithubComAntihaxGoesiEsi4(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "content_type_id":
-			out.ContentTypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ContentTypeId = int32(in.Int32())
+			}
 		case "destination_pin_id":
-			out.DestinationPinId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.DestinationPinId = int64(in.Int64())
+			}
 		case "quantity":
-			out.Quantity = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Quantity = float32(in.Float32())
+			}
 		case "route_id":
-			out.RouteId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.RouteId = int64(in.Int64())
+			}
 		case "source_pin_id":
-			out.SourcePinId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SourcePinId = int64(in.Int64())
+			}
 		case "waypoints":
 			if in.IsNull() {
 				in.Skip()
@@ -311,7 +325,11 @@ func easyjson29210505DecodeGithubComAntihaxGoesiEsi4(in *jlexer.Lexer, out *GetC
 				}
 				for !in.IsDelim(']') {
 					var v13 int64
-					v13 = int64(in.Int64())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v13 = int64(in.Int64())
+					}
 					out.Waypoints = append(out.Waypoints, v13)
 					in.WantComma()
 				}
@@ -411,11 +429,6 @@ func easyjson29210505DecodeGithubComAntihaxGoesiEsi3(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "contents":
 			if in.IsNull() {
@@ -441,31 +454,67 @@ func easyjson29210505DecodeGithubComAntihaxGoesiEsi3(in *jlexer.Lexer, out *GetC
 				in.Delim(']')
 			}
 		case "expiry_time":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.ExpiryTime).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.ExpiryTime).UnmarshalJSON(data))
+				}
 			}
 		case "extractor_details":
-			(out.ExtractorDetails).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(out.ExtractorDetails).UnmarshalEasyJSON(in)
+			}
 		case "factory_details":
 			easyjson29210505DecodeGithubComAntihaxGoesiEsi6(in, &out.FactoryDetails)
 		case "install_time":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.InstallTime).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.InstallTime).UnmarshalJSON(data))
+				}
 			}
 		case "last_cycle_start":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.LastCycleStart).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.LastCycleStart).UnmarshalJSON(data))
+				}
 			}
 		case "latitude":
-			out.Latitude = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Latitude = float32(in.Float32())
+			}
 		case "longitude":
-			out.Longitude = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Longitude = float32(in.Float32())
+			}
 		case "pin_id":
-			out.PinId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.PinId = int64(in.Int64())
+			}
 		case "schematic_id":
-			out.SchematicId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SchematicId = int32(in.Int32())
+			}
 		case "type_id":
-			out.TypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.TypeId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -610,14 +659,13 @@ func easyjson29210505DecodeGithubComAntihaxGoesiEsi6(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "schematic_id":
-			out.SchematicId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SchematicId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -653,16 +701,19 @@ func easyjson29210505DecodeGithubComAntihaxGoesiEsi5(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "amount":
-			out.Amount = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Amount = int64(in.Int64())
+			}
 		case "type_id":
-			out.TypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.TypeId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -708,18 +759,25 @@ func easyjson29210505DecodeGithubComAntihaxGoesiEsi2(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "destination_pin_id":
-			out.DestinationPinId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.DestinationPinId = int64(in.Int64())
+			}
 		case "link_level":
-			out.LinkLevel = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.LinkLevel = int32(in.Int32())
+			}
 		case "source_pin_id":
-			out.SourcePinId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SourcePinId = int64(in.Int64())
+			}
 		default:
 			in.SkipRecursive()
 		}

@@ -36,7 +36,11 @@ func easyjsonE9f52ab5DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCo
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCorporationsCorporationIdMembertracking200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,31 +101,54 @@ func easyjsonE9f52ab5DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "base_id":
-			out.BaseId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.BaseId = int32(in.Int32())
+			}
 		case "character_id":
-			out.CharacterId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CharacterId = int32(in.Int32())
+			}
 		case "location_id":
-			out.LocationId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.LocationId = int64(in.Int64())
+			}
 		case "logoff_date":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.LogoffDate).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.LogoffDate).UnmarshalJSON(data))
+				}
 			}
 		case "logon_date":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.LogonDate).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.LogonDate).UnmarshalJSON(data))
+				}
 			}
 		case "ship_type_id":
-			out.ShipTypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ShipTypeId = int32(in.Int32())
+			}
 		case "start_date":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.StartDate).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.StartDate).UnmarshalJSON(data))
+				}
 			}
 		default:
 			in.SkipRecursive()

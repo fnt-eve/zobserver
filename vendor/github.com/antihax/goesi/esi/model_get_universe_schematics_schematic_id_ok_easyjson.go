@@ -36,7 +36,11 @@ func easyjson3b9f5914DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetUn
 		}
 		for !in.IsDelim(']') {
 			var v1 GetUniverseSchematicsSchematicIdOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,16 +101,19 @@ func easyjson3b9f5914DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetU
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "cycle_time":
-			out.CycleTime = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CycleTime = int32(in.Int32())
+			}
 		case "schematic_name":
-			out.SchematicName = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SchematicName = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}

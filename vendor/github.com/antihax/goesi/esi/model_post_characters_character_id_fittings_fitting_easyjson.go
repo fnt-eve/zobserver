@@ -36,7 +36,11 @@ func easyjsonC29a6102DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *PostC
 		}
 		for !in.IsDelim(']') {
 			var v1 PostCharactersCharacterIdFittingsFitting
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,14 +101,13 @@ func easyjsonC29a6102DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *Post
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "description":
-			out.Description = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Description = string(in.String())
+			}
 		case "items":
 			if in.IsNull() {
 				in.Skip()
@@ -129,9 +132,17 @@ func easyjsonC29a6102DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *Post
 				in.Delim(']')
 			}
 		case "name":
-			out.Name = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
 		case "ship_type_id":
-			out.ShipTypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ShipTypeId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -230,18 +241,25 @@ func easyjsonC29a6102DecodeGithubComAntihaxGoesiEsi2(in *jlexer.Lexer, out *Post
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "flag":
-			out.Flag = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Flag = string(in.String())
+			}
 		case "quantity":
-			out.Quantity = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Quantity = int32(in.Int32())
+			}
 		case "type_id":
-			out.TypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.TypeId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

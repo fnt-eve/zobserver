@@ -36,7 +36,11 @@ func easyjson5cc83670DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *PostC
 		}
 		for !in.IsDelim(']') {
 			var v1 PostCorporationsCorporationIdAssetsNames200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,16 +101,19 @@ func easyjson5cc83670DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *Post
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "item_id":
-			out.ItemId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ItemId = int64(in.Int64())
+			}
 		case "name":
-			out.Name = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}

@@ -36,7 +36,11 @@ func easyjson7d1d947bDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCh
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCharactersCharacterIdPlanetsPlanetIdLink
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,18 +101,25 @@ func easyjson7d1d947bDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "destination_pin_id":
-			out.DestinationPinId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.DestinationPinId = int64(in.Int64())
+			}
 		case "link_level":
-			out.LinkLevel = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.LinkLevel = int32(in.Int32())
+			}
 		case "source_pin_id":
-			out.SourcePinId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SourcePinId = int64(in.Int64())
+			}
 		default:
 			in.SkipRecursive()
 		}

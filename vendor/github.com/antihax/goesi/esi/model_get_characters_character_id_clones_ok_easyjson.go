@@ -36,7 +36,11 @@ func easyjson13ace497DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCh
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCharactersCharacterIdClonesOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,11 +101,6 @@ func easyjson13ace497DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "home_location":
 			easyjson13ace497DecodeGithubComAntihaxGoesiEsi2(in, &out.HomeLocation)
@@ -129,12 +128,20 @@ func easyjson13ace497DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				in.Delim(']')
 			}
 		case "last_clone_jump_date":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.LastCloneJumpDate).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.LastCloneJumpDate).UnmarshalJSON(data))
+				}
 			}
 		case "last_station_change_date":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.LastStationChangeDate).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.LastStationChangeDate).UnmarshalJSON(data))
+				}
 			}
 		default:
 			in.SkipRecursive()
@@ -234,11 +241,6 @@ func easyjson13ace497DecodeGithubComAntihaxGoesiEsi3(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "implants":
 			if in.IsNull() {
@@ -257,20 +259,40 @@ func easyjson13ace497DecodeGithubComAntihaxGoesiEsi3(in *jlexer.Lexer, out *GetC
 				}
 				for !in.IsDelim(']') {
 					var v7 int32
-					v7 = int32(in.Int32())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v7 = int32(in.Int32())
+					}
 					out.Implants = append(out.Implants, v7)
 					in.WantComma()
 				}
 				in.Delim(']')
 			}
 		case "jump_clone_id":
-			out.JumpCloneId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.JumpCloneId = int32(in.Int32())
+			}
 		case "location_id":
-			out.LocationId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.LocationId = int64(in.Int64())
+			}
 		case "location_type":
-			out.LocationType = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.LocationType = string(in.String())
+			}
 		case "name":
-			out.Name = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -355,16 +377,19 @@ func easyjson13ace497DecodeGithubComAntihaxGoesiEsi2(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "location_id":
-			out.LocationId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.LocationId = int64(in.Int64())
+			}
 		case "location_type":
-			out.LocationType = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.LocationType = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}

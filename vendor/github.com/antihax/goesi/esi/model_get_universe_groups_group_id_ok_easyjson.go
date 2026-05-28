@@ -36,7 +36,11 @@ func easyjsonE0d2a1b4DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetUn
 		}
 		for !in.IsDelim(']') {
 			var v1 GetUniverseGroupsGroupIdOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,20 +101,31 @@ func easyjsonE0d2a1b4DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetU
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "category_id":
-			out.CategoryId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CategoryId = int32(in.Int32())
+			}
 		case "group_id":
-			out.GroupId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.GroupId = int32(in.Int32())
+			}
 		case "name":
-			out.Name = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
 		case "published":
-			out.Published = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Published = bool(in.Bool())
+			}
 		case "types":
 			if in.IsNull() {
 				in.Skip()
@@ -128,7 +143,11 @@ func easyjsonE0d2a1b4DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetU
 				}
 				for !in.IsDelim(']') {
 					var v4 int32
-					v4 = int32(in.Int32())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v4 = int32(in.Int32())
+					}
 					out.Types = append(out.Types, v4)
 					in.WantComma()
 				}

@@ -21,7 +21,6 @@ All URIs are relative to *https://esi.evetech.net*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*MetaApi* | [**GetHeaders**](docs/MetaApi.md#getheaders) | **Get** /headers/ | Debug request headers
 *MetaApi* | [**GetPing**](docs/MetaApi.md#getping) | **Get** /ping | Ping route
 *MetaApi* | [**GetStatus**](docs/MetaApi.md#getstatus) | **Get** /status.json | ESI health status
 *MetaApi* | [**GetVerify**](docs/MetaApi.md#getverify) | **Get** /verify/ | Verify access token

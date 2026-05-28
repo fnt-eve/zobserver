@@ -36,7 +36,11 @@ func easyjsonFbe2469DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCha
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCharactersCharacterIdCalendarEventIdAttendees200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,16 +101,19 @@ func easyjsonFbe2469DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetCh
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "character_id":
-			out.CharacterId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CharacterId = int32(in.Int32())
+			}
 		case "event_response":
-			out.EventResponse = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.EventResponse = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}

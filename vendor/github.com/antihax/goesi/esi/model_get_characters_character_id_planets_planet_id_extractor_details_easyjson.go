@@ -36,7 +36,11 @@ func easyjson1bb873dcDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCh
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCharactersCharacterIdPlanetsPlanetIdExtractorDetails
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,16 +101,19 @@ func easyjson1bb873dcDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "cycle_time":
-			out.CycleTime = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CycleTime = int32(in.Int32())
+			}
 		case "head_radius":
-			out.HeadRadius = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.HeadRadius = float32(in.Float32())
+			}
 		case "heads":
 			if in.IsNull() {
 				in.Skip()
@@ -131,9 +138,17 @@ func easyjson1bb873dcDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				in.Delim(']')
 			}
 		case "product_type_id":
-			out.ProductTypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ProductTypeId = int32(in.Int32())
+			}
 		case "qty_per_cycle":
-			out.QtyPerCycle = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.QtyPerCycle = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -242,18 +257,25 @@ func easyjson1bb873dcDecodeGithubComAntihaxGoesiEsi2(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "head_id":
-			out.HeadId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.HeadId = int32(in.Int32())
+			}
 		case "latitude":
-			out.Latitude = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Latitude = float32(in.Float32())
+			}
 		case "longitude":
-			out.Longitude = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Longitude = float32(in.Float32())
+			}
 		default:
 			in.SkipRecursive()
 		}

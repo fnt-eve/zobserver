@@ -36,7 +36,11 @@ func easyjsonB042087bDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetFw
 		}
 		for !in.IsDelim(']') {
 			var v1 GetFwSystems200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,24 +101,43 @@ func easyjsonB042087bDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetF
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "contested":
-			out.Contested = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Contested = string(in.String())
+			}
 		case "occupier_faction_id":
-			out.OccupierFactionId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.OccupierFactionId = int32(in.Int32())
+			}
 		case "owner_faction_id":
-			out.OwnerFactionId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.OwnerFactionId = int32(in.Int32())
+			}
 		case "solar_system_id":
-			out.SolarSystemId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SolarSystemId = int32(in.Int32())
+			}
 		case "victory_points":
-			out.VictoryPoints = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.VictoryPoints = int32(in.Int32())
+			}
 		case "victory_points_threshold":
-			out.VictoryPointsThreshold = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.VictoryPointsThreshold = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

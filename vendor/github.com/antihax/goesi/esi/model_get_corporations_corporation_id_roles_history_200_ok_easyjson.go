@@ -36,7 +36,11 @@ func easyjson1c7af11eDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCo
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCorporationsCorporationIdRolesHistory200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,20 +101,27 @@ func easyjson1c7af11eDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "changed_at":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.ChangedAt).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.ChangedAt).UnmarshalJSON(data))
+				}
 			}
 		case "character_id":
-			out.CharacterId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CharacterId = int32(in.Int32())
+			}
 		case "issuer_id":
-			out.IssuerId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.IssuerId = int32(in.Int32())
+			}
 		case "new_roles":
 			if in.IsNull() {
 				in.Skip()
@@ -128,7 +139,11 @@ func easyjson1c7af11eDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				}
 				for !in.IsDelim(']') {
 					var v4 string
-					v4 = string(in.String())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v4 = string(in.String())
+					}
 					out.NewRoles = append(out.NewRoles, v4)
 					in.WantComma()
 				}
@@ -151,14 +166,22 @@ func easyjson1c7af11eDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				}
 				for !in.IsDelim(']') {
 					var v5 string
-					v5 = string(in.String())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v5 = string(in.String())
+					}
 					out.OldRoles = append(out.OldRoles, v5)
 					in.WantComma()
 				}
 				in.Delim(']')
 			}
 		case "role_type":
-			out.RoleType = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.RoleType = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}

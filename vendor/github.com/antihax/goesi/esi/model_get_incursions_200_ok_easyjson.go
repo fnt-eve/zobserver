@@ -36,7 +36,11 @@ func easyjsonAb919c82DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetIn
 		}
 		for !in.IsDelim(']') {
 			var v1 GetIncursions200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,18 +101,25 @@ func easyjsonAb919c82DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetI
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "constellation_id":
-			out.ConstellationId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ConstellationId = int32(in.Int32())
+			}
 		case "faction_id":
-			out.FactionId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.FactionId = int32(in.Int32())
+			}
 		case "has_boss":
-			out.HasBoss = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.HasBoss = bool(in.Bool())
+			}
 		case "infested_solar_systems":
 			if in.IsNull() {
 				in.Skip()
@@ -126,20 +137,40 @@ func easyjsonAb919c82DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetI
 				}
 				for !in.IsDelim(']') {
 					var v4 int32
-					v4 = int32(in.Int32())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v4 = int32(in.Int32())
+					}
 					out.InfestedSolarSystems = append(out.InfestedSolarSystems, v4)
 					in.WantComma()
 				}
 				in.Delim(']')
 			}
 		case "influence":
-			out.Influence = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Influence = float32(in.Float32())
+			}
 		case "staging_solar_system_id":
-			out.StagingSolarSystemId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.StagingSolarSystemId = int32(in.Int32())
+			}
 		case "state":
-			out.State = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.State = string(in.String())
+			}
 		case "type":
-			out.Type_ = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Type_ = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}

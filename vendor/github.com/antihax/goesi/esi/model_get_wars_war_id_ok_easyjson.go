@@ -36,7 +36,11 @@ func easyjsonF6dfc9daDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetWa
 		}
 		for !in.IsDelim(']') {
 			var v1 GetWarsWarIdOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,11 +101,6 @@ func easyjsonF6dfc9daDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetW
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "aggressor":
 			easyjsonF6dfc9daDecodeGithubComAntihaxGoesiEsi2(in, &out.Aggressor)
@@ -129,28 +128,56 @@ func easyjsonF6dfc9daDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetW
 				in.Delim(']')
 			}
 		case "declared":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.Declared).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.Declared).UnmarshalJSON(data))
+				}
 			}
 		case "defender":
 			easyjsonF6dfc9daDecodeGithubComAntihaxGoesiEsi4(in, &out.Defender)
 		case "finished":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.Finished).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.Finished).UnmarshalJSON(data))
+				}
 			}
 		case "id":
-			out.Id = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Id = int32(in.Int32())
+			}
 		case "mutual":
-			out.Mutual = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Mutual = bool(in.Bool())
+			}
 		case "open_for_allies":
-			out.OpenForAllies = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.OpenForAllies = bool(in.Bool())
+			}
 		case "retracted":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.Retracted).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.Retracted).UnmarshalJSON(data))
+				}
 			}
 		case "started":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.Started).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.Started).UnmarshalJSON(data))
+				}
 			}
 		default:
 			in.SkipRecursive()
@@ -310,20 +337,31 @@ func easyjsonF6dfc9daDecodeGithubComAntihaxGoesiEsi4(in *jlexer.Lexer, out *GetW
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "alliance_id":
-			out.AllianceId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.AllianceId = int32(in.Int32())
+			}
 		case "corporation_id":
-			out.CorporationId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CorporationId = int32(in.Int32())
+			}
 		case "isk_destroyed":
-			out.IskDestroyed = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.IskDestroyed = float32(in.Float32())
+			}
 		case "ships_killed":
-			out.ShipsKilled = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ShipsKilled = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -389,16 +427,19 @@ func easyjsonF6dfc9daDecodeGithubComAntihaxGoesiEsi3(in *jlexer.Lexer, out *GetW
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "alliance_id":
-			out.AllianceId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.AllianceId = int32(in.Int32())
+			}
 		case "corporation_id":
-			out.CorporationId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CorporationId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -444,20 +485,31 @@ func easyjsonF6dfc9daDecodeGithubComAntihaxGoesiEsi2(in *jlexer.Lexer, out *GetW
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "alliance_id":
-			out.AllianceId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.AllianceId = int32(in.Int32())
+			}
 		case "corporation_id":
-			out.CorporationId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CorporationId = int32(in.Int32())
+			}
 		case "isk_destroyed":
-			out.IskDestroyed = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.IskDestroyed = float32(in.Float32())
+			}
 		case "ships_killed":
-			out.ShipsKilled = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ShipsKilled = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

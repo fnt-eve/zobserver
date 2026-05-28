@@ -36,7 +36,11 @@ func easyjsonFc689a0fDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCo
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCorporationsCorporationIdContacts200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,18 +101,25 @@ func easyjsonFc689a0fDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "contact_id":
-			out.ContactId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ContactId = int32(in.Int32())
+			}
 		case "contact_type":
-			out.ContactType = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ContactType = string(in.String())
+			}
 		case "is_watched":
-			out.IsWatched = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.IsWatched = bool(in.Bool())
+			}
 		case "label_ids":
 			if in.IsNull() {
 				in.Skip()
@@ -126,14 +137,22 @@ func easyjsonFc689a0fDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				}
 				for !in.IsDelim(']') {
 					var v4 int64
-					v4 = int64(in.Int64())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v4 = int64(in.Int64())
+					}
 					out.LabelIds = append(out.LabelIds, v4)
 					in.WantComma()
 				}
 				in.Delim(']')
 			}
 		case "standing":
-			out.Standing = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Standing = float32(in.Float32())
+			}
 		default:
 			in.SkipRecursive()
 		}

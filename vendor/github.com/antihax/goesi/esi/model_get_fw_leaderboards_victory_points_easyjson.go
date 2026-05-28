@@ -36,7 +36,11 @@ func easyjson682940b2DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetFw
 		}
 		for !in.IsDelim(']') {
 			var v1 GetFwLeaderboardsVictoryPoints
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,11 +101,6 @@ func easyjson682940b2DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetF
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "active_total":
 			if in.IsNull() {
@@ -143,7 +142,11 @@ func easyjson682940b2DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetF
 				}
 				for !in.IsDelim(']') {
 					var v5 GetFwLeaderboardsLastWeekLastWeek1
-					(v5).UnmarshalEasyJSON(in)
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						(v5).UnmarshalEasyJSON(in)
+					}
 					out.LastWeek = append(out.LastWeek, v5)
 					in.WantComma()
 				}
@@ -278,16 +281,19 @@ func easyjson682940b2DecodeGithubComAntihaxGoesiEsi3(in *jlexer.Lexer, out *GetF
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "amount":
-			out.Amount = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Amount = int32(in.Int32())
+			}
 		case "faction_id":
-			out.FactionId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.FactionId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -333,16 +339,19 @@ func easyjson682940b2DecodeGithubComAntihaxGoesiEsi2(in *jlexer.Lexer, out *GetF
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "amount":
-			out.Amount = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Amount = int32(in.Int32())
+			}
 		case "faction_id":
-			out.FactionId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.FactionId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

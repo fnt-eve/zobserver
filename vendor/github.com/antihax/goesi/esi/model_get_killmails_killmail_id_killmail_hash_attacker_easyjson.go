@@ -36,7 +36,11 @@ func easyjsonDa9764faDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetKi
 		}
 		for !in.IsDelim(']') {
 			var v1 GetKillmailsKillmailIdKillmailHashAttacker
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,30 +101,61 @@ func easyjsonDa9764faDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetK
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "alliance_id":
-			out.AllianceId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.AllianceId = int32(in.Int32())
+			}
 		case "character_id":
-			out.CharacterId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CharacterId = int32(in.Int32())
+			}
 		case "corporation_id":
-			out.CorporationId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CorporationId = int32(in.Int32())
+			}
 		case "damage_done":
-			out.DamageDone = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.DamageDone = int32(in.Int32())
+			}
 		case "faction_id":
-			out.FactionId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.FactionId = int32(in.Int32())
+			}
 		case "final_blow":
-			out.FinalBlow = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.FinalBlow = bool(in.Bool())
+			}
 		case "security_status":
-			out.SecurityStatus = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SecurityStatus = float32(in.Float32())
+			}
 		case "ship_type_id":
-			out.ShipTypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ShipTypeId = int32(in.Int32())
+			}
 		case "weapon_type_id":
-			out.WeaponTypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.WeaponTypeId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

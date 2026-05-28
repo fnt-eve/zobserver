@@ -36,7 +36,11 @@ func easyjsonC5702a3aDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetUn
 		}
 		for !in.IsDelim(']') {
 			var v1 GetUniverseMoonsMoonIdOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,20 +101,27 @@ func easyjsonC5702a3aDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetU
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "moon_id":
-			out.MoonId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.MoonId = int32(in.Int32())
+			}
 		case "name":
-			out.Name = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
 		case "position":
 			easyjsonC5702a3aDecodeGithubComAntihaxGoesiEsi2(in, &out.Position)
 		case "system_id":
-			out.SystemId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SystemId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -200,18 +211,25 @@ func easyjsonC5702a3aDecodeGithubComAntihaxGoesiEsi2(in *jlexer.Lexer, out *GetU
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "x":
-			out.X = float64(in.Float64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.X = float64(in.Float64())
+			}
 		case "y":
-			out.Y = float64(in.Float64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Y = float64(in.Float64())
+			}
 		case "z":
-			out.Z = float64(in.Float64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Z = float64(in.Float64())
+			}
 		default:
 			in.SkipRecursive()
 		}

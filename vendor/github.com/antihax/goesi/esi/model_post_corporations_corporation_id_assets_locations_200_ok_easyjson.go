@@ -36,7 +36,11 @@ func easyjsonB548a794DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *PostC
 		}
 		for !in.IsDelim(']') {
 			var v1 PostCorporationsCorporationIdAssetsLocations200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,14 +101,13 @@ func easyjsonB548a794DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *Post
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "item_id":
-			out.ItemId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ItemId = int64(in.Int64())
+			}
 		case "position":
 			easyjsonB548a794DecodeGithubComAntihaxGoesiEsi2(in, &out.Position)
 		default:
@@ -176,18 +179,25 @@ func easyjsonB548a794DecodeGithubComAntihaxGoesiEsi2(in *jlexer.Lexer, out *Post
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "x":
-			out.X = float64(in.Float64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.X = float64(in.Float64())
+			}
 		case "y":
-			out.Y = float64(in.Float64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Y = float64(in.Float64())
+			}
 		case "z":
-			out.Z = float64(in.Float64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Z = float64(in.Float64())
+			}
 		default:
 			in.SkipRecursive()
 		}

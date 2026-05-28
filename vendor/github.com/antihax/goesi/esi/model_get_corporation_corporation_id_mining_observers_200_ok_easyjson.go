@@ -36,7 +36,11 @@ func easyjsonB48e5cffDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCo
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCorporationCorporationIdMiningObservers200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,18 +101,25 @@ func easyjsonB48e5cffDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "last_updated":
-			out.LastUpdated = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.LastUpdated = string(in.String())
+			}
 		case "observer_id":
-			out.ObserverId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ObserverId = int64(in.Int64())
+			}
 		case "observer_type":
-			out.ObserverType = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ObserverType = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}

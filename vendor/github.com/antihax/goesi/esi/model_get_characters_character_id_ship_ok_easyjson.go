@@ -36,7 +36,11 @@ func easyjson7f2db38bDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCh
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCharactersCharacterIdShipOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,18 +101,25 @@ func easyjson7f2db38bDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "ship_item_id":
-			out.ShipItemId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ShipItemId = int64(in.Int64())
+			}
 		case "ship_name":
-			out.ShipName = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ShipName = string(in.String())
+			}
 		case "ship_type_id":
-			out.ShipTypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ShipTypeId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

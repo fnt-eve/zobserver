@@ -36,7 +36,11 @@ func easyjson70b0868DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCha
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCharactersCharacterIdCalendarEventIdOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,34 +101,69 @@ func easyjson70b0868DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetCh
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "date":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.Date).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.Date).UnmarshalJSON(data))
+				}
 			}
 		case "duration":
-			out.Duration = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Duration = int32(in.Int32())
+			}
 		case "event_id":
-			out.EventId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.EventId = int32(in.Int32())
+			}
 		case "importance":
-			out.Importance = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Importance = int32(in.Int32())
+			}
 		case "owner_id":
-			out.OwnerId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.OwnerId = int32(in.Int32())
+			}
 		case "owner_name":
-			out.OwnerName = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.OwnerName = string(in.String())
+			}
 		case "owner_type":
-			out.OwnerType = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.OwnerType = string(in.String())
+			}
 		case "response":
-			out.Response = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Response = string(in.String())
+			}
 		case "text":
-			out.Text = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Text = string(in.String())
+			}
 		case "title":
-			out.Title = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Title = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}

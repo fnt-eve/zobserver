@@ -36,7 +36,11 @@ func easyjson77cbcc92DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCo
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCorporationCorporationIdMiningObserversObserverId200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,22 +101,37 @@ func easyjson77cbcc92DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "character_id":
-			out.CharacterId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CharacterId = int32(in.Int32())
+			}
 		case "last_updated":
-			out.LastUpdated = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.LastUpdated = string(in.String())
+			}
 		case "quantity":
-			out.Quantity = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Quantity = int64(in.Int64())
+			}
 		case "recorded_corporation_id":
-			out.RecordedCorporationId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.RecordedCorporationId = int32(in.Int32())
+			}
 		case "type_id":
-			out.TypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.TypeId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

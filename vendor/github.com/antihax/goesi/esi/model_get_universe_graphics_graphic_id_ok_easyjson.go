@@ -36,7 +36,11 @@ func easyjsonF7263cfaDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetUn
 		}
 		for !in.IsDelim(']') {
 			var v1 GetUniverseGraphicsGraphicIdOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,28 +101,55 @@ func easyjsonF7263cfaDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetU
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "collision_file":
-			out.CollisionFile = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CollisionFile = string(in.String())
+			}
 		case "graphic_file":
-			out.GraphicFile = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.GraphicFile = string(in.String())
+			}
 		case "graphic_id":
-			out.GraphicId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.GraphicId = int32(in.Int32())
+			}
 		case "icon_folder":
-			out.IconFolder = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.IconFolder = string(in.String())
+			}
 		case "sof_dna":
-			out.SofDna = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SofDna = string(in.String())
+			}
 		case "sof_fation_name":
-			out.SofFationName = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SofFationName = string(in.String())
+			}
 		case "sof_hull_name":
-			out.SofHullName = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SofHullName = string(in.String())
+			}
 		case "sof_race_name":
-			out.SofRaceName = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SofRaceName = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}

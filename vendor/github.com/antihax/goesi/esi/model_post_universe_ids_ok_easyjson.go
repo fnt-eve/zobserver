@@ -36,7 +36,11 @@ func easyjsonA38aef0aDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *PostU
 		}
 		for !in.IsDelim(']') {
 			var v1 PostUniverseIdsOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,11 +101,6 @@ func easyjsonA38aef0aDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *Post
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "agents":
 			if in.IsNull() {
@@ -572,16 +571,19 @@ func easyjsonA38aef0aDecodeGithubComAntihaxGoesiEsi11(in *jlexer.Lexer, out *Pos
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "id":
-			out.Id = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Id = int32(in.Int32())
+			}
 		case "name":
-			out.Name = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -627,16 +629,19 @@ func easyjsonA38aef0aDecodeGithubComAntihaxGoesiEsi10(in *jlexer.Lexer, out *Pos
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "id":
-			out.Id = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Id = int32(in.Int32())
+			}
 		case "name":
-			out.Name = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -682,16 +687,19 @@ func easyjsonA38aef0aDecodeGithubComAntihaxGoesiEsi9(in *jlexer.Lexer, out *Post
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "id":
-			out.Id = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Id = int32(in.Int32())
+			}
 		case "name":
-			out.Name = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -737,16 +745,19 @@ func easyjsonA38aef0aDecodeGithubComAntihaxGoesiEsi8(in *jlexer.Lexer, out *Post
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "id":
-			out.Id = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Id = int32(in.Int32())
+			}
 		case "name":
-			out.Name = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -792,16 +803,19 @@ func easyjsonA38aef0aDecodeGithubComAntihaxGoesiEsi7(in *jlexer.Lexer, out *Post
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "id":
-			out.Id = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Id = int32(in.Int32())
+			}
 		case "name":
-			out.Name = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -847,16 +861,19 @@ func easyjsonA38aef0aDecodeGithubComAntihaxGoesiEsi6(in *jlexer.Lexer, out *Post
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "id":
-			out.Id = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Id = int32(in.Int32())
+			}
 		case "name":
-			out.Name = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -902,16 +919,19 @@ func easyjsonA38aef0aDecodeGithubComAntihaxGoesiEsi5(in *jlexer.Lexer, out *Post
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "id":
-			out.Id = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Id = int32(in.Int32())
+			}
 		case "name":
-			out.Name = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -957,16 +977,19 @@ func easyjsonA38aef0aDecodeGithubComAntihaxGoesiEsi4(in *jlexer.Lexer, out *Post
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "id":
-			out.Id = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Id = int32(in.Int32())
+			}
 		case "name":
-			out.Name = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -1012,16 +1035,19 @@ func easyjsonA38aef0aDecodeGithubComAntihaxGoesiEsi3(in *jlexer.Lexer, out *Post
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "id":
-			out.Id = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Id = int32(in.Int32())
+			}
 		case "name":
-			out.Name = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -1067,16 +1093,19 @@ func easyjsonA38aef0aDecodeGithubComAntihaxGoesiEsi2(in *jlexer.Lexer, out *Post
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "id":
-			out.Id = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Id = int32(in.Int32())
+			}
 		case "name":
-			out.Name = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}

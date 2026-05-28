@@ -36,7 +36,11 @@ func easyjsonB983e026DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCh
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCharactersCharacterIdRolesOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,11 +101,6 @@ func easyjsonB983e026DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "roles":
 			if in.IsNull() {
@@ -120,7 +119,11 @@ func easyjsonB983e026DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				}
 				for !in.IsDelim(']') {
 					var v4 string
-					v4 = string(in.String())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v4 = string(in.String())
+					}
 					out.Roles = append(out.Roles, v4)
 					in.WantComma()
 				}
@@ -143,7 +146,11 @@ func easyjsonB983e026DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				}
 				for !in.IsDelim(']') {
 					var v5 string
-					v5 = string(in.String())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v5 = string(in.String())
+					}
 					out.RolesAtBase = append(out.RolesAtBase, v5)
 					in.WantComma()
 				}
@@ -166,7 +173,11 @@ func easyjsonB983e026DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				}
 				for !in.IsDelim(']') {
 					var v6 string
-					v6 = string(in.String())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v6 = string(in.String())
+					}
 					out.RolesAtHq = append(out.RolesAtHq, v6)
 					in.WantComma()
 				}
@@ -189,7 +200,11 @@ func easyjsonB983e026DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				}
 				for !in.IsDelim(']') {
 					var v7 string
-					v7 = string(in.String())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v7 = string(in.String())
+					}
 					out.RolesAtOther = append(out.RolesAtOther, v7)
 					in.WantComma()
 				}

@@ -36,7 +36,11 @@ func easyjsonB6f9bc1aDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCo
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCorporationsCorporationIdMedals200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,24 +101,39 @@ func easyjsonB6f9bc1aDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "created_at":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.CreatedAt).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.CreatedAt).UnmarshalJSON(data))
+				}
 			}
 		case "creator_id":
-			out.CreatorId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CreatorId = int32(in.Int32())
+			}
 		case "description":
-			out.Description = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Description = string(in.String())
+			}
 		case "medal_id":
-			out.MedalId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.MedalId = int32(in.Int32())
+			}
 		case "title":
-			out.Title = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Title = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}

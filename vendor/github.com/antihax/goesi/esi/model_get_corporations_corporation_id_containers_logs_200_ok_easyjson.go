@@ -36,7 +36,11 @@ func easyjsonD2e11036DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCo
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCorporationsCorporationIdContainersLogs200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,38 +101,81 @@ func easyjsonD2e11036DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "action":
-			out.Action = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Action = string(in.String())
+			}
 		case "character_id":
-			out.CharacterId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CharacterId = int32(in.Int32())
+			}
 		case "container_id":
-			out.ContainerId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ContainerId = int64(in.Int64())
+			}
 		case "container_type_id":
-			out.ContainerTypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ContainerTypeId = int32(in.Int32())
+			}
 		case "location_flag":
-			out.LocationFlag = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.LocationFlag = string(in.String())
+			}
 		case "location_id":
-			out.LocationId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.LocationId = int64(in.Int64())
+			}
 		case "logged_at":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.LoggedAt).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.LoggedAt).UnmarshalJSON(data))
+				}
 			}
 		case "new_config_bitmask":
-			out.NewConfigBitmask = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.NewConfigBitmask = int32(in.Int32())
+			}
 		case "old_config_bitmask":
-			out.OldConfigBitmask = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.OldConfigBitmask = int32(in.Int32())
+			}
 		case "password_type":
-			out.PasswordType = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.PasswordType = string(in.String())
+			}
 		case "quantity":
-			out.Quantity = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Quantity = int32(in.Int32())
+			}
 		case "type_id":
-			out.TypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.TypeId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

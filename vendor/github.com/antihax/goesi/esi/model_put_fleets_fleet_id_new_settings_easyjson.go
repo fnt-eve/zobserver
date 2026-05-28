@@ -36,7 +36,11 @@ func easyjson955c47c3DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *PutFl
 		}
 		for !in.IsDelim(']') {
 			var v1 PutFleetsFleetIdNewSettings
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,16 +101,19 @@ func easyjson955c47c3DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *PutF
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "is_free_move":
-			out.IsFreeMove = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.IsFreeMove = bool(in.Bool())
+			}
 		case "motd":
-			out.Motd = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Motd = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}

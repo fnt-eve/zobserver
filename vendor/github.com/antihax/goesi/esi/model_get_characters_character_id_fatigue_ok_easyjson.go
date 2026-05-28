@@ -36,7 +36,11 @@ func easyjsonDc1671d6DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCh
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCharactersCharacterIdFatigueOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,23 +101,30 @@ func easyjsonDc1671d6DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "jump_fatigue_expire_date":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.JumpFatigueExpireDate).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.JumpFatigueExpireDate).UnmarshalJSON(data))
+				}
 			}
 		case "last_jump_date":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.LastJumpDate).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.LastJumpDate).UnmarshalJSON(data))
+				}
 			}
 		case "last_update_date":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.LastUpdateDate).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.LastUpdateDate).UnmarshalJSON(data))
+				}
 			}
 		default:
 			in.SkipRecursive()

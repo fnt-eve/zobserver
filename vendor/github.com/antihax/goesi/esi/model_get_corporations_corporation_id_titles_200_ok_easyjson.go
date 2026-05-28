@@ -36,7 +36,11 @@ func easyjsonDf6cf6fdDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCo
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCorporationsCorporationIdTitles200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,11 +101,6 @@ func easyjsonDf6cf6fdDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "grantable_roles":
 			if in.IsNull() {
@@ -120,7 +119,11 @@ func easyjsonDf6cf6fdDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				}
 				for !in.IsDelim(']') {
 					var v4 string
-					v4 = string(in.String())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v4 = string(in.String())
+					}
 					out.GrantableRoles = append(out.GrantableRoles, v4)
 					in.WantComma()
 				}
@@ -143,7 +146,11 @@ func easyjsonDf6cf6fdDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				}
 				for !in.IsDelim(']') {
 					var v5 string
-					v5 = string(in.String())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v5 = string(in.String())
+					}
 					out.GrantableRolesAtBase = append(out.GrantableRolesAtBase, v5)
 					in.WantComma()
 				}
@@ -166,7 +173,11 @@ func easyjsonDf6cf6fdDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				}
 				for !in.IsDelim(']') {
 					var v6 string
-					v6 = string(in.String())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v6 = string(in.String())
+					}
 					out.GrantableRolesAtHq = append(out.GrantableRolesAtHq, v6)
 					in.WantComma()
 				}
@@ -189,14 +200,22 @@ func easyjsonDf6cf6fdDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				}
 				for !in.IsDelim(']') {
 					var v7 string
-					v7 = string(in.String())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v7 = string(in.String())
+					}
 					out.GrantableRolesAtOther = append(out.GrantableRolesAtOther, v7)
 					in.WantComma()
 				}
 				in.Delim(']')
 			}
 		case "name":
-			out.Name = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
 		case "roles":
 			if in.IsNull() {
 				in.Skip()
@@ -214,7 +233,11 @@ func easyjsonDf6cf6fdDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				}
 				for !in.IsDelim(']') {
 					var v8 string
-					v8 = string(in.String())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v8 = string(in.String())
+					}
 					out.Roles = append(out.Roles, v8)
 					in.WantComma()
 				}
@@ -237,7 +260,11 @@ func easyjsonDf6cf6fdDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				}
 				for !in.IsDelim(']') {
 					var v9 string
-					v9 = string(in.String())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v9 = string(in.String())
+					}
 					out.RolesAtBase = append(out.RolesAtBase, v9)
 					in.WantComma()
 				}
@@ -260,7 +287,11 @@ func easyjsonDf6cf6fdDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				}
 				for !in.IsDelim(']') {
 					var v10 string
-					v10 = string(in.String())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v10 = string(in.String())
+					}
 					out.RolesAtHq = append(out.RolesAtHq, v10)
 					in.WantComma()
 				}
@@ -283,14 +314,22 @@ func easyjsonDf6cf6fdDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				}
 				for !in.IsDelim(']') {
 					var v11 string
-					v11 = string(in.String())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v11 = string(in.String())
+					}
 					out.RolesAtOther = append(out.RolesAtOther, v11)
 					in.WantComma()
 				}
 				in.Delim(']')
 			}
 		case "title_id":
-			out.TitleId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.TitleId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

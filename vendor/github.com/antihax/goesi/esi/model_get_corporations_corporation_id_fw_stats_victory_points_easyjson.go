@@ -36,7 +36,11 @@ func easyjsonB4a61b3aDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCo
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCorporationsCorporationIdFwStatsVictoryPoints
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,18 +101,25 @@ func easyjsonB4a61b3aDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "last_week":
-			out.LastWeek = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.LastWeek = int32(in.Int32())
+			}
 		case "total":
-			out.Total = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Total = int32(in.Int32())
+			}
 		case "yesterday":
-			out.Yesterday = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Yesterday = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

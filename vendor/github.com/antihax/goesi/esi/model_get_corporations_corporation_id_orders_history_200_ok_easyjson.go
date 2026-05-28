@@ -36,7 +36,11 @@ func easyjsonEf608ee4DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCo
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCorporationsCorporationIdOrdersHistory200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,46 +101,105 @@ func easyjsonEf608ee4DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "duration":
-			out.Duration = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Duration = int32(in.Int32())
+			}
 		case "escrow":
-			out.Escrow = float64(in.Float64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Escrow = float64(in.Float64())
+			}
 		case "is_buy_order":
-			out.IsBuyOrder = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.IsBuyOrder = bool(in.Bool())
+			}
 		case "issued":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.Issued).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.Issued).UnmarshalJSON(data))
+				}
 			}
 		case "issued_by":
-			out.IssuedBy = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.IssuedBy = int32(in.Int32())
+			}
 		case "location_id":
-			out.LocationId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.LocationId = int64(in.Int64())
+			}
 		case "min_volume":
-			out.MinVolume = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.MinVolume = int32(in.Int32())
+			}
 		case "order_id":
-			out.OrderId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.OrderId = int64(in.Int64())
+			}
 		case "price":
-			out.Price = float64(in.Float64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Price = float64(in.Float64())
+			}
 		case "range":
-			out.Range_ = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Range_ = string(in.String())
+			}
 		case "region_id":
-			out.RegionId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.RegionId = int32(in.Int32())
+			}
 		case "state":
-			out.State = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.State = string(in.String())
+			}
 		case "type_id":
-			out.TypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.TypeId = int32(in.Int32())
+			}
 		case "volume_remain":
-			out.VolumeRemain = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.VolumeRemain = int32(in.Int32())
+			}
 		case "volume_total":
-			out.VolumeTotal = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.VolumeTotal = int32(in.Int32())
+			}
 		case "wallet_division":
-			out.WalletDivision = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.WalletDivision = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

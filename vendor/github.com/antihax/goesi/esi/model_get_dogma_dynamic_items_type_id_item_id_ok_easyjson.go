@@ -36,7 +36,11 @@ func easyjson5a3b9194DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetDo
 		}
 		for !in.IsDelim(']') {
 			var v1 GetDogmaDynamicItemsTypeIdItemIdOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,14 +101,13 @@ func easyjson5a3b9194DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetD
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "created_by":
-			out.CreatedBy = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CreatedBy = int32(in.Int32())
+			}
 		case "dogma_attributes":
 			if in.IsNull() {
 				in.Skip()
@@ -152,9 +155,17 @@ func easyjson5a3b9194DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetD
 				in.Delim(']')
 			}
 		case "mutator_type_id":
-			out.MutatorTypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.MutatorTypeId = int32(in.Int32())
+			}
 		case "source_type_id":
-			out.SourceTypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SourceTypeId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -272,16 +283,19 @@ func easyjson5a3b9194DecodeGithubComAntihaxGoesiEsi3(in *jlexer.Lexer, out *GetD
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "effect_id":
-			out.EffectId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.EffectId = int32(in.Int32())
+			}
 		case "is_default":
-			out.IsDefault = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.IsDefault = bool(in.Bool())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -327,16 +341,19 @@ func easyjson5a3b9194DecodeGithubComAntihaxGoesiEsi2(in *jlexer.Lexer, out *GetD
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "attribute_id":
-			out.AttributeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.AttributeId = int32(in.Int32())
+			}
 		case "value":
-			out.Value = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Value = float32(in.Float32())
+			}
 		default:
 			in.SkipRecursive()
 		}

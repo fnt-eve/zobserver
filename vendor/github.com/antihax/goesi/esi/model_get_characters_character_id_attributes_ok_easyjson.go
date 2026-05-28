@@ -36,7 +36,11 @@ func easyjsonFa541e84DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCh
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCharactersCharacterIdAttributesOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,32 +101,59 @@ func easyjsonFa541e84DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "accrued_remap_cooldown_date":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.AccruedRemapCooldownDate).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.AccruedRemapCooldownDate).UnmarshalJSON(data))
+				}
 			}
 		case "bonus_remaps":
-			out.BonusRemaps = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.BonusRemaps = int32(in.Int32())
+			}
 		case "charisma":
-			out.Charisma = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Charisma = int32(in.Int32())
+			}
 		case "intelligence":
-			out.Intelligence = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Intelligence = int32(in.Int32())
+			}
 		case "last_remap_date":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.LastRemapDate).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.LastRemapDate).UnmarshalJSON(data))
+				}
 			}
 		case "memory":
-			out.Memory = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Memory = int32(in.Int32())
+			}
 		case "perception":
-			out.Perception = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Perception = int32(in.Int32())
+			}
 		case "willpower":
-			out.Willpower = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Willpower = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

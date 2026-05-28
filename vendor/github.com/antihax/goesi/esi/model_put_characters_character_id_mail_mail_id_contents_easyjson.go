@@ -36,7 +36,11 @@ func easyjsonAd2c4d9fDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *PutCh
 		}
 		for !in.IsDelim(']') {
 			var v1 PutCharactersCharacterIdMailMailIdContents
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,11 +101,6 @@ func easyjsonAd2c4d9fDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *PutC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "labels":
 			if in.IsNull() {
@@ -120,14 +119,22 @@ func easyjsonAd2c4d9fDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *PutC
 				}
 				for !in.IsDelim(']') {
 					var v4 int32
-					v4 = int32(in.Int32())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v4 = int32(in.Int32())
+					}
 					out.Labels = append(out.Labels, v4)
 					in.WantComma()
 				}
 				in.Delim(']')
 			}
 		case "read":
-			out.Read = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Read = bool(in.Bool())
+			}
 		default:
 			in.SkipRecursive()
 		}

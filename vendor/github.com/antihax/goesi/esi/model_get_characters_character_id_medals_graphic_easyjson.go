@@ -36,7 +36,11 @@ func easyjson6d4c19fbDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCh
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCharactersCharacterIdMedalsGraphic
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,20 +101,31 @@ func easyjson6d4c19fbDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "color":
-			out.Color = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Color = int32(in.Int32())
+			}
 		case "graphic":
-			out.Graphic = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Graphic = string(in.String())
+			}
 		case "layer":
-			out.Layer = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Layer = int32(in.Int32())
+			}
 		case "part":
-			out.Part = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Part = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

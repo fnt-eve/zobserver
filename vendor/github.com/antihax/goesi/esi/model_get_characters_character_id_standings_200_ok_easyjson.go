@@ -36,7 +36,11 @@ func easyjsonCd2065b3DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCh
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCharactersCharacterIdStandings200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,18 +101,25 @@ func easyjsonCd2065b3DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "from_id":
-			out.FromId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.FromId = int32(in.Int32())
+			}
 		case "from_type":
-			out.FromType = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.FromType = string(in.String())
+			}
 		case "standing":
-			out.Standing = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Standing = float32(in.Float32())
+			}
 		default:
 			in.SkipRecursive()
 		}

@@ -36,7 +36,11 @@ func easyjsonCd04e186DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetSt
 		}
 		for !in.IsDelim(']') {
 			var v1 GetStatusOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,22 +101,33 @@ func easyjsonCd04e186DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetS
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "players":
-			out.Players = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Players = int32(in.Int32())
+			}
 		case "server_version":
-			out.ServerVersion = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ServerVersion = string(in.String())
+			}
 		case "start_time":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.StartTime).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.StartTime).UnmarshalJSON(data))
+				}
 			}
 		case "vip":
-			out.Vip = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Vip = bool(in.Bool())
+			}
 		default:
 			in.SkipRecursive()
 		}

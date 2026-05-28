@@ -36,7 +36,11 @@ func easyjson5e6bca6DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetUni
 		}
 		for !in.IsDelim(']') {
 			var v1 GetUniverseStargatesStargateIdDestination
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,16 +101,19 @@ func easyjson5e6bca6DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetUn
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "stargate_id":
-			out.StargateId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.StargateId = int32(in.Int32())
+			}
 		case "system_id":
-			out.SystemId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SystemId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

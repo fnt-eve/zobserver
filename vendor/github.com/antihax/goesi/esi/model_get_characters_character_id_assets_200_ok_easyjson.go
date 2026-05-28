@@ -36,7 +36,11 @@ func easyjson359a4af9DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCh
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCharactersCharacterIdAssets200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,28 +101,55 @@ func easyjson359a4af9DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "is_blueprint_copy":
-			out.IsBlueprintCopy = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.IsBlueprintCopy = bool(in.Bool())
+			}
 		case "is_singleton":
-			out.IsSingleton = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.IsSingleton = bool(in.Bool())
+			}
 		case "item_id":
-			out.ItemId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ItemId = int64(in.Int64())
+			}
 		case "location_flag":
-			out.LocationFlag = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.LocationFlag = string(in.String())
+			}
 		case "location_id":
-			out.LocationId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.LocationId = int64(in.Int64())
+			}
 		case "location_type":
-			out.LocationType = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.LocationType = string(in.String())
+			}
 		case "quantity":
-			out.Quantity = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Quantity = int32(in.Int32())
+			}
 		case "type_id":
-			out.TypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.TypeId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

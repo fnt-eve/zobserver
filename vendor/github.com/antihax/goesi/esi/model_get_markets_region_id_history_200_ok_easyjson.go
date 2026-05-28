@@ -36,7 +36,11 @@ func easyjson7c5b8388DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetMa
 		}
 		for !in.IsDelim(']') {
 			var v1 GetMarketsRegionIdHistory200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,24 +101,43 @@ func easyjson7c5b8388DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetM
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "average":
-			out.Average = float64(in.Float64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Average = float64(in.Float64())
+			}
 		case "date":
-			out.Date = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Date = string(in.String())
+			}
 		case "highest":
-			out.Highest = float64(in.Float64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Highest = float64(in.Float64())
+			}
 		case "lowest":
-			out.Lowest = float64(in.Float64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Lowest = float64(in.Float64())
+			}
 		case "order_count":
-			out.OrderCount = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.OrderCount = int64(in.Int64())
+			}
 		case "volume":
-			out.Volume = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Volume = int64(in.Int64())
+			}
 		default:
 			in.SkipRecursive()
 		}

@@ -36,7 +36,11 @@ func easyjson2c8f07c0DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCh
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCharactersCharacterIdSkillqueue200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,32 +101,59 @@ func easyjson2c8f07c0DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "finish_date":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.FinishDate).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.FinishDate).UnmarshalJSON(data))
+				}
 			}
 		case "finished_level":
-			out.FinishedLevel = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.FinishedLevel = int32(in.Int32())
+			}
 		case "level_end_sp":
-			out.LevelEndSp = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.LevelEndSp = int32(in.Int32())
+			}
 		case "level_start_sp":
-			out.LevelStartSp = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.LevelStartSp = int32(in.Int32())
+			}
 		case "queue_position":
-			out.QueuePosition = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.QueuePosition = int32(in.Int32())
+			}
 		case "skill_id":
-			out.SkillId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SkillId = int32(in.Int32())
+			}
 		case "start_date":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.StartDate).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.StartDate).UnmarshalJSON(data))
+				}
 			}
 		case "training_start_sp":
-			out.TrainingStartSp = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.TrainingStartSp = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

@@ -36,7 +36,11 @@ func easyjsonE4451086DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetFw
 		}
 		for !in.IsDelim(']') {
 			var v1 GetFwLeaderboardsCorporationsOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,11 +101,6 @@ func easyjsonE4451086DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetF
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "kills":
 			easyjsonE4451086DecodeGithubComAntihaxGoesiEsi2(in, &out.Kills)
@@ -176,11 +175,6 @@ func easyjsonE4451086DecodeGithubComAntihaxGoesiEsi3(in *jlexer.Lexer, out *GetF
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "active_total":
 			if in.IsNull() {
@@ -333,16 +327,19 @@ func easyjsonE4451086DecodeGithubComAntihaxGoesiEsi6(in *jlexer.Lexer, out *GetF
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "amount":
-			out.Amount = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Amount = int32(in.Int32())
+			}
 		case "corporation_id":
-			out.CorporationId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CorporationId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -388,16 +385,19 @@ func easyjsonE4451086DecodeGithubComAntihaxGoesiEsi5(in *jlexer.Lexer, out *GetF
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "amount":
-			out.Amount = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Amount = int32(in.Int32())
+			}
 		case "corporation_id":
-			out.CorporationId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CorporationId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -443,16 +443,19 @@ func easyjsonE4451086DecodeGithubComAntihaxGoesiEsi4(in *jlexer.Lexer, out *GetF
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "amount":
-			out.Amount = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Amount = int32(in.Int32())
+			}
 		case "corporation_id":
-			out.CorporationId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CorporationId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -498,11 +501,6 @@ func easyjsonE4451086DecodeGithubComAntihaxGoesiEsi2(in *jlexer.Lexer, out *GetF
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "active_total":
 			if in.IsNull() {
@@ -655,16 +653,19 @@ func easyjsonE4451086DecodeGithubComAntihaxGoesiEsi9(in *jlexer.Lexer, out *GetF
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "amount":
-			out.Amount = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Amount = int32(in.Int32())
+			}
 		case "corporation_id":
-			out.CorporationId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CorporationId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -710,16 +711,19 @@ func easyjsonE4451086DecodeGithubComAntihaxGoesiEsi8(in *jlexer.Lexer, out *GetF
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "amount":
-			out.Amount = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Amount = int32(in.Int32())
+			}
 		case "corporation_id":
-			out.CorporationId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CorporationId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -765,16 +769,19 @@ func easyjsonE4451086DecodeGithubComAntihaxGoesiEsi7(in *jlexer.Lexer, out *GetF
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "amount":
-			out.Amount = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Amount = int32(in.Int32())
+			}
 		case "corporation_id":
-			out.CorporationId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CorporationId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

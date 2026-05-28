@@ -36,7 +36,11 @@ func easyjsonEcad90f3DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetUn
 		}
 		for !in.IsDelim(']') {
 			var v1 GetUniverseRaces200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,20 +101,31 @@ func easyjsonEcad90f3DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetU
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "alliance_id":
-			out.AllianceId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.AllianceId = int32(in.Int32())
+			}
 		case "description":
-			out.Description = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Description = string(in.String())
+			}
 		case "name":
-			out.Name = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
 		case "race_id":
-			out.RaceId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.RaceId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

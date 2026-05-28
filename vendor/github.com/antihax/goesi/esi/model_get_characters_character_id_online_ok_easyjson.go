@@ -36,7 +36,11 @@ func easyjson93c87c1aDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCh
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCharactersCharacterIdOnlineOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,24 +101,35 @@ func easyjson93c87c1aDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "last_login":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.LastLogin).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.LastLogin).UnmarshalJSON(data))
+				}
 			}
 		case "last_logout":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.LastLogout).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.LastLogout).UnmarshalJSON(data))
+				}
 			}
 		case "logins":
-			out.Logins = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Logins = int32(in.Int32())
+			}
 		case "online":
-			out.Online = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Online = bool(in.Bool())
+			}
 		default:
 			in.SkipRecursive()
 		}

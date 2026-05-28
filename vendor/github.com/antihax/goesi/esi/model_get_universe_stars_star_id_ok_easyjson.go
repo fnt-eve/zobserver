@@ -36,7 +36,11 @@ func easyjsonFddeaa82DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetUn
 		}
 		for !in.IsDelim(']') {
 			var v1 GetUniverseStarsStarIdOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,28 +101,55 @@ func easyjsonFddeaa82DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetU
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "age":
-			out.Age = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Age = int64(in.Int64())
+			}
 		case "luminosity":
-			out.Luminosity = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Luminosity = float32(in.Float32())
+			}
 		case "name":
-			out.Name = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
 		case "radius":
-			out.Radius = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Radius = int64(in.Int64())
+			}
 		case "solar_system_id":
-			out.SolarSystemId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SolarSystemId = int32(in.Int32())
+			}
 		case "spectral_class":
-			out.SpectralClass = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SpectralClass = string(in.String())
+			}
 		case "temperature":
-			out.Temperature = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Temperature = int32(in.Int32())
+			}
 		case "type_id":
-			out.TypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.TypeId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

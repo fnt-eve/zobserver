@@ -36,7 +36,11 @@ func easyjsonE4190f0eDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCo
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCorporationsCorporationIdWalletsDivisionJournal200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,40 +101,87 @@ func easyjsonE4190f0eDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "amount":
-			out.Amount = float64(in.Float64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Amount = float64(in.Float64())
+			}
 		case "balance":
-			out.Balance = float64(in.Float64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Balance = float64(in.Float64())
+			}
 		case "context_id":
-			out.ContextId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ContextId = int64(in.Int64())
+			}
 		case "context_id_type":
-			out.ContextIdType = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ContextIdType = string(in.String())
+			}
 		case "date":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.Date).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.Date).UnmarshalJSON(data))
+				}
 			}
 		case "description":
-			out.Description = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Description = string(in.String())
+			}
 		case "first_party_id":
-			out.FirstPartyId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.FirstPartyId = int32(in.Int32())
+			}
 		case "id":
-			out.Id = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Id = int64(in.Int64())
+			}
 		case "reason":
-			out.Reason = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Reason = string(in.String())
+			}
 		case "ref_type":
-			out.RefType = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.RefType = string(in.String())
+			}
 		case "second_party_id":
-			out.SecondPartyId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SecondPartyId = int32(in.Int32())
+			}
 		case "tax":
-			out.Tax = float64(in.Float64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Tax = float64(in.Float64())
+			}
 		case "tax_receiver_id":
-			out.TaxReceiverId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.TaxReceiverId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

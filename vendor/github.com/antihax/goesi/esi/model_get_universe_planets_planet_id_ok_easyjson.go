@@ -36,7 +36,11 @@ func easyjson334413eDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetUni
 		}
 		for !in.IsDelim(']') {
 			var v1 GetUniversePlanetsPlanetIdOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,22 +101,33 @@ func easyjson334413eDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetUn
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "name":
-			out.Name = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
 		case "planet_id":
-			out.PlanetId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.PlanetId = int32(in.Int32())
+			}
 		case "position":
 			easyjson334413eDecodeGithubComAntihaxGoesiEsi2(in, &out.Position)
 		case "system_id":
-			out.SystemId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SystemId = int32(in.Int32())
+			}
 		case "type_id":
-			out.TypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.TypeId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -212,18 +227,25 @@ func easyjson334413eDecodeGithubComAntihaxGoesiEsi2(in *jlexer.Lexer, out *GetUn
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "x":
-			out.X = float64(in.Float64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.X = float64(in.Float64())
+			}
 		case "y":
-			out.Y = float64(in.Float64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Y = float64(in.Float64())
+			}
 		case "z":
-			out.Z = float64(in.Float64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Z = float64(in.Float64())
+			}
 		default:
 			in.SkipRecursive()
 		}

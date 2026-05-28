@@ -1,25 +1,25 @@
 module github.com/fnt-eve/zobserver
 
-go 1.24
+go 1.26
 
 require (
 	github.com/bwmarrin/discordgo v0.29.0 // direct
 	github.com/gorilla/websocket v1.5.3 // indirect
-	golang.org/x/crypto v0.38.0 // indirect
-	golang.org/x/sys v0.33.0 // indirect
+	golang.org/x/crypto v0.52.0 // indirect
+	golang.org/x/sys v0.45.0 // indirect
 )
 
 require (
-	github.com/antihax/goesi v0.0.0-20250326124837-837c9408dfa4
-	go.uber.org/zap v1.27.0
-	golang.org/x/text v0.25.0
+	github.com/antihax/goesi v0.0.0-20251103030832-a87832eae7ca
+	go.uber.org/zap v1.28.0
+	golang.org/x/text v0.37.0
 )
 
 require (
 	github.com/golang-jwt/jwt/v4 v4.5.2 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
-	github.com/mailru/easyjson v0.9.0 // indirect
-	golang.org/x/oauth2 v0.30.0 // indirect
+	github.com/mailru/easyjson v0.9.2 // indirect
+	golang.org/x/oauth2 v0.36.0 // indirect
 )
 
 require (

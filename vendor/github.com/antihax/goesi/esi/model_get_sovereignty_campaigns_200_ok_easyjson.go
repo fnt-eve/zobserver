@@ -36,7 +36,11 @@ func easyjsonA4228502DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetSo
 		}
 		for !in.IsDelim(']') {
 			var v1 GetSovereigntyCampaigns200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,24 +101,43 @@ func easyjsonA4228502DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetS
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "attackers_score":
-			out.AttackersScore = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.AttackersScore = float32(in.Float32())
+			}
 		case "campaign_id":
-			out.CampaignId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CampaignId = int32(in.Int32())
+			}
 		case "constellation_id":
-			out.ConstellationId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ConstellationId = int32(in.Int32())
+			}
 		case "defender_id":
-			out.DefenderId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.DefenderId = int32(in.Int32())
+			}
 		case "defender_score":
-			out.DefenderScore = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.DefenderScore = float32(in.Float32())
+			}
 		case "event_type":
-			out.EventType = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.EventType = string(in.String())
+			}
 		case "participants":
 			if in.IsNull() {
 				in.Skip()
@@ -132,20 +155,36 @@ func easyjsonA4228502DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetS
 				}
 				for !in.IsDelim(']') {
 					var v4 GetSovereigntyCampaignsParticipant
-					(v4).UnmarshalEasyJSON(in)
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						(v4).UnmarshalEasyJSON(in)
+					}
 					out.Participants = append(out.Participants, v4)
 					in.WantComma()
 				}
 				in.Delim(']')
 			}
 		case "solar_system_id":
-			out.SolarSystemId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SolarSystemId = int32(in.Int32())
+			}
 		case "start_time":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.StartTime).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.StartTime).UnmarshalJSON(data))
+				}
 			}
 		case "structure_id":
-			out.StructureId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.StructureId = int64(in.Int64())
+			}
 		default:
 			in.SkipRecursive()
 		}

@@ -36,7 +36,11 @@ func easyjson71be149aDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCo
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCorporationsCorporationIdOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,42 +101,93 @@ func easyjson71be149aDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "alliance_id":
-			out.AllianceId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.AllianceId = int32(in.Int32())
+			}
 		case "ceo_id":
-			out.CeoId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CeoId = int32(in.Int32())
+			}
 		case "creator_id":
-			out.CreatorId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CreatorId = int32(in.Int32())
+			}
 		case "date_founded":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.DateFounded).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.DateFounded).UnmarshalJSON(data))
+				}
 			}
 		case "description":
-			out.Description = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Description = string(in.String())
+			}
 		case "faction_id":
-			out.FactionId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.FactionId = int32(in.Int32())
+			}
 		case "home_station_id":
-			out.HomeStationId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.HomeStationId = int32(in.Int32())
+			}
 		case "member_count":
-			out.MemberCount = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.MemberCount = int32(in.Int32())
+			}
 		case "name":
-			out.Name = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
 		case "shares":
-			out.Shares = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Shares = int64(in.Int64())
+			}
 		case "tax_rate":
-			out.TaxRate = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.TaxRate = float32(in.Float32())
+			}
 		case "ticker":
-			out.Ticker = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Ticker = string(in.String())
+			}
 		case "url":
-			out.Url = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Url = string(in.String())
+			}
 		case "war_eligible":
-			out.WarEligible = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.WarEligible = bool(in.Bool())
+			}
 		default:
 			in.SkipRecursive()
 		}

@@ -36,7 +36,11 @@ func easyjson3a1ded9fDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetFl
 		}
 		for !in.IsDelim(']') {
 			var v1 GetFleetsFleetIdMembers200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,34 +101,69 @@ func easyjson3a1ded9fDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetF
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "character_id":
-			out.CharacterId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CharacterId = int32(in.Int32())
+			}
 		case "join_time":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.JoinTime).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.JoinTime).UnmarshalJSON(data))
+				}
 			}
 		case "role":
-			out.Role = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Role = string(in.String())
+			}
 		case "role_name":
-			out.RoleName = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.RoleName = string(in.String())
+			}
 		case "ship_type_id":
-			out.ShipTypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ShipTypeId = int32(in.Int32())
+			}
 		case "solar_system_id":
-			out.SolarSystemId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SolarSystemId = int32(in.Int32())
+			}
 		case "squad_id":
-			out.SquadId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SquadId = int64(in.Int64())
+			}
 		case "station_id":
-			out.StationId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.StationId = int64(in.Int64())
+			}
 		case "takes_fleet_warp":
-			out.TakesFleetWarp = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.TakesFleetWarp = bool(in.Bool())
+			}
 		case "wing_id":
-			out.WingId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.WingId = int64(in.Int64())
+			}
 		default:
 			in.SkipRecursive()
 		}

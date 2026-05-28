@@ -36,7 +36,11 @@ func easyjson5567d6bcDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetUn
 		}
 		for !in.IsDelim(']') {
 			var v1 GetUniverseAncestries200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,24 +101,43 @@ func easyjson5567d6bcDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetU
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "bloodline_id":
-			out.BloodlineId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.BloodlineId = int32(in.Int32())
+			}
 		case "description":
-			out.Description = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Description = string(in.String())
+			}
 		case "icon_id":
-			out.IconId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.IconId = int32(in.Int32())
+			}
 		case "id":
-			out.Id = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Id = int32(in.Int32())
+			}
 		case "name":
-			out.Name = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
 		case "short_description":
-			out.ShortDescription = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ShortDescription = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}

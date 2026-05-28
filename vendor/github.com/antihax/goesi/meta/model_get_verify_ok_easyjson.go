@@ -36,7 +36,11 @@ func easyjson8356b13dDecodeGithubComAntihaxGoesiMeta(in *jlexer.Lexer, out *GetV
 		}
 		for !in.IsDelim(']') {
 			var v1 GetVerifyOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,26 +101,49 @@ func easyjson8356b13dDecodeGithubComAntihaxGoesiMeta1(in *jlexer.Lexer, out *Get
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "CharacterID":
-			out.CharacterID = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CharacterID = int32(in.Int32())
+			}
 		case "CharacterName":
-			out.CharacterName = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CharacterName = string(in.String())
+			}
 		case "CharacterOwnerHash":
-			out.CharacterOwnerHash = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CharacterOwnerHash = string(in.String())
+			}
 		case "ExpiresOn":
-			out.ExpiresOn = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ExpiresOn = string(in.String())
+			}
 		case "IntellectualProperty":
-			out.IntellectualProperty = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.IntellectualProperty = string(in.String())
+			}
 		case "Scopes":
-			out.Scopes = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Scopes = string(in.String())
+			}
 		case "TokenType":
-			out.TokenType = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.TokenType = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}

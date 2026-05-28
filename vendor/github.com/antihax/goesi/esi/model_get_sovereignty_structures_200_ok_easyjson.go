@@ -36,7 +36,11 @@ func easyjson1e8c5b0bDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetSo
 		}
 		for !in.IsDelim(']') {
 			var v1 GetSovereigntyStructures200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,29 +101,52 @@ func easyjson1e8c5b0bDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetS
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "alliance_id":
-			out.AllianceId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.AllianceId = int32(in.Int32())
+			}
 		case "solar_system_id":
-			out.SolarSystemId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SolarSystemId = int32(in.Int32())
+			}
 		case "structure_id":
-			out.StructureId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.StructureId = int64(in.Int64())
+			}
 		case "structure_type_id":
-			out.StructureTypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.StructureTypeId = int32(in.Int32())
+			}
 		case "vulnerability_occupancy_level":
-			out.VulnerabilityOccupancyLevel = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.VulnerabilityOccupancyLevel = float32(in.Float32())
+			}
 		case "vulnerable_end_time":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.VulnerableEndTime).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.VulnerableEndTime).UnmarshalJSON(data))
+				}
 			}
 		case "vulnerable_start_time":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.VulnerableStartTime).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.VulnerableStartTime).UnmarshalJSON(data))
+				}
 			}
 		default:
 			in.SkipRecursive()

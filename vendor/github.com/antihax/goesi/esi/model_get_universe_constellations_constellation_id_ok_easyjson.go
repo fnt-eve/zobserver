@@ -36,7 +36,11 @@ func easyjson7d9c79f0DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetUn
 		}
 		for !in.IsDelim(']') {
 			var v1 GetUniverseConstellationsConstellationIdOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,20 +101,31 @@ func easyjson7d9c79f0DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetU
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "constellation_id":
-			out.ConstellationId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ConstellationId = int32(in.Int32())
+			}
 		case "name":
-			out.Name = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
 		case "position":
-			(out.Position).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(out.Position).UnmarshalEasyJSON(in)
+			}
 		case "region_id":
-			out.RegionId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.RegionId = int32(in.Int32())
+			}
 		case "systems":
 			if in.IsNull() {
 				in.Skip()
@@ -128,7 +143,11 @@ func easyjson7d9c79f0DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetU
 				}
 				for !in.IsDelim(']') {
 					var v4 int32
-					v4 = int32(in.Int32())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v4 = int32(in.Int32())
+					}
 					out.Systems = append(out.Systems, v4)
 					in.WantComma()
 				}

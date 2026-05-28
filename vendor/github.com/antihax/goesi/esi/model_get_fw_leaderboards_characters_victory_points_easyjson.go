@@ -36,7 +36,11 @@ func easyjson5d999fdbDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetFw
 		}
 		for !in.IsDelim(']') {
 			var v1 GetFwLeaderboardsCharactersVictoryPoints
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,11 +101,6 @@ func easyjson5d999fdbDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetF
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "active_total":
 			if in.IsNull() {
@@ -166,7 +165,11 @@ func easyjson5d999fdbDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetF
 				}
 				for !in.IsDelim(']') {
 					var v6 GetFwLeaderboardsCharactersYesterdayYesterday1
-					(v6).UnmarshalEasyJSON(in)
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						(v6).UnmarshalEasyJSON(in)
+					}
 					out.Yesterday = append(out.Yesterday, v6)
 					in.WantComma()
 				}
@@ -278,16 +281,19 @@ func easyjson5d999fdbDecodeGithubComAntihaxGoesiEsi3(in *jlexer.Lexer, out *GetF
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "amount":
-			out.Amount = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Amount = int32(in.Int32())
+			}
 		case "character_id":
-			out.CharacterId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CharacterId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -333,16 +339,19 @@ func easyjson5d999fdbDecodeGithubComAntihaxGoesiEsi2(in *jlexer.Lexer, out *GetF
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "amount":
-			out.Amount = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Amount = int32(in.Int32())
+			}
 		case "character_id":
-			out.CharacterId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CharacterId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

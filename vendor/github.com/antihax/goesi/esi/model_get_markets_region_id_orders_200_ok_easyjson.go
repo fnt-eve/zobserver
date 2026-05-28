@@ -36,7 +36,11 @@ func easyjsonCdc2fd8fDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetMa
 		}
 		for !in.IsDelim(']') {
 			var v1 GetMarketsRegionIdOrders200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,38 +101,81 @@ func easyjsonCdc2fd8fDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetM
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "duration":
-			out.Duration = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Duration = int32(in.Int32())
+			}
 		case "is_buy_order":
-			out.IsBuyOrder = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.IsBuyOrder = bool(in.Bool())
+			}
 		case "issued":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.Issued).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.Issued).UnmarshalJSON(data))
+				}
 			}
 		case "location_id":
-			out.LocationId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.LocationId = int64(in.Int64())
+			}
 		case "min_volume":
-			out.MinVolume = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.MinVolume = int32(in.Int32())
+			}
 		case "order_id":
-			out.OrderId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.OrderId = int64(in.Int64())
+			}
 		case "price":
-			out.Price = float64(in.Float64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Price = float64(in.Float64())
+			}
 		case "range":
-			out.Range_ = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Range_ = string(in.String())
+			}
 		case "system_id":
-			out.SystemId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SystemId = int32(in.Int32())
+			}
 		case "type_id":
-			out.TypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.TypeId = int32(in.Int32())
+			}
 		case "volume_remain":
-			out.VolumeRemain = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.VolumeRemain = int32(in.Int32())
+			}
 		case "volume_total":
-			out.VolumeTotal = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.VolumeTotal = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

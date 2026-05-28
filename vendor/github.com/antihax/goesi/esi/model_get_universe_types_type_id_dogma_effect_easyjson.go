@@ -36,7 +36,11 @@ func easyjson6cb8c3e4DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetUn
 		}
 		for !in.IsDelim(']') {
 			var v1 GetUniverseTypesTypeIdDogmaEffect
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,16 +101,19 @@ func easyjson6cb8c3e4DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetU
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "effect_id":
-			out.EffectId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.EffectId = int32(in.Int32())
+			}
 		case "is_default":
-			out.IsDefault = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.IsDefault = bool(in.Bool())
+			}
 		default:
 			in.SkipRecursive()
 		}

@@ -36,7 +36,11 @@ func easyjsonDac132eeDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetFl
 		}
 		for !in.IsDelim(']') {
 			var v1 GetFleetsFleetIdOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,20 +101,31 @@ func easyjsonDac132eeDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetF
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "is_free_move":
-			out.IsFreeMove = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.IsFreeMove = bool(in.Bool())
+			}
 		case "is_registered":
-			out.IsRegistered = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.IsRegistered = bool(in.Bool())
+			}
 		case "is_voice_enabled":
-			out.IsVoiceEnabled = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.IsVoiceEnabled = bool(in.Bool())
+			}
 		case "motd":
-			out.Motd = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Motd = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}

@@ -36,7 +36,11 @@ func easyjson79bc02b5DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetKi
 		}
 		for !in.IsDelim(']') {
 			var v1 GetKillmailsKillmailIdKillmailHashOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,11 +101,6 @@ func easyjson79bc02b5DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetK
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "attackers":
 			if in.IsNull() {
@@ -120,26 +119,54 @@ func easyjson79bc02b5DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetK
 				}
 				for !in.IsDelim(']') {
 					var v4 GetKillmailsKillmailIdKillmailHashAttacker
-					(v4).UnmarshalEasyJSON(in)
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						(v4).UnmarshalEasyJSON(in)
+					}
 					out.Attackers = append(out.Attackers, v4)
 					in.WantComma()
 				}
 				in.Delim(']')
 			}
 		case "killmail_id":
-			out.KillmailId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.KillmailId = int32(in.Int32())
+			}
 		case "killmail_time":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.KillmailTime).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.KillmailTime).UnmarshalJSON(data))
+				}
 			}
 		case "moon_id":
-			out.MoonId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.MoonId = int32(in.Int32())
+			}
 		case "solar_system_id":
-			out.SolarSystemId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SolarSystemId = int32(in.Int32())
+			}
 		case "victim":
-			(out.Victim).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(out.Victim).UnmarshalEasyJSON(in)
+			}
 		case "war_id":
-			out.WarId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.WarId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

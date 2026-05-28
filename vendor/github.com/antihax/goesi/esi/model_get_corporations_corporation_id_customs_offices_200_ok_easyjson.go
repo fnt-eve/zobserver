@@ -36,7 +36,11 @@ func easyjson6abb6e4eDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCo
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCorporationsCorporationIdCustomsOffices200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,40 +101,91 @@ func easyjson6abb6e4eDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "alliance_tax_rate":
-			out.AllianceTaxRate = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.AllianceTaxRate = float32(in.Float32())
+			}
 		case "allow_access_with_standings":
-			out.AllowAccessWithStandings = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.AllowAccessWithStandings = bool(in.Bool())
+			}
 		case "allow_alliance_access":
-			out.AllowAllianceAccess = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.AllowAllianceAccess = bool(in.Bool())
+			}
 		case "bad_standing_tax_rate":
-			out.BadStandingTaxRate = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.BadStandingTaxRate = float32(in.Float32())
+			}
 		case "corporation_tax_rate":
-			out.CorporationTaxRate = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CorporationTaxRate = float32(in.Float32())
+			}
 		case "excellent_standing_tax_rate":
-			out.ExcellentStandingTaxRate = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ExcellentStandingTaxRate = float32(in.Float32())
+			}
 		case "good_standing_tax_rate":
-			out.GoodStandingTaxRate = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.GoodStandingTaxRate = float32(in.Float32())
+			}
 		case "neutral_standing_tax_rate":
-			out.NeutralStandingTaxRate = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.NeutralStandingTaxRate = float32(in.Float32())
+			}
 		case "office_id":
-			out.OfficeId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.OfficeId = int64(in.Int64())
+			}
 		case "reinforce_exit_end":
-			out.ReinforceExitEnd = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ReinforceExitEnd = int32(in.Int32())
+			}
 		case "reinforce_exit_start":
-			out.ReinforceExitStart = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ReinforceExitStart = int32(in.Int32())
+			}
 		case "standing_level":
-			out.StandingLevel = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.StandingLevel = string(in.String())
+			}
 		case "system_id":
-			out.SystemId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SystemId = int32(in.Int32())
+			}
 		case "terrible_standing_tax_rate":
-			out.TerribleStandingTaxRate = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.TerribleStandingTaxRate = float32(in.Float32())
+			}
 		default:
 			in.SkipRecursive()
 		}

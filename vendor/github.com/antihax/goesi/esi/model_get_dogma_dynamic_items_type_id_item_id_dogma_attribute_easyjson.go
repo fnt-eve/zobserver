@@ -36,7 +36,11 @@ func easyjsonC68f7d55DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetDo
 		}
 		for !in.IsDelim(']') {
 			var v1 GetDogmaDynamicItemsTypeIdItemIdDogmaAttribute
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,16 +101,19 @@ func easyjsonC68f7d55DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetD
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "attribute_id":
-			out.AttributeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.AttributeId = int32(in.Int32())
+			}
 		case "value":
-			out.Value = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Value = float32(in.Float32())
+			}
 		default:
 			in.SkipRecursive()
 		}

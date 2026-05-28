@@ -36,7 +36,11 @@ func easyjson635b4880DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetWa
 		}
 		for !in.IsDelim(']') {
 			var v1 GetWarsWarIdKillmails200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,16 +101,19 @@ func easyjson635b4880DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetW
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "killmail_hash":
-			out.KillmailHash = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.KillmailHash = string(in.String())
+			}
 		case "killmail_id":
-			out.KillmailId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.KillmailId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

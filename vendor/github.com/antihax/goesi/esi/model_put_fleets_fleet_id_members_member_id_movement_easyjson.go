@@ -36,7 +36,11 @@ func easyjsonCbc331dfDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *PutFl
 		}
 		for !in.IsDelim(']') {
 			var v1 PutFleetsFleetIdMembersMemberIdMovement
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,18 +101,25 @@ func easyjsonCbc331dfDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *PutF
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "role":
-			out.Role = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Role = string(in.String())
+			}
 		case "squad_id":
-			out.SquadId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SquadId = int64(in.Int64())
+			}
 		case "wing_id":
-			out.WingId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.WingId = int64(in.Int64())
+			}
 		default:
 			in.SkipRecursive()
 		}

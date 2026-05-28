@@ -36,7 +36,11 @@ func easyjson5c3e6de0DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCo
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCorporationsCorporationIdMedalsIssued200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,26 +101,45 @@ func easyjson5c3e6de0DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "character_id":
-			out.CharacterId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CharacterId = int32(in.Int32())
+			}
 		case "issued_at":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.IssuedAt).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.IssuedAt).UnmarshalJSON(data))
+				}
 			}
 		case "issuer_id":
-			out.IssuerId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.IssuerId = int32(in.Int32())
+			}
 		case "medal_id":
-			out.MedalId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.MedalId = int32(in.Int32())
+			}
 		case "reason":
-			out.Reason = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Reason = string(in.String())
+			}
 		case "status":
-			out.Status = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Status = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}

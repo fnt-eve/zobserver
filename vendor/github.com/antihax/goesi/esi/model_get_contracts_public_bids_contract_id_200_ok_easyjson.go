@@ -36,7 +36,11 @@ func easyjson1a6ccbc6DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCo
 		}
 		for !in.IsDelim(']') {
 			var v1 GetContractsPublicBidsContractId200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,19 +101,26 @@ func easyjson1a6ccbc6DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "amount":
-			out.Amount = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Amount = float32(in.Float32())
+			}
 		case "bid_id":
-			out.BidId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.BidId = int32(in.Int32())
+			}
 		case "date_bid":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.DateBid).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.DateBid).UnmarshalJSON(data))
+				}
 			}
 		default:
 			in.SkipRecursive()

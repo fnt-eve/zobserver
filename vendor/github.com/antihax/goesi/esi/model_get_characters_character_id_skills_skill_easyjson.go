@@ -36,7 +36,11 @@ func easyjsonB44bf216DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCh
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCharactersCharacterIdSkillsSkill
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,20 +101,31 @@ func easyjsonB44bf216DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "active_skill_level":
-			out.ActiveSkillLevel = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ActiveSkillLevel = int32(in.Int32())
+			}
 		case "skill_id":
-			out.SkillId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SkillId = int32(in.Int32())
+			}
 		case "skillpoints_in_skill":
-			out.SkillpointsInSkill = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SkillpointsInSkill = int64(in.Int64())
+			}
 		case "trained_skill_level":
-			out.TrainedSkillLevel = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.TrainedSkillLevel = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

@@ -36,7 +36,11 @@ func easyjson3c44e3bdDecodeGithubComAntihaxGoesiMeta(in *jlexer.Lexer, out *GetS
 		}
 		for !in.IsDelim(']') {
 			var v1 GetStatusItem
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,20 +101,31 @@ func easyjson3c44e3bdDecodeGithubComAntihaxGoesiMeta1(in *jlexer.Lexer, out *Get
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "endpoint":
-			out.Endpoint = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Endpoint = string(in.String())
+			}
 		case "method":
-			out.Method = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Method = string(in.String())
+			}
 		case "route":
-			out.Route = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Route = string(in.String())
+			}
 		case "status":
-			out.Status = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Status = string(in.String())
+			}
 		case "tags":
 			if in.IsNull() {
 				in.Skip()
@@ -128,7 +143,11 @@ func easyjson3c44e3bdDecodeGithubComAntihaxGoesiMeta1(in *jlexer.Lexer, out *Get
 				}
 				for !in.IsDelim(']') {
 					var v4 string
-					v4 = string(in.String())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v4 = string(in.String())
+					}
 					out.Tags = append(out.Tags, v4)
 					in.WantComma()
 				}

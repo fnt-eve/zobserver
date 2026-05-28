@@ -36,7 +36,11 @@ func easyjsonB29675b3DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetIn
 		}
 		for !in.IsDelim(']') {
 			var v1 GetIndustryFacilities200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,24 +101,43 @@ func easyjsonB29675b3DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetI
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "facility_id":
-			out.FacilityId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.FacilityId = int64(in.Int64())
+			}
 		case "owner_id":
-			out.OwnerId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.OwnerId = int32(in.Int32())
+			}
 		case "region_id":
-			out.RegionId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.RegionId = int32(in.Int32())
+			}
 		case "solar_system_id":
-			out.SolarSystemId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SolarSystemId = int32(in.Int32())
+			}
 		case "tax":
-			out.Tax = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Tax = float32(in.Float32())
+			}
 		case "type_id":
-			out.TypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.TypeId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

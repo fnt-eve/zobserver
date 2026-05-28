@@ -36,7 +36,11 @@ func easyjson2d81da92DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetUn
 		}
 		for !in.IsDelim(']') {
 			var v1 GetUniverseTypesTypeIdOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,16 +101,19 @@ func easyjson2d81da92DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetU
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "capacity":
-			out.Capacity = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Capacity = float32(in.Float32())
+			}
 		case "description":
-			out.Description = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Description = string(in.String())
+			}
 		case "dogma_attributes":
 			if in.IsNull() {
 				in.Skip()
@@ -154,29 +161,77 @@ func easyjson2d81da92DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetU
 				in.Delim(']')
 			}
 		case "graphic_id":
-			out.GraphicId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.GraphicId = int32(in.Int32())
+			}
 		case "group_id":
-			out.GroupId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.GroupId = int32(in.Int32())
+			}
 		case "icon_id":
-			out.IconId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.IconId = int32(in.Int32())
+			}
 		case "market_group_id":
-			out.MarketGroupId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.MarketGroupId = int32(in.Int32())
+			}
 		case "mass":
-			out.Mass = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Mass = float32(in.Float32())
+			}
 		case "name":
-			out.Name = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
 		case "packaged_volume":
-			out.PackagedVolume = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.PackagedVolume = float32(in.Float32())
+			}
 		case "portion_size":
-			out.PortionSize = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.PortionSize = int32(in.Int32())
+			}
 		case "published":
-			out.Published = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Published = bool(in.Bool())
+			}
 		case "radius":
-			out.Radius = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Radius = float32(in.Float32())
+			}
 		case "type_id":
-			out.TypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.TypeId = int32(in.Int32())
+			}
 		case "volume":
-			out.Volume = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Volume = float32(in.Float32())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -404,16 +459,19 @@ func easyjson2d81da92DecodeGithubComAntihaxGoesiEsi3(in *jlexer.Lexer, out *GetU
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "effect_id":
-			out.EffectId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.EffectId = int32(in.Int32())
+			}
 		case "is_default":
-			out.IsDefault = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.IsDefault = bool(in.Bool())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -459,16 +517,19 @@ func easyjson2d81da92DecodeGithubComAntihaxGoesiEsi2(in *jlexer.Lexer, out *GetU
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "attribute_id":
-			out.AttributeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.AttributeId = int32(in.Int32())
+			}
 		case "value":
-			out.Value = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Value = float32(in.Float32())
+			}
 		default:
 			in.SkipRecursive()
 		}

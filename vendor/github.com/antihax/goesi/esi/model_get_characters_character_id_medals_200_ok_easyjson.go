@@ -36,7 +36,11 @@ func easyjson88215edcDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCh
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCharactersCharacterIdMedals200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,20 +101,27 @@ func easyjson88215edcDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "corporation_id":
-			out.CorporationId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CorporationId = int32(in.Int32())
+			}
 		case "date":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.Date).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.Date).UnmarshalJSON(data))
+				}
 			}
 		case "description":
-			out.Description = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Description = string(in.String())
+			}
 		case "graphics":
 			if in.IsNull() {
 				in.Skip()
@@ -135,15 +146,35 @@ func easyjson88215edcDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				in.Delim(']')
 			}
 		case "issuer_id":
-			out.IssuerId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.IssuerId = int32(in.Int32())
+			}
 		case "medal_id":
-			out.MedalId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.MedalId = int32(in.Int32())
+			}
 		case "reason":
-			out.Reason = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Reason = string(in.String())
+			}
 		case "status":
-			out.Status = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Status = string(in.String())
+			}
 		case "title":
-			out.Title = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Title = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -292,20 +323,31 @@ func easyjson88215edcDecodeGithubComAntihaxGoesiEsi2(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "color":
-			out.Color = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Color = int32(in.Int32())
+			}
 		case "graphic":
-			out.Graphic = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Graphic = string(in.String())
+			}
 		case "layer":
-			out.Layer = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Layer = int32(in.Int32())
+			}
 		case "part":
-			out.Part = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Part = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

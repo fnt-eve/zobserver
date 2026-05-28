@@ -36,7 +36,11 @@ func easyjsonD2c9dba0DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCh
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCharactersCharacterIdOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,36 +101,75 @@ func easyjsonD2c9dba0DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "alliance_id":
-			out.AllianceId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.AllianceId = int32(in.Int32())
+			}
 		case "birthday":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.Birthday).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.Birthday).UnmarshalJSON(data))
+				}
 			}
 		case "bloodline_id":
-			out.BloodlineId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.BloodlineId = int32(in.Int32())
+			}
 		case "corporation_id":
-			out.CorporationId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CorporationId = int32(in.Int32())
+			}
 		case "description":
-			out.Description = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Description = string(in.String())
+			}
 		case "faction_id":
-			out.FactionId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.FactionId = int32(in.Int32())
+			}
 		case "gender":
-			out.Gender = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Gender = string(in.String())
+			}
 		case "name":
-			out.Name = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
 		case "race_id":
-			out.RaceId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.RaceId = int32(in.Int32())
+			}
 		case "security_status":
-			out.SecurityStatus = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SecurityStatus = float32(in.Float32())
+			}
 		case "title":
-			out.Title = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Title = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}

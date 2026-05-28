@@ -36,7 +36,11 @@ func easyjson30a3ef00DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCh
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCharactersCharacterIdMailLabelsOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,11 +101,6 @@ func easyjson30a3ef00DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "labels":
 			if in.IsNull() {
@@ -120,14 +119,22 @@ func easyjson30a3ef00DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				}
 				for !in.IsDelim(']') {
 					var v4 GetCharactersCharacterIdMailLabelsLabel
-					(v4).UnmarshalEasyJSON(in)
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						(v4).UnmarshalEasyJSON(in)
+					}
 					out.Labels = append(out.Labels, v4)
 					in.WantComma()
 				}
 				in.Delim(']')
 			}
 		case "total_unread_count":
-			out.TotalUnreadCount = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.TotalUnreadCount = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

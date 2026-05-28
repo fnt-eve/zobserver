@@ -36,7 +36,11 @@ func easyjsonB74f4c6eDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCh
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCharactersCharacterIdCalendar200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,24 +101,39 @@ func easyjsonB74f4c6eDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "event_date":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.EventDate).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.EventDate).UnmarshalJSON(data))
+				}
 			}
 		case "event_id":
-			out.EventId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.EventId = int32(in.Int32())
+			}
 		case "event_response":
-			out.EventResponse = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.EventResponse = string(in.String())
+			}
 		case "importance":
-			out.Importance = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Importance = int32(in.Int32())
+			}
 		case "title":
-			out.Title = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Title = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}

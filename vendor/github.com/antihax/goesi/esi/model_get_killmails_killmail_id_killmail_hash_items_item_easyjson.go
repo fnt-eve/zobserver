@@ -36,7 +36,11 @@ func easyjsonC50fbf15DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetKi
 		}
 		for !in.IsDelim(']') {
 			var v1 GetKillmailsKillmailIdKillmailHashItemsItem
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,22 +101,37 @@ func easyjsonC50fbf15DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetK
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "flag":
-			out.Flag = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Flag = int32(in.Int32())
+			}
 		case "item_type_id":
-			out.ItemTypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ItemTypeId = int32(in.Int32())
+			}
 		case "quantity_destroyed":
-			out.QuantityDestroyed = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.QuantityDestroyed = int64(in.Int64())
+			}
 		case "quantity_dropped":
-			out.QuantityDropped = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.QuantityDropped = int64(in.Int64())
+			}
 		case "singleton":
-			out.Singleton = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Singleton = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

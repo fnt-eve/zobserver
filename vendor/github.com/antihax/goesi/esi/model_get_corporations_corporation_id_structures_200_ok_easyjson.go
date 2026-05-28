@@ -36,7 +36,11 @@ func easyjson52e0404DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCor
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCorporationsCorporationIdStructures200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,30 +101,53 @@ func easyjson52e0404DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetCo
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "corporation_id":
-			out.CorporationId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CorporationId = int32(in.Int32())
+			}
 		case "fuel_expires":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.FuelExpires).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.FuelExpires).UnmarshalJSON(data))
+				}
 			}
 		case "name":
-			out.Name = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
 		case "next_reinforce_apply":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.NextReinforceApply).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.NextReinforceApply).UnmarshalJSON(data))
+				}
 			}
 		case "next_reinforce_hour":
-			out.NextReinforceHour = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.NextReinforceHour = int32(in.Int32())
+			}
 		case "profile_id":
-			out.ProfileId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ProfileId = int32(in.Int32())
+			}
 		case "reinforce_hour":
-			out.ReinforceHour = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ReinforceHour = int32(in.Int32())
+			}
 		case "services":
 			if in.IsNull() {
 				in.Skip()
@@ -145,24 +172,52 @@ func easyjson52e0404DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetCo
 				in.Delim(']')
 			}
 		case "state":
-			out.State = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.State = string(in.String())
+			}
 		case "state_timer_end":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.StateTimerEnd).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.StateTimerEnd).UnmarshalJSON(data))
+				}
 			}
 		case "state_timer_start":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.StateTimerStart).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.StateTimerStart).UnmarshalJSON(data))
+				}
 			}
 		case "structure_id":
-			out.StructureId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.StructureId = int64(in.Int64())
+			}
 		case "system_id":
-			out.SystemId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SystemId = int32(in.Int32())
+			}
 		case "type_id":
-			out.TypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.TypeId = int32(in.Int32())
+			}
 		case "unanchors_at":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.UnanchorsAt).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.UnanchorsAt).UnmarshalJSON(data))
+				}
 			}
 		default:
 			in.SkipRecursive()
@@ -372,16 +427,19 @@ func easyjson52e0404DecodeGithubComAntihaxGoesiEsi2(in *jlexer.Lexer, out *GetCo
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "name":
-			out.Name = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
 		case "state":
-			out.State = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.State = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}

@@ -36,7 +36,11 @@ func easyjson315d323dDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetDo
 		}
 		for !in.IsDelim(']') {
 			var v1 GetDogmaEffectsEffectIdOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,38 +101,85 @@ func easyjson315d323dDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetD
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "description":
-			out.Description = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Description = string(in.String())
+			}
 		case "disallow_auto_repeat":
-			out.DisallowAutoRepeat = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.DisallowAutoRepeat = bool(in.Bool())
+			}
 		case "discharge_attribute_id":
-			out.DischargeAttributeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.DischargeAttributeId = int32(in.Int32())
+			}
 		case "display_name":
-			out.DisplayName = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.DisplayName = string(in.String())
+			}
 		case "duration_attribute_id":
-			out.DurationAttributeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.DurationAttributeId = int32(in.Int32())
+			}
 		case "effect_category":
-			out.EffectCategory = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.EffectCategory = int32(in.Int32())
+			}
 		case "effect_id":
-			out.EffectId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.EffectId = int32(in.Int32())
+			}
 		case "electronic_chance":
-			out.ElectronicChance = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ElectronicChance = bool(in.Bool())
+			}
 		case "falloff_attribute_id":
-			out.FalloffAttributeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.FalloffAttributeId = int32(in.Int32())
+			}
 		case "icon_id":
-			out.IconId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.IconId = int32(in.Int32())
+			}
 		case "is_assistance":
-			out.IsAssistance = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.IsAssistance = bool(in.Bool())
+			}
 		case "is_offensive":
-			out.IsOffensive = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.IsOffensive = bool(in.Bool())
+			}
 		case "is_warp_safe":
-			out.IsWarpSafe = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.IsWarpSafe = bool(in.Bool())
+			}
 		case "modifiers":
 			if in.IsNull() {
 				in.Skip()
@@ -153,19 +204,47 @@ func easyjson315d323dDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetD
 				in.Delim(']')
 			}
 		case "name":
-			out.Name = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
 		case "post_expression":
-			out.PostExpression = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.PostExpression = int32(in.Int32())
+			}
 		case "pre_expression":
-			out.PreExpression = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.PreExpression = int32(in.Int32())
+			}
 		case "published":
-			out.Published = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Published = bool(in.Bool())
+			}
 		case "range_attribute_id":
-			out.RangeAttributeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.RangeAttributeId = int32(in.Int32())
+			}
 		case "range_chance":
-			out.RangeChance = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.RangeChance = bool(in.Bool())
+			}
 		case "tracking_speed_attribute_id":
-			out.TrackingSpeedAttributeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.TrackingSpeedAttributeId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -434,24 +513,43 @@ func easyjson315d323dDecodeGithubComAntihaxGoesiEsi2(in *jlexer.Lexer, out *GetD
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "domain":
-			out.Domain = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Domain = string(in.String())
+			}
 		case "effect_id":
-			out.EffectId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.EffectId = int32(in.Int32())
+			}
 		case "func":
-			out.Func_ = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Func_ = string(in.String())
+			}
 		case "modified_attribute_id":
-			out.ModifiedAttributeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ModifiedAttributeId = int32(in.Int32())
+			}
 		case "modifying_attribute_id":
-			out.ModifyingAttributeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ModifyingAttributeId = int32(in.Int32())
+			}
 		case "operator":
-			out.Operator = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Operator = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

@@ -36,7 +36,11 @@ func easyjson9f888528DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCo
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCorporationsCorporationIdFwStatsOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,24 +101,39 @@ func easyjson9f888528DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "enlisted_on":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.EnlistedOn).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.EnlistedOn).UnmarshalJSON(data))
+				}
 			}
 		case "faction_id":
-			out.FactionId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.FactionId = int32(in.Int32())
+			}
 		case "kills":
-			(out.Kills).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(out.Kills).UnmarshalEasyJSON(in)
+			}
 		case "pilots":
-			out.Pilots = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Pilots = int32(in.Int32())
+			}
 		case "victory_points":
-			(out.VictoryPoints).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(out.VictoryPoints).UnmarshalEasyJSON(in)
+			}
 		default:
 			in.SkipRecursive()
 		}

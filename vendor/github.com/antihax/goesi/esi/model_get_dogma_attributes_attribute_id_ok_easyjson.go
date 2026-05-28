@@ -36,7 +36,11 @@ func easyjson6176f835DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetDo
 		}
 		for !in.IsDelim(']') {
 			var v1 GetDogmaAttributesAttributeIdOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,32 +101,67 @@ func easyjson6176f835DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetD
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "attribute_id":
-			out.AttributeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.AttributeId = int32(in.Int32())
+			}
 		case "default_value":
-			out.DefaultValue = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.DefaultValue = float32(in.Float32())
+			}
 		case "description":
-			out.Description = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Description = string(in.String())
+			}
 		case "display_name":
-			out.DisplayName = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.DisplayName = string(in.String())
+			}
 		case "high_is_good":
-			out.HighIsGood = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.HighIsGood = bool(in.Bool())
+			}
 		case "icon_id":
-			out.IconId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.IconId = int32(in.Int32())
+			}
 		case "name":
-			out.Name = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
 		case "published":
-			out.Published = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Published = bool(in.Bool())
+			}
 		case "stackable":
-			out.Stackable = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Stackable = bool(in.Bool())
+			}
 		case "unit_id":
-			out.UnitId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.UnitId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

@@ -36,7 +36,11 @@ func easyjsonDebc599dDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCh
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCharactersCharacterIdSearchOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,11 +101,6 @@ func easyjsonDebc599dDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "agent":
 			if in.IsNull() {
@@ -120,7 +119,11 @@ func easyjsonDebc599dDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				}
 				for !in.IsDelim(']') {
 					var v4 int32
-					v4 = int32(in.Int32())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v4 = int32(in.Int32())
+					}
 					out.Agent = append(out.Agent, v4)
 					in.WantComma()
 				}
@@ -143,7 +146,11 @@ func easyjsonDebc599dDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				}
 				for !in.IsDelim(']') {
 					var v5 int32
-					v5 = int32(in.Int32())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v5 = int32(in.Int32())
+					}
 					out.Alliance = append(out.Alliance, v5)
 					in.WantComma()
 				}
@@ -166,7 +173,11 @@ func easyjsonDebc599dDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				}
 				for !in.IsDelim(']') {
 					var v6 int32
-					v6 = int32(in.Int32())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v6 = int32(in.Int32())
+					}
 					out.Character = append(out.Character, v6)
 					in.WantComma()
 				}
@@ -189,7 +200,11 @@ func easyjsonDebc599dDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				}
 				for !in.IsDelim(']') {
 					var v7 int32
-					v7 = int32(in.Int32())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v7 = int32(in.Int32())
+					}
 					out.Constellation = append(out.Constellation, v7)
 					in.WantComma()
 				}
@@ -212,7 +227,11 @@ func easyjsonDebc599dDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				}
 				for !in.IsDelim(']') {
 					var v8 int32
-					v8 = int32(in.Int32())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v8 = int32(in.Int32())
+					}
 					out.Corporation = append(out.Corporation, v8)
 					in.WantComma()
 				}
@@ -235,7 +254,11 @@ func easyjsonDebc599dDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				}
 				for !in.IsDelim(']') {
 					var v9 int32
-					v9 = int32(in.Int32())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v9 = int32(in.Int32())
+					}
 					out.Faction = append(out.Faction, v9)
 					in.WantComma()
 				}
@@ -258,7 +281,11 @@ func easyjsonDebc599dDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				}
 				for !in.IsDelim(']') {
 					var v10 int32
-					v10 = int32(in.Int32())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v10 = int32(in.Int32())
+					}
 					out.InventoryType = append(out.InventoryType, v10)
 					in.WantComma()
 				}
@@ -281,7 +308,11 @@ func easyjsonDebc599dDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				}
 				for !in.IsDelim(']') {
 					var v11 int32
-					v11 = int32(in.Int32())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v11 = int32(in.Int32())
+					}
 					out.Region = append(out.Region, v11)
 					in.WantComma()
 				}
@@ -304,7 +335,11 @@ func easyjsonDebc599dDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				}
 				for !in.IsDelim(']') {
 					var v12 int32
-					v12 = int32(in.Int32())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v12 = int32(in.Int32())
+					}
 					out.SolarSystem = append(out.SolarSystem, v12)
 					in.WantComma()
 				}
@@ -327,7 +362,11 @@ func easyjsonDebc599dDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				}
 				for !in.IsDelim(']') {
 					var v13 int32
-					v13 = int32(in.Int32())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v13 = int32(in.Int32())
+					}
 					out.Station = append(out.Station, v13)
 					in.WantComma()
 				}
@@ -350,7 +389,11 @@ func easyjsonDebc599dDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				}
 				for !in.IsDelim(']') {
 					var v14 int64
-					v14 = int64(in.Int64())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v14 = int64(in.Int64())
+					}
 					out.Structure = append(out.Structure, v14)
 					in.WantComma()
 				}

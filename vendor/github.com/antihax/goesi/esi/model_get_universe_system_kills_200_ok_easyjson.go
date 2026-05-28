@@ -36,7 +36,11 @@ func easyjson49880f36DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetUn
 		}
 		for !in.IsDelim(']') {
 			var v1 GetUniverseSystemKills200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,20 +101,31 @@ func easyjson49880f36DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetU
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "npc_kills":
-			out.NpcKills = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.NpcKills = int32(in.Int32())
+			}
 		case "pod_kills":
-			out.PodKills = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.PodKills = int32(in.Int32())
+			}
 		case "ship_kills":
-			out.ShipKills = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ShipKills = int32(in.Int32())
+			}
 		case "system_id":
-			out.SystemId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SystemId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

@@ -36,7 +36,11 @@ func easyjson68d0aa8cDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCo
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCorporationsCorporationIdShareholders200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,18 +101,25 @@ func easyjson68d0aa8cDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "share_count":
-			out.ShareCount = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ShareCount = int64(in.Int64())
+			}
 		case "shareholder_id":
-			out.ShareholderId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ShareholderId = int32(in.Int32())
+			}
 		case "shareholder_type":
-			out.ShareholderType = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ShareholderType = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}

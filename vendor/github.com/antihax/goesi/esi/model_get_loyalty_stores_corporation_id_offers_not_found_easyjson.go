@@ -36,7 +36,11 @@ func easyjson5b391bd0DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetLo
 		}
 		for !in.IsDelim(']') {
 			var v1 GetLoyaltyStoresCorporationIdOffersNotFound
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,14 +101,13 @@ func easyjson5b391bd0DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetL
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "error":
-			out.Error_ = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Error_ = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}

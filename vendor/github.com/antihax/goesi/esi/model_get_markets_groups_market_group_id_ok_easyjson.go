@@ -36,7 +36,11 @@ func easyjson821c4c1dDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetMa
 		}
 		for !in.IsDelim(']') {
 			var v1 GetMarketsGroupsMarketGroupIdOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,20 +101,31 @@ func easyjson821c4c1dDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetM
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "description":
-			out.Description = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Description = string(in.String())
+			}
 		case "market_group_id":
-			out.MarketGroupId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.MarketGroupId = int32(in.Int32())
+			}
 		case "name":
-			out.Name = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
 		case "parent_group_id":
-			out.ParentGroupId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ParentGroupId = int32(in.Int32())
+			}
 		case "types":
 			if in.IsNull() {
 				in.Skip()
@@ -128,7 +143,11 @@ func easyjson821c4c1dDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetM
 				}
 				for !in.IsDelim(']') {
 					var v4 int32
-					v4 = int32(in.Int32())
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						v4 = int32(in.Int32())
+					}
 					out.Types = append(out.Types, v4)
 					in.WantComma()
 				}

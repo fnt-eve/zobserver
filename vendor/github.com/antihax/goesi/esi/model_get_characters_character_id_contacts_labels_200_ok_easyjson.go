@@ -36,7 +36,11 @@ func easyjson5f389623DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCh
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCharactersCharacterIdContactsLabels200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,16 +101,19 @@ func easyjson5f389623DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "label_id":
-			out.LabelId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.LabelId = int64(in.Int64())
+			}
 		case "label_name":
-			out.LabelName = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.LabelName = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}

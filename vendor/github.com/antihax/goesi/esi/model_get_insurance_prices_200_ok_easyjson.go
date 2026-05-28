@@ -36,7 +36,11 @@ func easyjson24365b2aDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetIn
 		}
 		for !in.IsDelim(']') {
 			var v1 GetInsurancePrices200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,11 +101,6 @@ func easyjson24365b2aDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetI
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "levels":
 			if in.IsNull() {
@@ -127,7 +126,11 @@ func easyjson24365b2aDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetI
 				in.Delim(']')
 			}
 		case "type_id":
-			out.TypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.TypeId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -206,18 +209,25 @@ func easyjson24365b2aDecodeGithubComAntihaxGoesiEsi2(in *jlexer.Lexer, out *GetI
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "cost":
-			out.Cost = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Cost = float32(in.Float32())
+			}
 		case "name":
-			out.Name = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
 		case "payout":
-			out.Payout = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Payout = float32(in.Float32())
+			}
 		default:
 			in.SkipRecursive()
 		}

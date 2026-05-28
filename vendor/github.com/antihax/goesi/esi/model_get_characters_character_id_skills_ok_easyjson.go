@@ -36,7 +36,11 @@ func easyjson275affcbDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCh
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCharactersCharacterIdSkillsOk
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,11 +101,6 @@ func easyjson275affcbDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "skills":
 			if in.IsNull() {
@@ -120,16 +119,28 @@ func easyjson275affcbDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 				}
 				for !in.IsDelim(']') {
 					var v4 GetCharactersCharacterIdSkillsSkill
-					(v4).UnmarshalEasyJSON(in)
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						(v4).UnmarshalEasyJSON(in)
+					}
 					out.Skills = append(out.Skills, v4)
 					in.WantComma()
 				}
 				in.Delim(']')
 			}
 		case "total_sp":
-			out.TotalSp = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.TotalSp = int64(in.Int64())
+			}
 		case "unallocated_sp":
-			out.UnallocatedSp = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.UnallocatedSp = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

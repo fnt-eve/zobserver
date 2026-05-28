@@ -36,7 +36,11 @@ func easyjson23965dafDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCo
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCorporationsCorporationIdContracts200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,64 +101,147 @@ func easyjson23965dafDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "acceptor_id":
-			out.AcceptorId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.AcceptorId = int32(in.Int32())
+			}
 		case "assignee_id":
-			out.AssigneeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.AssigneeId = int32(in.Int32())
+			}
 		case "availability":
-			out.Availability = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Availability = string(in.String())
+			}
 		case "buyout":
-			out.Buyout = float64(in.Float64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Buyout = float64(in.Float64())
+			}
 		case "collateral":
-			out.Collateral = float64(in.Float64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Collateral = float64(in.Float64())
+			}
 		case "contract_id":
-			out.ContractId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ContractId = int32(in.Int32())
+			}
 		case "date_accepted":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.DateAccepted).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.DateAccepted).UnmarshalJSON(data))
+				}
 			}
 		case "date_completed":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.DateCompleted).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.DateCompleted).UnmarshalJSON(data))
+				}
 			}
 		case "date_expired":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.DateExpired).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.DateExpired).UnmarshalJSON(data))
+				}
 			}
 		case "date_issued":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.DateIssued).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.DateIssued).UnmarshalJSON(data))
+				}
 			}
 		case "days_to_complete":
-			out.DaysToComplete = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.DaysToComplete = int32(in.Int32())
+			}
 		case "end_location_id":
-			out.EndLocationId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.EndLocationId = int64(in.Int64())
+			}
 		case "for_corporation":
-			out.ForCorporation = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ForCorporation = bool(in.Bool())
+			}
 		case "issuer_corporation_id":
-			out.IssuerCorporationId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.IssuerCorporationId = int32(in.Int32())
+			}
 		case "issuer_id":
-			out.IssuerId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.IssuerId = int32(in.Int32())
+			}
 		case "price":
-			out.Price = float64(in.Float64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Price = float64(in.Float64())
+			}
 		case "reward":
-			out.Reward = float64(in.Float64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Reward = float64(in.Float64())
+			}
 		case "start_location_id":
-			out.StartLocationId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.StartLocationId = int64(in.Int64())
+			}
 		case "status":
-			out.Status = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Status = string(in.String())
+			}
 		case "title":
-			out.Title = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Title = string(in.String())
+			}
 		case "type":
-			out.Type_ = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Type_ = string(in.String())
+			}
 		case "volume":
-			out.Volume = float64(in.Float64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Volume = float64(in.Float64())
+			}
 		default:
 			in.SkipRecursive()
 		}

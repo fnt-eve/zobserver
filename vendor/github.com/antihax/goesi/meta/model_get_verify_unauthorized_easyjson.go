@@ -36,7 +36,11 @@ func easyjson7b0c9169DecodeGithubComAntihaxGoesiMeta(in *jlexer.Lexer, out *GetV
 		}
 		for !in.IsDelim(']') {
 			var v1 GetVerifyUnauthorized
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,14 +101,13 @@ func easyjson7b0c9169DecodeGithubComAntihaxGoesiMeta1(in *jlexer.Lexer, out *Get
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "error":
-			out.Error_ = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Error_ = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}

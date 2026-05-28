@@ -36,7 +36,11 @@ func easyjson39b04daDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetSov
 		}
 		for !in.IsDelim(']') {
 			var v1 GetSovereigntyCampaignsParticipant
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,16 +101,19 @@ func easyjson39b04daDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetSo
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "alliance_id":
-			out.AllianceId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.AllianceId = int32(in.Int32())
+			}
 		case "score":
-			out.Score = float32(in.Float32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Score = float32(in.Float32())
+			}
 		default:
 			in.SkipRecursive()
 		}

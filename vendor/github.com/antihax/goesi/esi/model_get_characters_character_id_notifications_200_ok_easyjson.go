@@ -36,7 +36,11 @@ func easyjson697854beDecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetCh
 		}
 		for !in.IsDelim(']') {
 			var v1 GetCharactersCharacterIdNotifications200Ok
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,28 +101,51 @@ func easyjson697854beDecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetC
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "is_read":
-			out.IsRead = bool(in.Bool())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.IsRead = bool(in.Bool())
+			}
 		case "notification_id":
-			out.NotificationId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.NotificationId = int64(in.Int64())
+			}
 		case "sender_id":
-			out.SenderId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SenderId = int32(in.Int32())
+			}
 		case "sender_type":
-			out.SenderType = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.SenderType = string(in.String())
+			}
 		case "text":
-			out.Text = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Text = string(in.String())
+			}
 		case "timestamp":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.Timestamp).UnmarshalJSON(data))
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.Timestamp).UnmarshalJSON(data))
+				}
 			}
 		case "type":
-			out.Type_ = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Type_ = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}

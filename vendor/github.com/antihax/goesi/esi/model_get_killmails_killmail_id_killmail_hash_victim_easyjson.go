@@ -36,7 +36,11 @@ func easyjson8cf1533DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *GetKil
 		}
 		for !in.IsDelim(']') {
 			var v1 GetKillmailsKillmailIdKillmailHashVictim
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,22 +101,37 @@ func easyjson8cf1533DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetKi
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "alliance_id":
-			out.AllianceId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.AllianceId = int32(in.Int32())
+			}
 		case "character_id":
-			out.CharacterId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CharacterId = int32(in.Int32())
+			}
 		case "corporation_id":
-			out.CorporationId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CorporationId = int32(in.Int32())
+			}
 		case "damage_taken":
-			out.DamageTaken = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.DamageTaken = int32(in.Int32())
+			}
 		case "faction_id":
-			out.FactionId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.FactionId = int32(in.Int32())
+			}
 		case "items":
 			if in.IsNull() {
 				in.Skip()
@@ -139,7 +158,11 @@ func easyjson8cf1533DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *GetKi
 		case "position":
 			easyjson8cf1533DecodeGithubComAntihaxGoesiEsi3(in, &out.Position)
 		case "ship_type_id":
-			out.ShipTypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ShipTypeId = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -278,18 +301,25 @@ func easyjson8cf1533DecodeGithubComAntihaxGoesiEsi3(in *jlexer.Lexer, out *GetKi
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "x":
-			out.X = float64(in.Float64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.X = float64(in.Float64())
+			}
 		case "y":
-			out.Y = float64(in.Float64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Y = float64(in.Float64())
+			}
 		case "z":
-			out.Z = float64(in.Float64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Z = float64(in.Float64())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -345,16 +375,19 @@ func easyjson8cf1533DecodeGithubComAntihaxGoesiEsi2(in *jlexer.Lexer, out *GetKi
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "flag":
-			out.Flag = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Flag = int32(in.Int32())
+			}
 		case "item_type_id":
-			out.ItemTypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ItemTypeId = int32(in.Int32())
+			}
 		case "items":
 			if in.IsNull() {
 				in.Skip()
@@ -379,11 +412,23 @@ func easyjson8cf1533DecodeGithubComAntihaxGoesiEsi2(in *jlexer.Lexer, out *GetKi
 				in.Delim(']')
 			}
 		case "quantity_destroyed":
-			out.QuantityDestroyed = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.QuantityDestroyed = int64(in.Int64())
+			}
 		case "quantity_dropped":
-			out.QuantityDropped = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.QuantityDropped = int64(in.Int64())
+			}
 		case "singleton":
-			out.Singleton = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Singleton = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -478,22 +523,37 @@ func easyjson8cf1533DecodeGithubComAntihaxGoesiEsi4(in *jlexer.Lexer, out *GetKi
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "flag":
-			out.Flag = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Flag = int32(in.Int32())
+			}
 		case "item_type_id":
-			out.ItemTypeId = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ItemTypeId = int32(in.Int32())
+			}
 		case "quantity_destroyed":
-			out.QuantityDestroyed = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.QuantityDestroyed = int64(in.Int64())
+			}
 		case "quantity_dropped":
-			out.QuantityDropped = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.QuantityDropped = int64(in.Int64())
+			}
 		case "singleton":
-			out.Singleton = int32(in.Int32())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Singleton = int32(in.Int32())
+			}
 		default:
 			in.SkipRecursive()
 		}

@@ -36,7 +36,11 @@ func easyjsonF3c409e3DecodeGithubComAntihaxGoesiEsi(in *jlexer.Lexer, out *PostF
 		}
 		for !in.IsDelim(']') {
 			var v1 PostFleetsFleetIdWingsCreated
-			(v1).UnmarshalEasyJSON(in)
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				(v1).UnmarshalEasyJSON(in)
+			}
 			*out = append(*out, v1)
 			in.WantComma()
 		}
@@ -97,14 +101,13 @@ func easyjsonF3c409e3DecodeGithubComAntihaxGoesiEsi1(in *jlexer.Lexer, out *Post
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)
 		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
 		switch key {
 		case "wing_id":
-			out.WingId = int64(in.Int64())
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.WingId = int64(in.Int64())
+			}
 		default:
 			in.SkipRecursive()
 		}
