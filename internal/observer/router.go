@@ -1,34 +1,44 @@
 package observer
 
 import (
+	"context"
+	"slices"
+
 	goesi "github.com/antihax/goesi/esi"
 	"go.uber.org/zap"
 )
 
 type router struct {
-	in           chan *ZkilResponse
-	out          chan *RoutedZkilResponse
+	in           chan *Killmail
+	out          chan *RoutedKillmail
 	destinations []Destination
+	log          *zap.SugaredLogger
 }
 
-func newRouter(in chan *ZkilResponse, out chan *RoutedZkilResponse, destinations []Destination, log *zap.SugaredLogger) *router {
-	r := &router{in, out, destinations}
-	r.init(log)
-	return r
+func newRouter(in chan *Killmail, out chan *RoutedKillmail, destinations []Destination, log *zap.SugaredLogger) *router {
+	return &router{in, out, destinations, log}
 }
 
-func (r *router) init(log *zap.SugaredLogger) {
-	go func() {
-		for {
-			zkr := <-r.in
-			log.Debugw("routing KM", "killID", zkr.Package.KillID)
-			routed := r.routeMessage(zkr)
-			r.out <- routed
+// run routes incoming killmails to matching destinations until ctx is
+// cancelled.
+func (r *router) run(ctx context.Context) {
+	for {
+		select {
+		case <-ctx.Done():
+			return
+		case km := <-r.in:
+			r.log.Debugw("routing KM", "killmail_id", km.KillmailID)
+			routed := r.routeMessage(km)
+			select {
+			case r.out <- routed:
+			case <-ctx.Done():
+				return
+			}
 		}
-	}()
+	}
 }
 
-func (r *router) routeMessage(zkr *ZkilResponse) *RoutedZkilResponse {
+func (r *router) routeMessage(km *Killmail) *RoutedKillmail {
 	var matchedRoutes []Route
 	for _, dest := range r.destinations {
 		if dest.All {
@@ -37,20 +47,20 @@ func (r *router) routeMessage(zkr *ZkilResponse) *RoutedZkilResponse {
 			continue
 		}
 
-		if matchedVictim(dest, zkr.Package.Killmail.Victim) {
+		if matchedVictim(dest, km.ESI.Victim) {
 			routes := destinationToRoutes(dest, true)
 			matchedRoutes = append(matchedRoutes, routes...)
 			continue
 		}
 
-		if matchedAttackers(dest, zkr.Package.Killmail.Attackers) {
+		if matchedAttackers(dest, km.ESI.Attackers) {
 			routes := destinationToRoutes(dest, false)
 			matchedRoutes = append(matchedRoutes, routes...)
 			continue
 		}
 	}
 
-	return &RoutedZkilResponse{ZkilResponse: zkr, MatchedRoutes: matchedRoutes}
+	return &RoutedKillmail{Killmail: km, MatchedRoutes: matchedRoutes}
 }
 
 func matchedVictim(d Destination, victim goesi.GetKillmailsKillmailIdKillmailHashVictim) bool {
@@ -83,11 +93,5 @@ func destinationToRoutes(d Destination, isLoss bool) []Route {
 }
 
 func ContainsID(ids []int32, id int32) bool {
-	for _, elem := range ids {
-		if elem == id {
-			return true
-		}
-	}
-
-	return false
+	return slices.Contains(ids, id)
 }

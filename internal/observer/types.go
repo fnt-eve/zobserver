@@ -4,27 +4,19 @@ import (
 	goesi "github.com/antihax/goesi/esi"
 )
 
-type ZkilResponse struct {
-	Package ZkilPackage `json:"package"`
+// Killmail is one R2Z2 killmail file. It is also the wire-decode target for
+// GET /ephemeral/{sequence_id}.json. The full ESI killmail body is inline
+// under ESI; Zkb carries zKillboard metadata.
+type Killmail struct {
+	KillmailID int64                                       `json:"killmail_id"`
+	ESI        *goesi.GetKillmailsKillmailIdKillmailHashOk `json:"esi"`
+	Zkb        *ZKillmailMetadata                          `json:"zkb"`
 }
 
-type ZkilPackage struct {
-	KillID            int64                                       `json:"killID"`
-	Killmail          *goesi.GetKillmailsKillmailIdKillmailHashOk `json:"killmail"`
-	ZKillmailMetadata *ZKillmailMetadata                          `json:"zkb"`
-}
-
+// ZKillmailMetadata is zKillboard's zkb metadata block. Only the total ISK
+// value of the kill is consumed.
 type ZKillmailMetadata struct {
-	LocationID   int32   `json:"locationID"`
-	Hash         string  `json:"hash"`
-	FittedValue  float64 `json:"fittedValue"`
-	DroppedValue float64 `json:"droppedValue"`
-	TotalValue   float64 `json:"totalValue"`
-	Points       int     `json:"points"`
-	Npc          bool    `json:"npc"`
-	Solo         bool    `json:"solo"`
-	Awox         bool    `json:"awox"`
-	Href         string  `json:"href"`
+	TotalValue float64 `json:"totalValue"`
 }
 
 type Route struct {
@@ -32,7 +24,8 @@ type Route struct {
 	IsLoss         bool
 }
 
-type RoutedZkilResponse struct {
-	ZkilResponse  *ZkilResponse
+// RoutedKillmail pairs a killmail with the destination routes it matched.
+type RoutedKillmail struct {
+	Killmail      *Killmail
 	MatchedRoutes []Route
 }

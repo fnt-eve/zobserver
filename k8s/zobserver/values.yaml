@@ -51,8 +51,6 @@ env:
   logFormat: "prod"
   logLevel: "info"
   esiUserAgent: "zobserver/test@example.com"
-  queueName: "zobserver-0"
-  ttw: 10
   destinations: |-
     - name: test1
       all: true

@@ -3,17 +3,18 @@ package observer
 import (
 	"errors"
 	"os"
+	"time"
 
 	"gopkg.in/yaml.v3"
 )
 
 //nolint:revive
 type ObserverConfig struct {
-	QueueName        string `default:"" split_words:"true"`
-	TTW              string `default:"10" split_words:"true"`
-	EsiUserAgent     string `default:"zobserver" split_words:"true"`
-	Destinations     string `required:"false" split_words:"true"`
-	DestinationsFile string `required:"false" split_words:"true"`
+	EsiUserAgent       string        `default:"zobserver" split_words:"true"`
+	ActivePollInterval time.Duration `default:"100ms" split_words:"true"`
+	IdlePollInterval   time.Duration `default:"6s" split_words:"true"`
+	Destinations       string        `required:"false" split_words:"true"`
+	DestinationsFile   string        `required:"false" split_words:"true"`
 }
 
 type Destination struct {

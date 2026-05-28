@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	"context"
 	"os"
 	"os/signal"
 	"syscall"
@@ -29,14 +29,19 @@ func main() {
 		panic(err)
 	}
 
-	_, err = observer.New(c.ObserverConfig, logger.Sugar())
+	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
+	defer stop()
+
+	obs, err := observer.New(c.ObserverConfig, logger.Sugar())
 	if err != nil {
 		logger.Sugar().Errorw("failed to start km feed", "error", err)
 		os.Exit(1)
 	}
 
-	fmt.Println("Server is now running.  Press CTRL-C to exit.")
-	sc := make(chan os.Signal, 1)
-	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)
-	<-sc
+	obs.Start(ctx)
+	logger.Sugar().Infow("observer running")
+
+	<-ctx.Done()
+	stop()
+	obs.Wait()
 }

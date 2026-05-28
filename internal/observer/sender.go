@@ -39,25 +39,28 @@ type resolvedNames struct {
 type sender struct {
 	dg        *discordgo.Session
 	APIClient *goesi.APIClient
-	in        chan *RoutedZkilResponse
+	in        chan *RoutedKillmail
+	log       *zap.SugaredLogger
 }
 
-func newSender(in chan *RoutedZkilResponse, ESIClient *goesi.APIClient, log *zap.SugaredLogger) *sender {
+func newSender(in chan *RoutedKillmail, ESIClient *goesi.APIClient, log *zap.SugaredLogger) *sender {
 	dg, _ := discordgo.New("")
-	s := &sender{dg, ESIClient, in}
-	s.init(log)
-	return s
+	return &sender{dg, ESIClient, in, log}
 }
 
-func (s *sender) init(log *zap.SugaredLogger) {
-	go func() {
-		for {
-			rm := <-s.in
-			l := log.With("killID", rm.ZkilResponse.Package.KillID)
-			log.Debugw("sending KM", "killID", rm.ZkilResponse.Package.KillID)
+// run delivers routed killmails to their Discord webhooks until ctx is
+// cancelled.
+func (s *sender) run(ctx context.Context) {
+	for {
+		select {
+		case <-ctx.Done():
+			return
+		case rm := <-s.in:
+			l := s.log.With("killmail_id", rm.Killmail.KillmailID)
+			s.log.Debugw("sending KM", "killmail_id", rm.Killmail.KillmailID)
 			for _, route := range rm.MatchedRoutes {
-				ll := l.With("discordWHID", route.DiscordWebhook.ID)
-				embed, err := s.transform(rm.ZkilResponse, route.IsLoss)
+				ll := l.With("discord_webhook_id", route.DiscordWebhook.ID)
+				embed, err := s.transform(rm.Killmail, route.IsLoss)
 				if err != nil {
 					ll.Errorw("failed to transform KM", "error", err)
 					continue
@@ -69,7 +72,7 @@ func (s *sender) init(log *zap.SugaredLogger) {
 				}
 			}
 		}
-	}()
+	}
 }
 
 func (s *sender) resolveIDs(ids []int32) (map[int32]string, error) {
@@ -179,15 +182,15 @@ func getKMEntityInfo(aff EntityAffiliation, resolvedNames map[int32]string) Enti
 	return names
 }
 
-func (s *sender) transform(r *ZkilResponse, isLoss bool) (*discordgo.MessageEmbed, error) {
+func (s *sender) transform(km *Killmail, isLoss bool) (*discordgo.MessageEmbed, error) {
 	victimAff := EntityAffiliation{
-		CharacterID:   r.Package.Killmail.Victim.CharacterId,
-		CorporationID: r.Package.Killmail.Victim.CorporationId,
-		AllianceID:    r.Package.Killmail.Victim.AllianceId,
-		ShipTypeID:    r.Package.Killmail.Victim.ShipTypeId,
-		FactionID:     r.Package.Killmail.Victim.FactionId,
+		CharacterID:   km.ESI.Victim.CharacterId,
+		CorporationID: km.ESI.Victim.CorporationId,
+		AllianceID:    km.ESI.Victim.AllianceId,
+		ShipTypeID:    km.ESI.Victim.ShipTypeId,
+		FactionID:     km.ESI.Victim.FactionId,
 	}
-	fb := findFinalBlow(r.Package.Killmail.Attackers)
+	fb := findFinalBlow(km.ESI.Attackers)
 	var fbAff *EntityAffiliation
 	if fb != nil {
 		fbAff = &EntityAffiliation{
@@ -199,14 +202,14 @@ func (s *sender) transform(r *ZkilResponse, isLoss bool) (*discordgo.MessageEmbe
 		}
 	}
 
-	names, err := s.resolveKMEntities(&victimAff, fbAff, r.Package.Killmail.SolarSystemId)
+	names, err := s.resolveKMEntities(&victimAff, fbAff, km.ESI.SolarSystemId)
 	if err != nil {
 		return nil, err
 	}
 
 	var footer *discordgo.MessageEmbedFooter
 	if fb != nil {
-		footer = genFooter(*names.fbInfo, fb.ShipTypeId, len(r.Package.Killmail.Attackers))
+		footer = genFooter(*names.fbInfo, fb.ShipTypeId, len(km.ESI.Attackers))
 	}
 
 	color, err := getColor(isLoss)
@@ -215,11 +218,11 @@ func (s *sender) transform(r *ZkilResponse, isLoss bool) (*discordgo.MessageEmbe
 	}
 
 	return &discordgo.MessageEmbed{
-		URL:       zKillURL(r.Package.KillID),
+		URL:       zKillURL(km.KillmailID),
 		Title:     genTitle(names.victimInfo.CharacterName, names.victimInfo.ShipTypeName, names.systemName),
-		Timestamp: r.Package.Killmail.KillmailTime.Format(time.RFC3339),
-		Fields:    genFields(names.victimInfo, names.victimInfo.ShipTypeName, names.systemName, r.Package.ZKillmailMetadata.TotalValue),
-		Thumbnail: genThumbnail(r.Package.Killmail.Victim.ShipTypeId),
+		Timestamp: km.ESI.KillmailTime.Format(time.RFC3339),
+		Fields:    genFields(names.victimInfo, names.victimInfo.ShipTypeName, names.systemName, km.Zkb.TotalValue),
+		Thumbnail: genThumbnail(km.ESI.Victim.ShipTypeId),
 		Color:     color,
 		Footer:    footer,
 	}, nil

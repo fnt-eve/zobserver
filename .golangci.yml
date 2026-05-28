@@ -1,41 +1,49 @@
 version: "2"
 run:
-  modules-download-mode: vendor
+    modules-download-mode: mod
 linters:
-  default: none
-  enable:
-    - errcheck
-    - exhaustive
-    - forcetypeassert
-    - govet
-    - ineffassign
-    - revive
-    - staticcheck
-    - unused
-    - whitespace
-  exclusions:
-    generated: lax
-    presets:
-      - comments
-      - common-false-positives
-      - legacy
-      - std-error-handling
-    rules:
-      - linters:
-          - errcheck
-        text: .*logger.Sync.*
-    paths:
-      - third_party$
-      - builtin$
-      - examples$
-      - ".*/mocks"
-      - "generated"
+    default: none
+    enable:
+        - errcheck
+        - exhaustive
+        - forcetypeassert
+        - govet
+        - ineffassign
+        - revive
+        - staticcheck
+        - unused
+        - whitespace
+        #- gocritic
+        - exptostd
+        - usestdlibvars
+        # - gosec
+    exclusions:
+        generated: lax
+        presets:
+            - comments
+            - common-false-positives
+            - legacy
+            - std-error-handling
+        rules:
+            - linters:
+                  - errcheck
+              text: .*logger.Sync.*
+        paths:
+            - third_party$
+            - builtin$
+            - examples$
+            - ".*/mocks"
+            - "generated"
+            - "^pkg/"
+            - "^vendor/"
 formatters:
-  enable:
-    - gofmt
-  exclusions:
-    generated: lax
-    paths:
-      - third_party$
-      - builtin$
-      - examples$
+    enable:
+        - gofmt
+    exclusions:
+        generated: lax
+        paths:
+            - third_party$
+            - builtin$
+            - examples$
+            - "^pkg/"
+            - "^vendor/"

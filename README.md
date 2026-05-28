@@ -1,10 +1,10 @@
 # ZObserver
 
-`zobserver` is a Go-based application designed to monitor EVE Online killmail feeds, filter them based on specified criteria (characters, corporations, alliances), and relay relevant killmails to Discord webhooks. It leverages ZKillboard's RedisQ message queue for incoming killmails and the EVE Online ESI API for additional data.
+`zobserver` is a Go-based application designed to monitor EVE Online killmail feeds, filter them based on specified criteria (characters, corporations, alliances), and relay relevant killmails to Discord webhooks. It polls ZKillboard's R2Z2 killmail feed for incoming killmails and uses the EVE Online ESI API for additional data.
 
 ## Features
 
-* **EVE Online Killmail Monitoring**: Listens to a killmail feed (via RedisQ).
+* **EVE Online Killmail Monitoring**: Polls ZKillboard's R2Z2 killmail feed, an ordered sequence of static killmail files.
 * **Configurable Filtering**: Filters killmails based on:
   * Character IDs
   * Corporation IDs
@@ -19,13 +19,13 @@
 
 ### Core Configuration
 
-* `LOGGER_FORMAT`: Log output format (e.g., "prod", "dev").
-* `LOGGER_LEVEL`: Logging level (e.g., "info", "debug").
-* `QUEUE_NAME`: The name of the RedisQ queue to listen to.
-* `TTW`: Time To Wait, in seconds. Default: `"10"`.
-* `ESI_USER_AGENT`: User agent string for requests to the EVE Online ESI. Default: `"zobserver"`.
-* `DESTINATIONS_FILE`: Path to a YAML file containing destination configurations (see format below).
-* `DESTINATIONS`: Alternatively, a string containing the YAML configuration for destinations directly.
+* `ESI_USER_AGENT`: User-Agent string sent on ESI and R2Z2 requests. R2Z2 returns HTTP 403 for a blank User-Agent. Default: `"zobserver"`.
+* `DESTINATIONS`: A string containing the YAML configuration for destinations directly (see format below).
+* `DESTINATIONS_FILE`: Path to a YAML file containing destination configurations. Alternative to `DESTINATIONS`.
+* `ACTIVE_POLL_INTERVAL`: Delay between consecutive killmail fetches while catching up to the live edge. Default: `100ms`.
+* `IDLE_POLL_INTERVAL`: Delay after reaching the live edge (HTTP 404) before polling again. Default: `6s`.
+* `LOG_FORMAT`: Log output format (e.g., "prod", "devel").
+* `LOG_LEVEL`: Logging level (e.g., "info", "debug").
 
 If neither `DESTINATIONS_FILE` nor `DESTINATIONS` is provided, the application will error as it requires at least one destination.
 
@@ -76,7 +76,6 @@ A `Dockerfile` is present in the root of the project. The application image is a
    You'll need to pass the necessary environment variables for configuration.
    ```bash
    docker run -d \
-     -e QUEUE_NAME="your-redis-queue" \
      -e ESI_USER_AGENT="your-esi-agent/1.0 your@email.com" \
      -e DESTINATIONS_FILE="/app/destinations.yaml" \
      -v /path/to/your/destinations.yaml:/app/destinations.yaml \
@@ -106,7 +105,7 @@ The project includes a Helm chart located in the `k8s/zobserver/` directory.
 * `cmd/observer/`: Main application entry point.
 * `internal/`: Contains the core logic of the observer.
   * `internal/logger/`: Logging setup.
-  * `internal/observer/`: Core observer, Redis queue, routing, and ESI/Discord sending logic.
+  * `internal/observer/`: Core observer, R2Z2 poller, routing, and ESI/Discord sending logic.
 * `k8s/zobserver/`: Helm chart for Kubernetes deployment.
 * `Dockerfile`: For building the Docker image.
 * `go.mod`, `go.sum`: Go module files.

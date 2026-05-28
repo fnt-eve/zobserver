@@ -49,10 +49,6 @@ spec:
             value: {{ .Values.env.logLevel }}
           - name: ESI_USER_AGENT
             value: {{ .Values.env.esiUserAgent | quote }}
-          - name: QUEUE_NAME
-            value: {{ .Values.env.queueName | quote }}
-          - name: TTW
-            value: {{ .Values.env.ttw | quote }}
           - name: DESTINATIONS
             value: | 
             {{- .Values.env.destinations | nindent 14 }}
