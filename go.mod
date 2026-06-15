@@ -12,7 +12,7 @@ require (
 require (
 	github.com/antihax/goesi v0.0.0-20251103030832-a87832eae7ca
 	go.uber.org/zap v1.28.0
-	golang.org/x/text v0.37.0
+	golang.org/x/text v0.38.0
 )
 
 require (
